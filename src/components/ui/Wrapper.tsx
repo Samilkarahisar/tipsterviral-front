@@ -27,7 +27,7 @@ const Wrapper = ({ children }: Props) => {
   });
 
   return (
-    <div className="bg-[#fcfcfd] dark:bg-dark min-h-screen flex flex-col">
+    <div className="bg-[#fffbf3] dark:bg-dark min-h-screen flex flex-col">
       <Header />
       <div className="flex-1 flex flex-col">
         {pageLoading ? <LoadingScreen /> : children}

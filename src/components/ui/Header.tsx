@@ -48,16 +48,13 @@ const Header = () => {
   }, [open, router.events]);
 
   return (
-    <div className="border-b border-secondary dark:border-dark-secondary laptop:py-[16px] py-4 sticky top-0 bg-blue-100 dark:bg-dark z-20">
+    <div className="border-b border-secondary border-black dark:border-dark-secondary laptop:py-[16px] py-4 sticky top-0 bg-white dark:bg-dark z-20">
       <Container>
         <div className="flex justify-between">
           <div className="flex justify-between items-center gap-10">
             <Link href={!user ? '/' : '/dashboard'}>
-              <a className="laptop:w-10 laptop:h-10 h-[40px] w-[198px] block">
-                <ImgLogo
-                  className="dark:fill-current dark:text-white"
-                  alt="logo"
-                />
+              <a className="laptop:w-40 laptop:h-50  block">
+                <img src={ImgLogo.src} />
               </a>
             </Link>
           </div>
