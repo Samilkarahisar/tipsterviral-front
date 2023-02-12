@@ -1,8 +1,8 @@
 import api from '@/lib/axios';
 import { auth } from '@/lib/firebase';
-import { API_PATH_GET_TITLES, API_PATH_SINGLE_TITLE } from '@/res/values';
+import { API_PATH_GET_DESIGN, API_PATH_GET_TITLES } from '@/res/values';
 
-export const getTitles = async (siteId: string | undefined) => {
+export const getDesigns = async (siteId: string | undefined) => {
   try {
     const token = await auth.currentUser?.getIdToken();
     const ownerId = auth.currentUser?.uid;
@@ -22,12 +22,12 @@ export const getTitles = async (siteId: string | undefined) => {
   }
 };
 
-export const getTitleById = async (
+export const getDesignBySlug = async (
   token: string | undefined,
-  id: string | number,
+  slug: string,
 ) => {
   try {
-    const { data } = await api.get(`${API_PATH_SINGLE_TITLE}/${id}`, {
+    const { data } = await api.get(`${API_PATH_GET_DESIGN}/${slug}`, {
       params: {
         token,
       },

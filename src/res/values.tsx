@@ -1,6 +1,8 @@
 export const DISCORD_LINK = 'https://discord.gg/YpsYjPxWqH';
 export const TWITTER_LINK = 'https://twitter.com/ImageYeti';
 
+export const API_PATH_GET_DESIGN = '/public/getDesignBySlug';
+
 export const API_PATH_ADD_SITE = '/restricted/createSite';
 export const API_PATH_UPDATE_SITE = '/restricted/updateSite';
 export const API_PATH_DELETE_SITE = '/restricted/deleteSite';

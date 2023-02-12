@@ -1,5 +1,5 @@
 import { logoPositions, titlePositions, weight } from '@/res/values';
-import { TitleDto } from '@/types/dto/TitleDto';
+import { TitleDto } from '@/types/dto/DesignDto';
 import { BgColorsOutlined, DownOutlined } from '@ant-design/icons';
 import { Button, Col, Dropdown, Input, Menu, Row, Switch, Tooltip } from 'antd';
 import React, { useState } from 'react';
