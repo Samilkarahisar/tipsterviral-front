@@ -7,7 +7,7 @@ import Container from './Container';
 
 const Footer = () => {
   return (
-    <div className="border-t border-secondary dark:border-dark-secondary pt-4 pb-4">
+    <div className="bg-white border-t border-black dark:border-dark-secondary pt-4 pb-4">
       <Container>
         <div className="flex tablet:items-center items-start justify-between tablet:mb-10 mb-14 flex-wrap gap-5">
           <ul className="flex space-y-4 tablet:space-x-8 flex-wrap tablet:flex-row flex-col tablet:space-y-0 mb-0">
