@@ -3,7 +3,6 @@ import Container from '@/components/ui/Container';
 import { DesignDto } from '@/types/dto/DesignDto';
 import { NextPageContext } from 'next';
 import { NextSeo } from 'next-seo';
-import nookies from 'nookies';
 import React from 'react';
 
 interface Props {
@@ -32,7 +31,7 @@ const DesignPage: React.FC<Props> = ({ design }) => {
           />
         </div>
 
-        <div className="flex laptop:gap-14 small:gap-4 tablet:flex-row flex-col mt-10 pl-20">
+        <div className="flex laptop:gap-14 small:gap-4 tablet:flex-row flex-col mt-10 laptop:pl-20">
           <div className="small:flex hidden flex-col items-center tablet:mb-0 mb-6 justify-end">
             {/* laptop*/}
             <div className="laptop:w-[520px] ">
@@ -111,13 +110,13 @@ const DesignPage: React.FC<Props> = ({ design }) => {
 };
 
 export async function getServerSideProps(ctx: NextPageContext) {
-  const { token } = nookies.get(ctx);
   const { slug } = ctx.query;
 
   let design = null;
 
   try {
-    const pass = await getDesignBySlug(token, slug as string);
+    const pass = await getDesignBySlug(slug as string);
+    console.log(pass);
     design = pass.res[0];
   } catch (e) {
     return;
