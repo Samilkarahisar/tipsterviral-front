@@ -118,7 +118,7 @@ class PrivacyPolicy extends Component {
             <li>
               <p>
                 <strong>Website</strong> refers to decoloco.co, accessible from
-                {'http://www.decoloco.co'}
+                {'https://decoloco.co'}
               </p>
             </li>
             <li>

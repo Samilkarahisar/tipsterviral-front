@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo
-        title="ImageYeti"
+        title="Decoloco"
         description="Our yeti automatically generates a fitting image for your content"
       />
       <Wrapper>
