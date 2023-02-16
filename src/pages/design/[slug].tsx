@@ -46,14 +46,14 @@ const DesignPage: React.FC<Props> = ({ design }) => {
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                   The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using 'Content
-                  here, content here', making it look like readable English.
-                  Many desktop publishing packages and web page editors now use
-                  Lorem Ipsum as their default model text, and a search for
-                  'lorem ipsum' will uncover many web sites still in their
-                  infancy. Various versions have evolved over the years,
-                  sometimes by accident, sometimes on purpose (injected humour
-                  and the like).
+                  normal distribution of letters, as opposed to using `&lsquo;`,
+                  Content here, content here`&lsquo;`, , making it look like
+                  readable English. Many desktop publishing packages and web
+                  page editors now use Lorem Ipsum as their default model text,
+                  and a search for `&lsquo;`, lorem ipsum`&lsquo;`, will uncover
+                  many web sites still in their infancy. Various versions have
+                  evolved over the years, sometimes by accident, sometimes on
+                  purpose (injected humour and the like).
                 </p>
               </div>
             </div>
@@ -100,9 +100,7 @@ const DesignPage: React.FC<Props> = ({ design }) => {
             <h1 className="text-3xl font-bold mb-5">
               Could your room look like this?
             </h1>
-            <button
-              className="bg-[#ee7932] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block"
-              onClick={() => router.push('/login')}>
+            <button className="bg-[#ee7932] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block">
               Try decoloco for free
             </button>
           </div>
