@@ -1,5 +1,5 @@
-export const DISCORD_LINK = 'https://discord.gg/YpsYjPxWqH';
-export const TWITTER_LINK = 'https://twitter.com/ImageYeti';
+export const DISCORD_LINK = '';
+export const TWITTER_LINK = 'https://twitter.com/Decolococo';
 
 export const API_PATH_GET_DESIGN = '/public/getDesignBySlug';
 

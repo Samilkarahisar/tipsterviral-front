@@ -39,7 +39,7 @@ const Footer = () => {
           </div>
         </div>
         <label className="text-gray2 text-xs">
-          ImageYeti © 2022 - contact@imageyeti.com
+          Decoloco © 2022 - contact@decoloco.co
         </label>
       </Container>
     </div>

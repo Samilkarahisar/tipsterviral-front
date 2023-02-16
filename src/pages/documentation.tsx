@@ -32,7 +32,7 @@ const Documentation = () => {
               <div className="m-auto">
                 <b>API Link</b>
                 <label className="block p-2 rounded-lg max-w-[500px] bg-green2 ">
-                  https://api.imageyeti.com/magicGenerate
+                  https://api.decoloco.co/magicGenerate
                 </label>
               </div>
               <div className=" m-auto">

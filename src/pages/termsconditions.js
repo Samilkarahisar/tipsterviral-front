@@ -10,9 +10,9 @@ class TermsConditions extends Component {
     return (
       <div>
         <NextSeo
-          title={`Imageyeti Terms and Conditions`}
+          title={`decoloco.co Terms and Conditions`}
           description={
-            'Terms and Conditions of Imageyeti. Please read it before using our website.'
+            'Terms and Conditions of decoloco.co. Please read it before using our website.'
           }
         />
 
@@ -60,7 +60,7 @@ class TermsConditions extends Component {
               <p>
                 <strong>Company</strong> (referred to as either &quot;the
                 Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot;
-                in this Agreement) refers to imageyeti.
+                in this Agreement) refers to decoloco.co.
               </p>
             </li>
             <li>
@@ -92,8 +92,8 @@ class TermsConditions extends Component {
             </li>
             <li>
               <p>
-                <strong>Website</strong> refers to imageyeti, accessible from
-                http://www.imageyeti.com
+                <strong>Website</strong> refers to decoloco.co, accessible from
+                https://decoloco.co
               </p>
             </li>
             <li>
@@ -146,18 +146,18 @@ class TermsConditions extends Component {
           </strong>
           <strong>
             We are using Stripe.com as payment handler. Available packages can
-            be found on: https://imageyeti.com/pricing
+            be found on: https://decoloco.co/pricing
           </strong>
           <strong>
             Each package gives a determined amount of credits. Everytime you
             click on a button containing the word Generate, your account
             consumes 1 credit. The usage of our magic API endpoints (see:
-            https://imageyeti.com/documentation) also consume 1 credit every
+            https://decoloco.co/documentation) also consume 1 credit every
             usage.
           </strong>
           <strong>
             The remaining credits your account has is visible on the
-            https://imageyeti.com/dashboard page, under the Generate button.
+            https://decoloco.co/dashboard page, under the Generate button.
           </strong>
           <strong>Used credits can not be refunded.</strong>
           <strong>
@@ -171,7 +171,7 @@ class TermsConditions extends Component {
           </strong>
           <strong>
             For any questions or bug reports, please ruch us at
-            contact@imageyeti.com
+            contact@decoloco.co
           </strong>
           <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
             Subscriptions
@@ -255,7 +255,7 @@ class TermsConditions extends Component {
           </h1>
           <br />
           <strong>
-            Imageyeti is an automation and editing tool. <br />
+            decoloco.co is an automation and editing tool. <br />
             We do not distribute the generated images, nor sell them. <br /> AI
             generated images are copyright free
             (https://creativecommons.org/publicdomain/zero/1.0/).
@@ -267,7 +267,7 @@ class TermsConditions extends Component {
             DMCA and Takedowns Policy
           </h1>
           <strong>
-            When you generate images with imageyeti, we generate 2 images by
+            When you generate images with decoloco.co, we generate 2 images by
             AI(stable-diffusion algorithm) through various AI hosting services
             and also gather 1 human made copyright free image from Pixabay.{' '}
             <br /> The first and second image returned by our service is AI
@@ -275,40 +275,40 @@ class TermsConditions extends Component {
             The second comes from Pixabay. <br />
             We respect any right holders, and if you believe any image generated
             by our service is in infringement of your copyright, please reach us
-            at contact@imageyeti.com and we will process your request. <br />
+            at contact@decoloco.co and we will process your request. <br />
           </strong>
           <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
             Liability for Damage
           </h1>
           <strong>
-            Imageyeti is not liable for damages resulting from this agreement,
+            decoloco.co is not liable for damages resulting from this agreement,
             unless the damage was caused intentionally or results from gross
             negligence. <br />
-            Imageyeti is not liable for damages caused by incorrect or
+            decoloco.co is not liable for damages caused by incorrect or
             incomplete information provided by or on behalf of the client.{' '}
             <br />
-            Imageyeti is not liable for any consequences of electronic
+            decoloco.co is not liable for any consequences of electronic
             communication, including but not limited to, manipulation,
             interception by third parties or transmission of viruses. <br />{' '}
-            Imageyeti is also not liable for other situations that are beyond
+            decoloco.co is also not liable for other situations that are beyond
             its reach, including hacks. <br /> Client remains at all times
             responsible for the application or implementation of knowledge or
-            actions as acquired during an agreement. <br /> Imageyeti is not
-            liable for complications arising from the use of Imageyeti services.{' '}
-            <br />
-            Imageyeti will delete an account 90 days after cancellation of a
+            actions as acquired during an agreement. <br /> decoloco.co is not
+            liable for complications arising from the use of decoloco.co
+            services. <br />
+            decoloco.co will delete an account 90 days after cancellation of a
             plan. <br /> Client is responsible for making or requesting a
             backup, if desired. <br /> Client is responsible for the actions
-            that are performed using his Imageyeti user account, including
+            that are performed using his decoloco.co user account, including
             abuse. <br />
-            In the event that Imageyeti owes client compensation, the damage
-            will not exceed the amount invoiced by Imageyeti to client in the
+            In the event that decoloco.co owes client compensation, the damage
+            will not exceed the amount invoiced by decoloco.co to client in the
             three months prior to the damage arising, unless the law stipulates
             otherwise. <br /> If invoiced per year, the damage shall not exceed
             a quarter of the annual amount. <br />
-            Client acknowledges that Imageyeti cannot be held liable by third
+            Client acknowledges that decoloco.co cannot be held liable by third
             parties for claims related to the services and goods provided by
-            Imageyeti. <br />
+            decoloco.co. <br />
           </strong>
           <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
             Complaints
@@ -316,7 +316,7 @@ class TermsConditions extends Component {
           <strong>
             Client is obliged to report complaints about offers, invoices and /
             or delivered services within 7 calendar days after the complaint has
-            arisen to the Imageyeti in writing and with reasons.
+            arisen to the decoloco.co in writing and with reasons.
             <br /> Simple Analytics strives to respond substantively to
             complaints within 7 calendar days.
             <br /> Submitting a complaint does not suspend the payment
@@ -548,7 +548,7 @@ class TermsConditions extends Component {
             contact us:
           </p>
           <ul>
-            <li>By email: contact@imageyeti.com</li>
+            <li>By email: contact@decoloco.co</li>
           </ul>
         </div>
       </div>

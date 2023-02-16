@@ -132,7 +132,7 @@ const Dashboard = () => {
   return (
     <>
       <NextSeo
-        title={`Imageyeti - Dashboard`}
+        title={`Decoloco - Dashboard`}
         description={'Type your title and generate your images'}
       />
       <Modal
@@ -150,7 +150,7 @@ const Dashboard = () => {
           <div className="mt-2 bg-green2 p-2 rounded-lg max-w-[500px]">
             <b>You don&apos;t have any website registered yet!</b>
             <label className="block">
-              To start using Imageyeti, please add a website to your profile, it
+              To start using Decoloco, please add a website to your profile, it
               will be useful to find your different content and corresponding
               images in the future.
             </label>

@@ -6,9 +6,9 @@ const HomePage = () => {
   return (
     <>
       <NextSeo
-        title={`Imageyeti - AI powered image generation API`}
+        title={`Decoloco - AI powered image generation API`}
         description={
-          'Imageyeti handles everything for you. We use the newest technologies like Stable Diffusion to find a unique background for your needs. All you have to do is to give us a title and we provide you a content ready image, for your blog, podcast, social media usages.'
+          'Decoloco handles everything for you. We use the newest technologies like Stable Diffusion to find a unique background for your needs. All you have to do is to give us a title and we provide you a content ready image, for your blog, podcast, social media usages.'
         }
       />
       <div
