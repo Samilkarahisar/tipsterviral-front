@@ -22,17 +22,9 @@ export const getDesigns = async (siteId: string | undefined) => {
   }
 };
 
-export const getDesignBySlug = async (
-  token: string | undefined,
-  slug: string,
-) => {
+export const getDesignBySlug = async (slug: string) => {
   try {
-    const { data } = await api.get(`${API_PATH_GET_DESIGN}/${slug}`, {
-      params: {
-        token,
-      },
-    });
-
+    const { data } = await api.get(`${API_PATH_GET_DESIGN}/${slug}`);
     return data;
   } catch (e) {
     return null;
