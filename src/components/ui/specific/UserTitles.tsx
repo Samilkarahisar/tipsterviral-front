@@ -1,4 +1,4 @@
-import { TitleDto } from '@/types/dto/TitleDto';
+import { TitleDto } from '@/types/dto/DesignDto';
 import { List } from 'antd';
 import router from 'next/router';
 import React from 'react';

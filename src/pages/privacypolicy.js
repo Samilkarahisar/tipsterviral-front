@@ -10,7 +10,7 @@ class PrivacyPolicy extends Component {
     return (
       <div>
         <NextSeo
-          title={`imageyeti Privacy Policy`}
+          title={`decoloco.co Privacy Policy`}
           description={
             'This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.'
           }
@@ -56,7 +56,7 @@ class PrivacyPolicy extends Component {
               <p>
                 <strong>Company</strong> (referred to as either &quot;the
                 Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot;
-                in this Agreement) refers to imageyeti.
+                in this Agreement) refers to decoloco.co.
               </p>
             </li>
             <li>
@@ -117,8 +117,8 @@ class PrivacyPolicy extends Component {
             </li>
             <li>
               <p>
-                <strong>Website</strong> refers to imageyeti, accessible from
-                {'http://www.imageyeti.com'}
+                <strong>Website</strong> refers to decoloco.co, accessible from
+                {'https://decoloco.co'}
               </p>
             </li>
             <li>
@@ -556,7 +556,7 @@ class PrivacyPolicy extends Component {
             us:
           </p>
           <ul>
-            <li>By email: contact@imageyeti.com</li>
+            <li>By email: contact@decoloco.co</li>
           </ul>
         </div>
       </div>
