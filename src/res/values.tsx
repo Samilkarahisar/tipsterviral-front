@@ -3,6 +3,8 @@ export const TWITTER_LINK = 'https://twitter.com/Decolococo';
 
 export const API_PATH_GET_DESIGN = '/public/getDesignBySlug';
 
+export const API_PATH_POST_DESIGN_TOOL = '/public/createDesignFromTool';
+
 export const API_PATH_GET_REDESIGN = '/public/getRedesignBySlug';
 
 export const API_PATH_ADD_SITE = '/restricted/createSite';

@@ -1,3 +1,4 @@
+import { createDesignFromTool } from '@/api/tool';
 import { getUser } from '@/api/user';
 import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
@@ -93,7 +94,7 @@ const Tool = () => {
 
   const [priceIdLoading, setPriceIdLoading] = useState(true);
   const [subscription, setSubscription] = useState<any>();
-  const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile, setSelectedFile] = useState(undefined);
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(roomList[0].value);
   const [selectedStyle, setSelectedStyle] = useState(styleList[0].value);
@@ -105,9 +106,8 @@ const Tool = () => {
   const changeHandler = (event) => {
     const file = event.target.files[0];
     const fileNotNull = file !== undefined;
-    console.log(file.type + ' ' + file.type.toLowerCase().indexOf('image/'));
     if (fileNotNull && file.type.toLowerCase().indexOf('image/') < 0) {
-      setSelectedFile(null);
+      setSelectedFile(undefined);
       setIsFileSelected(false);
       alert('Please select an image file');
     } else {
@@ -133,22 +133,18 @@ const Tool = () => {
     setPriceIdLoading(false);
   };
 
-  const handleSubmission = () => {
-    const formData = new FormData();
+  const handleSubmission = async () => {
+    let formData = new FormData();
+    formData.append('image', selectedFile);
+    formData.append('room', selectedRoom);
+    formData.append('style', selectedStyle);
 
-    formData.append('File', selectedFile);
-
-    fetch('https://freeimage.host/api/1/upload?key=<YOUR_API_KEY>', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log('Success:', result);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    try {
+      await createDesignFromTool(formData as FormData);
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   };
 
   return priceIdLoading ? (
@@ -158,9 +154,9 @@ const Tool = () => {
   ) : (
     <>
       <div className="max-w-[1000px] mx-auto py-4 px-4">
-        <div className="flex rounded-3xl  min-w-[1000px]">
-          <div className="flex w-1/2 h-[500px] bg-transparent m-10 mr-5">
-            <div className="flex w-full h-3/4">
+        <div className="flex flex-col laptop:flex-row rounded-3xl  laptop:min-w-[1000px]">
+          <div className="flex mobile:flex-col mobile:w-full laptop:w-1/2 bg-transparent m-5 laptop:m-10 laptop:mr-5">
+            <div className="flex w-full h-full laptop:h-3/4">
               <label className="flex flex-col w-full rounded-3xl border-4 border-dashed border-yellow-500 hover:cursor-pointer group">
                 {isFileSelected ? (
                   <div className="flex flex-col w-full h-full">
@@ -177,7 +173,7 @@ const Tool = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center justify-center m-10 my-auto group-hover:scale-110 transition">
+                  <div className="flex flex-col items-center justify-center m-10 laptop:my-auto group-hover:scale-110 transition">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-24 h-24 text-black"
@@ -191,7 +187,7 @@ const Tool = () => {
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                       />
                     </svg>
-                    <p className="pt-1 m-0 text-xl tracking-wider text-black">
+                    <p className="pt-1 m-0 text-xl text-center tracking-wider text-black">
                       Upload a picture
                     </p>
                   </div>
@@ -201,23 +197,23 @@ const Tool = () => {
                   name="file"
                   accept="image/*"
                   onChange={changeHandler}
-                  className="opacity-0"
+                  className="hidden"
                 />
               </label>
             </div>
           </div>
-          <div className="flex w-1/2 bg-transparent m-10 ml-5">
+          <div className="flex mobile:flex-col mobile:w-full laptop:w-1/2 bg-transparent m-5 laptop:m-10 laptop:ml-5">
             <div className="w-full h-full">
               <div id="select-room" className="flex flex-col mb-4">
-                <span className="text-black text-2xl">
+                <span className="text-black text-xl laptop:text-2xl">
                   Select the room of your picture
                 </span>
                 <div className="h-1 w-1/2 bg-yellow-500 rounded-xl mt-2 mb-8" />
-                <div className="grid grid-cols-4">
+                <div className="grid grid-cols-3 laptop:grid-cols-4">
                   {roomList.map((option) => (
                     <div
                       key={option.value}
-                      className="w-24 h-24 mr-2 mb-2"
+                      className="cursor-pointer w-20 h-20 mr-1 mb-1 laptop:w-24 laptop:h-24 laptop:mr-2 laptop:mb-2"
                       onClick={() => {
                         setSelectedRoom(option.value);
                         console.log(option.value);
@@ -245,11 +241,11 @@ const Tool = () => {
                   Select the style of your room
                 </span>
                 <div className="h-1 w-1/2 bg-yellow-500 rounded-xl mt-2 mb-8" />
-                <div className="grid grid-cols-4">
+                <div className="grid grid-cols-3 laptop:grid-cols-4">
                   {styleList.map((option) => (
                     <div
                       key={option.value}
-                      className="w-24 h-24 mr-2 mb-2"
+                      className="cursor-pointer w-20 h-20 mr-1 mb-1 laptop:w-24 laptop:h-24 laptop:mr-2 laptop:mb-2"
                       onClick={() => {
                         setSelectedStyle(option.value);
                         console.log(option.value);
@@ -272,14 +268,19 @@ const Tool = () => {
                   ))}
                 </div>
               </div>
-
-              <div id="button-generate" className="flex flex-col w-full">
-                <button className="flex rounded-full bg-yellow-500 hover:bg-yellow-600 text-white text-xl font-bold bottom-0 py-2 px-8 mx-auto">
-                  Generate
-                </button>
-              </div>
             </div>
           </div>
+        </div>
+        <div id="button-generate" className="flex flex-col w-full">
+          <button
+            className="flex rounded-full bg-yellow-500 hover:bg-yellow-600 text-white text-xl font-bold bottom-0 py-2 px-8 mx-auto disabled:cursor-default disabled:bg-gray-500 disabled:hover:bg-gray-600"
+            disabled={!isFileSelected}
+            title={!isFileSelected ? 'Attach a file to generate' : ''}
+            onClick={() => {
+              handleSubmission();
+            }}>
+            Generate
+          </button>
         </div>
       </div>
     </>
