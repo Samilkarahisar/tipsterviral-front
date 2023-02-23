@@ -53,7 +53,7 @@ const Header = () => {
         <div className="flex justify-between">
           <div className="flex justify-between items-center gap-10">
             <Link href={!user ? '/' : '/dashboard'}>
-              <a className="laptop:w-40 laptop:h-50  block">
+              <a className="w-40 h-50  block">
                 <img src={ImgLogo.src} />
               </a>
             </Link>

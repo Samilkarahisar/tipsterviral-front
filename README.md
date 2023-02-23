@@ -1,12 +1,14 @@
-## Imageyeti web application
+## Decoloco web application
 
 ### Prerequisites
+
 - Yarn (1.22.4 or greater)
 - Node.js (v14.16.0 or greater)
 
 ### How to start the app
- 
+
 #### Development mode
+
 ```
 # Install all the dependencies
 yarn install
@@ -16,6 +18,7 @@ yarn dev
 ```
 
 #### Production mode
+
 ```
 # Install all the dependencies
 yarn install

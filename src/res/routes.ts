@@ -5,12 +5,7 @@ export const ROUTE_ACCOUNT = '/account';
 export const ROUTE_MAGIC = '/documentation';
 export const ROUTE_TERMS = '/termsconditions';
 export const ROUTE_PRIVACY = '/documentation';
-export const headerRoutes = [
-  {
-    label: 'Pricing',
-    route: ROUTE_PRICING,
-  },
-];
+export const headerRoutes = [];
 
 export const footerRoutes = [
   {

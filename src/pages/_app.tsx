@@ -9,8 +9,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo
-        title="Decoloco"
-        description="Our yeti automatically generates a fitting image for your content"
+        title="Decoloco.co"
+        description="Redesign your house in 5 seconds"
       />
       <Wrapper>
         <Component {...pageProps} />
