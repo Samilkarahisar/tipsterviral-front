@@ -13,10 +13,6 @@ export const headerRoutes = [
 ];
 export const footerRoutes = [
   {
-    label: 'Magic API',
-    route: ROUTE_MAGIC,
-  },
-  {
     label: 'Terms & Conditions',
     route: ROUTE_TERMS,
   },

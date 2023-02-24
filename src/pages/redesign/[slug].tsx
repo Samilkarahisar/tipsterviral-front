@@ -35,7 +35,7 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
               src="https://i.ibb.co/xfLDTt6/Nouveau-projet-21.png"
               className="small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[75px] laptop:h-[75px]"
             />
-            <h1 className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="relative">
                 <div className="rounded-full overflow-hidden h-24 w-72 flex items-center justify-center bg-gray-300 border-2 border-black relative ">
                   <img
@@ -43,15 +43,15 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
                     alt="Image"
                     className="h-24 w-72 object-cover"
                   />
-                  <h1 className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <h1 className="text-4xl font-bold pt-2 text-[white] drop-shadow-2xl shadow-black">
+                  <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div className="text-4xl font-bold pt-2 text-[white] drop-shadow-2xl shadow-black">
                       {redesign.style}
                       <span className="text-[#ee7932]">.</span>
-                    </h1>
-                  </h1>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </h1>
+            </div>
           </div>
           <img
             src={redesign.result_url}
