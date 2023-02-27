@@ -223,7 +223,6 @@ const Tool = () => {
                       className="cursor-pointer w-20 h-20 mr-1 mb-1 laptop:w-24 laptop:h-24 laptop:mr-2 laptop:mb-2"
                       onClick={() => {
                         setSelectedRoom(option.value);
-                        console.log(option.value);
                       }}>
                       <div
                         className={`relative bg-[#fefbf2] 
@@ -255,7 +254,6 @@ const Tool = () => {
                       className="cursor-pointer w-20 h-20 mr-1 mb-1 laptop:w-24 laptop:h-24 laptop:mr-2 laptop:mb-2"
                       onClick={() => {
                         setSelectedStyle(option.value);
-                        console.log(option.value);
                       }}>
                       <div
                         className={`relative

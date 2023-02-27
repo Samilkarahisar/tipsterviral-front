@@ -116,7 +116,6 @@ export async function getServerSideProps(ctx: NextPageContext) {
 
   try {
     const pass = await getDesignBySlug(slug as string);
-    console.log(pass);
     design = pass.res[0];
   } catch (e) {
     return;
