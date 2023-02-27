@@ -2,88 +2,82 @@ import { createDesignFromTool } from '@/api/tool';
 import { getUser } from '@/api/user';
 import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
-import {
-  IconBathroom,
-  IconBedroom,
-  IconBricks,
-  IconCloset,
-  IconGarage,
-  IconGreen,
-  IconKitchen,
-  IconLivingRoom,
-  IconLux,
-  IconMarble,
-  IconToilet,
-  IconWood,
-} from '@/res/icons';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 type BillingInterval = 'year' | 'month';
 
-const roomList = [
+const styleList = [
   {
-    image: IconBathroom.src,
-    label: 'Bathroom',
+    image:
+      'https://imageio.forbes.com/specials-images/imageserve/632d891161b9efabbc7d2c23/0x0.jpg?format=jpg&crop=2200,1232,x398,y0,safe&width=1200',
+    label: 'Japanese',
     value: '1',
   },
   {
-    image: IconBedroom.src,
-    label: 'Bedroom',
+    image:
+      'https://cdn.pixabay.com/photo/2017/01/18/13/10/galaxy-soho-1989816_1280.jpg',
+    label: 'Modern',
     value: '2',
   },
   {
-    image: IconKitchen.src,
-    label: 'Kitchen',
+    image:
+      'https://cdn.pixabay.com/photo/2020/06/07/01/50/window-5268702_1280.jpg',
+    label: 'Minimalist',
     value: '3',
   },
   {
-    image: IconLivingRoom.src,
-    label: 'Living Room',
+    image:
+      'https://cdn.pixabay.com/photo/2019/05/29/19/51/house-4238414_1280.jpg',
+    label: 'Scandinavian',
     value: '4',
   },
   {
-    image: IconToilet.src,
-    label: 'Toilet',
+    image:
+      'https://cdn.pixabay.com/photo/2018/03/12/20/07/maldives-3220702_1280.jpg',
+    label: 'Tropical',
     value: '5',
   },
   {
-    image: IconGarage.src,
-    label: 'Garage',
-    value: '6',
-  },
-  {
-    image: IconCloset.src,
-    label: 'Closet',
-    value: '7',
-  },
-];
-
-const styleList = [
-  {
-    image: IconWood.src,
-    label: 'Wood',
-    value: '1',
-  },
-  {
-    image: IconGreen.src,
-    label: 'Green',
+    image:
+      'https://cdn.pixabay.com/photo/2015/06/27/16/34/wall-823611_1280.jpg',
+    label: 'Industrial',
     value: '2',
   },
   {
-    image: IconLux.src,
-    label: 'Lux',
+    image:
+      'https://cdn.pixabay.com/photo/2021/03/02/01/07/cyberpunk-6061251_1280.jpg',
+    label: 'Cyberpunk',
     value: '3',
   },
   {
-    image: IconBricks.src,
-    label: 'Bricks',
+    image:
+      'https://cdn.pixabay.com/photo/2019/11/04/19/15/steampunk-4601917_1280.jpg',
+    label: 'Steampunk',
     value: '4',
   },
   {
-    image: IconMarble.src,
-    label: 'Marble',
+    image: 'https://cdn.pixabay.com/photo/2015/04/08/13/22/car-712684_1280.jpg',
+    label: 'Vice City',
+    value: '5',
+  },
+  {
+    image:
+      'https://cdn.pixabay.com/photo/2014/12/06/12/47/fireplace-558985_1280.jpg',
+    label: 'Christmas',
+    value: '5',
+  },
+  {
+    image:
+      'https://cdn.pixabay.com/photo/2014/10/15/01/57/catherines-palace-489085_1280.jpg',
+    label: 'Palace',
+    value: '5',
+  },
+  {
+    image:
+      'https://cdn.pixabay.com/photo/2018/07/13/09/04/architecture-3535243_1280.jpg',
+    label: 'Morocco',
     value: '5',
   },
 ];
@@ -205,17 +199,30 @@ const Tool = () => {
           <div
             id="styleSelectDiv"
             className={`${isStyleSelected ? 'blur' : ''}`}>
+            <div className="text-2xl font-bold">Choose a style</div>
             {styleList.map((option, id) => (
               <div
                 key={id}
-                className="flex flex-col w-full h-12 my-2 rounded-full bg-black justify-center items-center"
                 onClick={() => {
                   setSelectedStyle(option.value);
                   setIsStyleSelected(true);
                   console.log(option.value);
-                }}>
-                <div className="text-white font-bold text-lg">
-                  {option.label}
+                }}
+                className="flex flex-col w-full justify-center items-center mt-5">
+                <div className="relative">
+                  <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative ">
+                    <img
+                      src={option.image}
+                      alt="Image"
+                      className="h-24 w-80 object-cover blur-[0.7px]"
+                    />
+                    <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <div className="text-4xl font-bold pt-2 text-[white] drop-shadow-2xl shadow-black">
+                        {option.label}
+                        <span className="text-[#ee7932]">.</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
