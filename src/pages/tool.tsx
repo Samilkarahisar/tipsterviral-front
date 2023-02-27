@@ -134,16 +134,21 @@ const Tool = () => {
   };
 
   const handleSubmission = async () => {
-    let formData = new FormData();
-    formData.append('image', selectedFile);
-    formData.append('room', selectedRoom);
-    formData.append('style', selectedStyle);
-
-    try {
-      await createDesignFromTool(formData as FormData);
-    } catch (err) {
-      console.log(err);
+    if (!selectedFile) {
+      console.log('No file selected');
       return;
+    } else {
+      const formData = new FormData();
+      formData.append('image', selectedFile);
+      formData.append('room', selectedRoom);
+      formData.append('style', 'Japanese');
+
+      try {
+        await createDesignFromTool(formData);
+      } catch (err) {
+        console.log(err);
+        return;
+      }
     }
   };
 
