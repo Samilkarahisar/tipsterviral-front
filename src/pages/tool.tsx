@@ -156,7 +156,7 @@ const Tool = () => {
   ) : (
     <>
       <div id="selectDiv" className="flex justify-center">
-        <div className="flex flex-col flex-grow px-10 py-5 max-w-lg">
+        <div className="flex flex-col flex-grow p-5">
           <label className="flex flex-col w-full min-h-[200px] mb-7 rounded-3xl border-4 border-dashed border-yellow-500 hover:cursor-pointer group">
             {isFileSelected ? (
               <div className="flex flex-col w-full h-full">

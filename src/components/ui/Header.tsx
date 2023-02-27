@@ -70,7 +70,7 @@ const Header = () => {
           <div
             className={`laptop:static fixed ${
               !open ? 'translate-x-full' : 'translate-x-0'
-            } right-0 min-h-screen laptop:min-h-0 laptop:transform-none transition-transform duration-300 laptop:h-auto h-full bg-transparent laptop:w-auto w-[265px] top-0 laptop:p-0 p-4 pr-9 laptop:gap-10 laptop:flex laptop:flex-row flex-col`}>
+            } right-0 min-h-screen laptop:min-h-0 laptop:transform-none transition-transform duration-300 laptop:h-auto h-full bg-white laptop:w-auto w-[265px] top-0 laptop:p-0 p-4 pr-9 laptop:gap-10 laptop:flex laptop:flex-row flex-col`}>
             <IconClose
               onClick={() => setOpen(false)}
               className="laptop:hidden mb-5 stroke-current text-gray1 dark:text-dark-gray1 cursor-pointer"
