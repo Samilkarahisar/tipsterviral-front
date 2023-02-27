@@ -7,6 +7,7 @@ import {
   ROUTE_ACCOUNT,
   ROUTE_DASHBOARD,
   ROUTE_LOGIN,
+  ROUTE_TOOL,
 } from '@/res/routes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -52,7 +53,7 @@ const Header = () => {
       <Container>
         <div className="flex justify-between">
           <div className="flex justify-between items-center gap-10">
-            <Link href={!user ? '/' : '/dashboard'}>
+            <Link href={!user ? '/' : '/tool'}>
               <a className="w-40 h-50  block">
                 <img src={ImgLogo.src} />
               </a>
@@ -98,6 +99,13 @@ const Header = () => {
                     <Link href={ROUTE_DASHBOARD}>
                       <a>
                         <label className="cursor-pointer">Dashboard</label>
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={ROUTE_TOOL}>
+                      <a>
+                        <label className="cursor-pointer">Tool</label>
                       </a>
                     </Link>
                   </li>
