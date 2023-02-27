@@ -129,6 +129,7 @@ const Tool = () => {
   };
 
   const handleSubmission = async () => {
+    console.log('ici');
     if (!selectedFile) {
       console.log('No file selected');
       return;
@@ -204,7 +205,7 @@ const Tool = () => {
               <div
                 key={id}
                 onClick={() => {
-                  setSelectedStyle(option.value);
+                  setSelectedStyle(option.label);
                   setIsStyleSelected(true);
                   console.log(option.value);
                 }}
