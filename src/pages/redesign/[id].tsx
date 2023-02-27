@@ -1,8 +1,9 @@
-import { getRedesignBySlug } from '@/api/redesign';
+import { getRedesignById } from '@/api/redesign';
 import Container from '@/components/ui/Container';
 import { RedesignDto } from '@/types/dto/RedesignDto';
 import { NextPageContext } from 'next';
 import { NextSeo } from 'next-seo';
+import nookies from 'nookies';
 import React from 'react';
 
 interface Props {
@@ -73,14 +74,14 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
 };
 
 export async function getServerSideProps(ctx: NextPageContext) {
-  const { slug } = ctx.query;
+  const { id } = ctx.query;
 
+  const { token } = nookies.get(ctx);
   let redesign = null;
 
   try {
-    const pass = await getRedesignBySlug(slug as string);
-    console.log(pass);
-    redesign = pass;
+    const pass = await getRedesignById(token, id as string);
+    redesign = pass.redesign;
   } catch (e) {
     return;
   }
