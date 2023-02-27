@@ -8,18 +8,13 @@ export const createDesignFromTool = async (formData: any) => {
     const ownerId = auth.currentUser?.uid;
 
     if (token && ownerId) {
-      console.log(token);
-      await api
-        .post(API_PATH_POST_DESIGN_TOOL, formData, {
-          params: {
-            token,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        });
+      const { data } = await api.post(API_PATH_POST_DESIGN_TOOL, formData, {
+        params: {
+          token,
+        },
+      });
+      return data;
     }
-    return;
   } catch (e) {
     return;
   }

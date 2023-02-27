@@ -128,7 +128,6 @@ const Tool = () => {
 
   const getSubscriptionInfo = async () => {
     const data = await getUser();
-
     setSubscription(data);
     setPriceIdLoading(false);
   };
@@ -144,7 +143,10 @@ const Tool = () => {
       formData.append('style', 'Japanese');
 
       try {
-        await createDesignFromTool(formData);
+        const result = await createDesignFromTool(formData);
+        if (result.code == 200) {
+          router.push('/redesign/' + result.id);
+        }
       } catch (err) {
         console.log(err);
         return;
