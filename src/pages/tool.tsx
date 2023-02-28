@@ -129,7 +129,6 @@ const Tool = () => {
   };
 
   const handleSubmission = async () => {
-    console.log('ici');
     if (!selectedFile) {
       console.log('No file selected');
       return;
@@ -140,7 +139,7 @@ const Tool = () => {
 
       try {
         const result = await createDesignFromTool(formData);
-        if (result.code == 200) {
+        if (result?.code == 200) {
           router.push('/redesign/' + result.id);
         }
       } catch (err) {
