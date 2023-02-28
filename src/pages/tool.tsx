@@ -137,11 +137,8 @@ const Tool = () => {
       console.log('No file selected');
       return;
     } else {
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-      formData.append('style', selectedStyle);
       try {
-        const result = await createDesignFromTool(formData);
+        const result = await createDesignFromTool(selectedFile, selectedStyle);
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
         }
