@@ -99,15 +99,19 @@ const Tool = () => {
   }, [user]);
 
   const changeHandler = (event) => {
-    const file = event.target.files[0];
-    const fileNotNull = file !== undefined;
-    if (fileNotNull && file.type.toLowerCase().indexOf('image/') < 0) {
-      setSelectedFile(undefined);
-      setIsFileSelected(false);
-      alert('Please select an image file');
+    if (user) {
+      const file = event.target.files[0];
+      const fileNotNull = file !== undefined;
+      if (fileNotNull && file.type.toLowerCase().indexOf('image/') < 0) {
+        setSelectedFile(undefined);
+        setIsFileSelected(false);
+        alert('Please select an image file');
+      } else {
+        setSelectedFile(file);
+        setIsFileSelected(fileNotNull);
+      }
     } else {
-      setSelectedFile(file);
-      setIsFileSelected(fileNotNull);
+      router.push('/login');
     }
   };
 
@@ -129,7 +133,6 @@ const Tool = () => {
   };
 
   const handleSubmission = async () => {
-    console.log('ici');
     if (!selectedFile) {
       console.log('No file selected');
       return;
@@ -137,11 +140,8 @@ const Tool = () => {
       const formData = new FormData();
       formData.append('image', selectedFile);
       formData.append('style', selectedStyle);
-      console.log(selectedFile);
       try {
-        console.log(formData);
         const result = await createDesignFromTool(formData);
-        console.log(result);
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
         }
