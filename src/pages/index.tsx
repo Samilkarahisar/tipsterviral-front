@@ -57,7 +57,7 @@ const HomePage = () => {
           backgroundImage: 'url(https://i.ibb.co/09FwV12/landingpage3-3.png)',
           width: '100%',
         }}
-        className="xl:h-[10vh] lg:h-[7vh] md:h-[5vh] sm:h-[3vh] h-[150px] animate-ltr-linear-infinite md:bg-contain "></div>
+        className="xl:h-[9vh] lg:h-[7vh] md:h-[5vh] sm:h-[3vh] h-[150px] animate-ltr-linear-infinite md:bg-contain "></div>
 
       <div className="max-w-[800px] w-full px-4 mx-auto py-5">
         <div className="text-3xl text-center mb-6 mt-[20px] font-Alexandria">
