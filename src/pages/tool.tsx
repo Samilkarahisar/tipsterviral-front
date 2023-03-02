@@ -128,22 +128,29 @@ const Tool = () => {
 
   const getSubscriptionInfo = async () => {
     const data = await getUser();
-
     setSubscription(data);
     setPriceIdLoading(false);
   };
 
   const handleSubmission = async () => {
-    let formData = new FormData();
-    formData.append('image', selectedFile);
-    formData.append('room', selectedRoom);
-    formData.append('style', selectedStyle);
-
-    try {
-      await createDesignFromTool(formData as FormData);
-    } catch (err) {
-      console.log(err);
+    if (!selectedFile) {
+      console.log('No file selected');
       return;
+    } else {
+      const formData = new FormData();
+      formData.append('image', selectedFile);
+      formData.append('room', selectedRoom);
+      formData.append('style', 'Japanese');
+
+      try {
+        const result = await createDesignFromTool(formData);
+        if (result.code == 200) {
+          router.push('/redesign/' + result.id);
+        }
+      } catch (err) {
+        console.log(err);
+        return;
+      }
     }
   };
 
@@ -216,7 +223,6 @@ const Tool = () => {
                       className="cursor-pointer w-20 h-20 mr-1 mb-1 laptop:w-24 laptop:h-24 laptop:mr-2 laptop:mb-2"
                       onClick={() => {
                         setSelectedRoom(option.value);
-                        console.log(option.value);
                       }}>
                       <div
                         className={`relative bg-[#fefbf2] 
@@ -248,7 +254,6 @@ const Tool = () => {
                       className="cursor-pointer w-20 h-20 mr-1 mb-1 laptop:w-24 laptop:h-24 laptop:mr-2 laptop:mb-2"
                       onClick={() => {
                         setSelectedStyle(option.value);
-                        console.log(option.value);
                       }}>
                       <div
                         className={`relative
