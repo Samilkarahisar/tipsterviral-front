@@ -1,18 +1,14 @@
 import { getAllRedesignsByUserId } from '@/api/redesign';
 import { getUser } from '@/api/user';
 import { auth } from '@/lib/firebase';
-import fontawesome, { IconDefinition } from '@fortawesome/fontawesome';
-import { faCoins, faImages, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  FormatPainterOutlined,
+  PlusOutlined,
+  WalletOutlined,
+} from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
-fontawesome.library.add(
-  faCoins as IconDefinition,
-  faImages as IconDefinition,
-  faPlus as IconDefinition,
-);
 
 const Dashboard = () => {
   const [user] = useAuthState(auth);
@@ -49,7 +45,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-2 laptop:grid-cols-4 gap-2 w-full h-[120px] p-6">
         <div className="flex justify-center items-center border bg-white border-gray-200 rounded-xl p-4">
           <div className="flex justify-center items-center w-12 h-12 bg-gray-200 rounded-lg">
-            <FontAwesomeIcon icon={'coins'} size={'2x'} />
+            <WalletOutlined />
           </div>
           <div className="flex flex-col pl-2">
             <div className="text-gray-400 text-lg font-bold">Crédits</div>
@@ -60,7 +56,7 @@ const Dashboard = () => {
         </div>
         <div className="flex justify-center items-center border bg-white border-gray-200 rounded-xl p-4">
           <div className="flex justify-center items-center w-12 h-12 bg-gray-200 rounded-lg">
-            <FontAwesomeIcon icon={'images'} size={'2x'} />
+            <FormatPainterOutlined />
           </div>
           <div className="flex flex-col pl-2">
             <div className="text-gray-400 text-lg font-bold">Designs</div>
@@ -92,7 +88,7 @@ const Dashboard = () => {
             onClick={() => {
               redirectToTool();
             }}>
-            <FontAwesomeIcon icon={'plus'} size={'4x'} color={'white'} />
+            <PlusOutlined />
           </div>
         </div>
       </div>
