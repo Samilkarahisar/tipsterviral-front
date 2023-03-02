@@ -36,7 +36,7 @@ const Dashboard = () => {
     if (data) setRedesigns(data.redesigns);
   };
 
-  const redirectToRedesign = async (id) => {
+  const redirectToRedesign = async (id: string) => {
     router.push('/redesign/' + id);
   };
 
@@ -70,8 +70,8 @@ const Dashboard = () => {
       </div>
       <div className="p-6">
         <div className="grid grid-cols-1 laptop:grid-cols-4 gap-2">
-          {redesigns?.map((redesign) => (
-            <div className="relative">
+          {redesigns?.map((redesign: any, id: number) => (
+            <div className="relative" key={id}>
               <div
                 className="flex flex-col justify-center items-center w-full h-[200px] bg-gray-500 rounded-3xl cursor-pointer overflow-hidden"
                 onClick={() => {
