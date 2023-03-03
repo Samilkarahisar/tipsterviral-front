@@ -155,7 +155,19 @@ const Tool = () => {
     </div>
   ) : (
     <>
-      <div id="selectDiv" className="flex justify-center">
+      <div
+        id="transformModal"
+        className="fixed left-0 top-0 z-50 w-full h-full bg-black bg-opacity-40 transition overflow-auto">
+        <div
+          id="transformModalContent"
+          className="absolute bg-white top-1/2 left-1/2 -ml-28 -mt-10 p-5 rounded-md w-60 h-40">
+          test
+        </div>
+      </div>
+      <div
+        id="selectDiv"
+        className={`flex justify-center items-center  laptop:mx-auto 
+        ${isStyleSelected ? 'blur' : ''}`}>
         <div className="flex flex-col flex-grow p-5">
           <label className="flex flex-col w-full min-h-[200px] mb-7 rounded-3xl border-4 border-dashed border-yellow-500 hover:cursor-pointer group">
             {isFileSelected ? (
@@ -196,9 +208,7 @@ const Tool = () => {
               className="hidden"
             />
           </label>
-          <div
-            id="styleSelectDiv"
-            className={`${isStyleSelected ? 'blur' : ''}`}>
+          <div id="styleSelectDiv">
             <div className="text-2xl font-bold">Choose a style</div>
             {styleList.map((option, id) => (
               <div
@@ -210,14 +220,14 @@ const Tool = () => {
                 }}
                 className="flex flex-col w-full justify-center items-center mt-5">
                 <div className="relative">
-                  <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative ">
+                  <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative cursor-pointer">
                     <img
                       src={option.image}
                       alt="Image"
                       className="h-24 w-80 object-cover blur-[0.7px]"
                     />
                     <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                      <div className="text-4xl font-bold pt-2 text-[white] drop-shadow-2xl shadow-black">
+                      <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
                         {option.label}
                         <span className="text-[#ee7932]">.</span>
                       </div>
