@@ -25,7 +25,6 @@ export const getRedesignById = async (
 export const getAllRedesignsByUserId = async () => {
   try {
     const token = await auth.currentUser?.getIdToken();
-    console.log(token);
     const { data } = await api.get(`${API_PATH_GET_REDESIGNS_BY_USER}`, {
       params: {
         token,

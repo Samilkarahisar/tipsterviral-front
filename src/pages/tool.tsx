@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-type BillingInterval = 'year' | 'month';
-
 const styleList = [
   {
     image:
@@ -83,20 +81,26 @@ const styleList = [
 ];
 
 const Tool = () => {
-  const [user] = useAuthState(auth);
   const router = useRouter();
-
-  const [priceIdLoading, setPriceIdLoading] = useState(true);
-  const [subscription, setSubscription] = useState<any>();
+  const [user] = useAuthState(auth);
+  const [account, setAccount] = useState<any>({});
   const [selectedFile, setSelectedFile] = useState(undefined);
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [selectedStyle, setSelectedStyle] = useState(styleList[0].value);
   const [isStyleSelected, setIsStyleSelected] = useState(false);
-  const [submit, setSubmit] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
 
   useEffect(() => {
     getSubscriptionInfo();
+    setIsNoCreditsLeft(account.credits_amount <= 0);
+    console.log(isNoCreditsLeft);
   }, [user]);
+
+  const getSubscriptionInfo = async () => {
+    const data = await getUser();
+    if (data) setAccount(data);
+  };
 
   const changeHandler = (event) => {
     if (user) {
@@ -115,6 +119,10 @@ const Tool = () => {
     }
   };
 
+  const redirectToPricing = () => {
+    router.push('/pricing');
+  };
+
   const ImageThumb = ({ image }) => {
     return (
       <img
@@ -125,11 +133,8 @@ const Tool = () => {
     );
   };
 
-  const getSubscriptionInfo = async () => {
-    const data = await getUser();
-
-    setSubscription(data);
-    setPriceIdLoading(false);
+  const toggleIsStyleSelected = async () => {
+    setIsStyleSelected(!isStyleSelected);
   };
 
   const handleSubmission = async () => {
@@ -138,9 +143,12 @@ const Tool = () => {
       return;
     } else {
       try {
+        setIsSubmitted(true);
         const result = await createDesignFromTool(selectedFile, selectedStyle);
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
+        } else {
+          console.log(result?.code + ': ' + result?.status);
         }
       } catch (err) {
         console.log(err);
@@ -149,13 +157,94 @@ const Tool = () => {
     }
   };
 
-  return priceIdLoading ? (
-    <div>
-      <Spinner />
-    </div>
-  ) : (
+  return (
     <>
-      <div id="selectDiv" className="flex justify-center">
+      <div
+        className={`fixed left-0 top-0 z-50 w-full h-full ${
+          !isStyleSelected ? 'hidden' : ''
+        }`}>
+        <div className="absolute bg-white top-1/2 left-1/2 -ml-36 -mt-28 p-5 rounded-xl w-72 h-60">
+          <div
+            className={`absolute top-0 right-0 m-4 cursor-pointer ${
+              isSubmitted ? 'hidden' : ''
+            }`}
+            onClick={() => {
+              toggleIsStyleSelected();
+            }}>
+            <svg
+              className="h-8 w-8 hover:text-gray-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true">
+              <path
+                strokeLinecap-="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+          {isNoCreditsLeft ? (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">
+                Sorry you don't have any credits left...
+              </div>
+              <div
+                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  redirectToPricing();
+                }}>
+                Buy more
+              </div>
+            </div>
+          ) : isSubmitted ? (
+            <div className="flex flex-col justify-center items-center h-full w-full">
+              <Spinner />
+              <div className="text-center">
+                <span className="text-xl">Generating...</span>
+                <br />
+                Please wait a few seconds
+              </div>
+            </div>
+          ) : isFileSelected ? (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">
+                Do you want to use the{' '}
+                <span className="font-bold">{selectedStyle}</span> style ?
+              </div>
+              <div
+                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  handleSubmission();
+                }}>
+                Confirm
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">Please select a picture</div>
+              <div
+                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  toggleIsStyleSelected();
+                }}>
+                OK
+              </div>
+            </div>
+          )}
+        </div>
+        <div
+          className="w-full h-full bg-black bg-opacity-40 transition overflow-auto"
+          onClick={() => {
+            if (!isSubmitted) toggleIsStyleSelected();
+          }}></div>
+      </div>
+      <div
+        id="selectDiv"
+        className={`flex justify-center items-center  laptop:mx-auto 
+        ${isStyleSelected ? 'blur' : ''}`}>
         <div className="flex flex-col flex-grow p-5">
           <label className="flex flex-col w-full min-h-[200px] mb-7 rounded-3xl border-4 border-dashed border-yellow-500 hover:cursor-pointer group">
             {isFileSelected ? (
@@ -189,16 +278,12 @@ const Tool = () => {
               name="file"
               accept="image/*"
               onChange={(e) => {
-                if (!submit) {
-                  changeHandler(e);
-                }
+                changeHandler(e);
               }}
               className="hidden"
             />
           </label>
-          <div
-            id="styleSelectDiv"
-            className={`${isStyleSelected ? 'blur' : ''}`}>
+          <div id="styleSelectDiv">
             <div className="text-2xl font-bold">Choose a style</div>
             {styleList.map((option, id) => (
               <div
@@ -206,18 +291,17 @@ const Tool = () => {
                 onClick={() => {
                   setSelectedStyle(option.label);
                   setIsStyleSelected(true);
-                  console.log(option.value);
                 }}
                 className="flex flex-col w-full justify-center items-center mt-5">
                 <div className="relative">
-                  <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative ">
+                  <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative cursor-pointer">
                     <img
                       src={option.image}
                       alt="Image"
                       className="h-24 w-80 object-cover blur-[0.7px]"
                     />
                     <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                      <div className="text-4xl font-bold pt-2 text-[white] drop-shadow-2xl shadow-black">
+                      <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
                         {option.label}
                         <span className="text-[#ee7932]">.</span>
                       </div>
@@ -226,69 +310,6 @@ const Tool = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-      <div
-        id="transformDiv"
-        className={`${
-          !isStyleSelected ? 'hidden' : ''
-        } absolute bottom-0 w-full h-1/4 bg-white rounded-t-3xl border-2 transition-all`}>
-        <div className="flex flex-col ">
-          <div
-            className="flex self-end p-2 m-2 rounded-full bg-black"
-            onClick={() => {
-              if (!submit) {
-                setIsStyleSelected(false);
-              }
-            }}>
-            <svg
-              className="h-6 w-6 text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true">
-              <path
-                strokeLinecap-="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </div>
-          <div className="flex self-center">
-            <button
-              className="flex items-center bg-yellow-500 hover:bg-yellow-600 text-white text-2xl py-2 px-8 rounded-full"
-              onClick={() => {
-                handleSubmission();
-              }}>
-              {submit ? (
-                <svg
-                  className="animate-spin text-white h-5 w-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-              ) : (
-                <></>
-              )}
-              Transform
-            </button>
           </div>
         </div>
       </div>
