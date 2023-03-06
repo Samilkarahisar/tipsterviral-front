@@ -29,7 +29,7 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         <div className="flex flex-col laptop:items-center laptop:justify-center p-10">
           <img
             src={redesign.init_url}
-            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[520px] laptop:h-[520px]"
+            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
           />
           <div className="relative">
             <img
@@ -57,7 +57,7 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
           <img
             src={redesign.result_url}
             alt="alt-text"
-            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[520px] laptop:h-[520px]"
+            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
           />
           <div className="flex flex-col items-start mt-10">
             <h1 className="text-3xl font-bold mb-5">
