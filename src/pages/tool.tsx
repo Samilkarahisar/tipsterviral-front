@@ -192,7 +192,7 @@ const Tool = () => {
                 Sorry you don&apos;t have any credits left...
               </div>
               <div
-                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
                 onClick={() => {
                   redirectToPricing();
                 }}>
@@ -215,7 +215,7 @@ const Tool = () => {
                 <span className="font-bold">{selectedStyle}</span> style ?
               </div>
               <div
-                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
                 onClick={() => {
                   handleSubmission();
                 }}>
@@ -226,7 +226,7 @@ const Tool = () => {
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">Please select a picture</div>
               <div
-                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
                 onClick={() => {
                   toggleIsStyleSelected();
                 }}>
@@ -243,10 +243,10 @@ const Tool = () => {
       </div>
       <div
         id="selectDiv"
-        className={`flex justify-center items-center  laptop:mx-auto 
+        className={`flex justify-center items-center laptop:mx-auto 
         ${isStyleSelected ? 'blur' : ''}`}>
         <div className="flex flex-col flex-grow p-5">
-          <label className="flex flex-col w-full min-h-[200px] mb-7 rounded-3xl border-4 border-dashed border-yellow-500 hover:cursor-pointer group">
+          <label className="flex flex-col w-full min-h-[200px] mb-7 rounded-3xl border-4 border-dashed border-[#ee7932] hover:cursor-pointer group">
             {isFileSelected ? (
               <div className="flex flex-col w-full h-full">
                 <div className="flex flex-col items-center justify-center overflow-hidden p-4">
