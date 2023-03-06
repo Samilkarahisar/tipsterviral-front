@@ -81,20 +81,26 @@ const styleList = [
 ];
 
 const Tool = () => {
-  const [user] = useAuthState(auth);
   const router = useRouter();
-
-  const [priceIdLoading, setPriceIdLoading] = useState(true);
-  const [subscription, setSubscription] = useState<any>();
+  const [user] = useAuthState(auth);
+  const [account, setAccount] = useState<any>({});
   const [selectedFile, setSelectedFile] = useState(undefined);
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [selectedStyle, setSelectedStyle] = useState(styleList[0].value);
   const [isStyleSelected, setIsStyleSelected] = useState(false);
-  const [submit, setSubmit] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
 
   useEffect(() => {
     getSubscriptionInfo();
+    setIsNoCreditsLeft(account.credits_amount <= 0);
+    console.log(isNoCreditsLeft);
   }, [user]);
+
+  const getSubscriptionInfo = async () => {
+    const data = await getUser();
+    if (data) setAccount(data);
+  };
 
   const changeHandler = (event) => {
     if (user) {
@@ -113,6 +119,10 @@ const Tool = () => {
     }
   };
 
+  const redirectToPricing = () => {
+    router.push('/pricing');
+  };
+
   const ImageThumb = ({ image }) => {
     return (
       <img
@@ -121,13 +131,6 @@ const Tool = () => {
         className="object-scale-down h-full"
       />
     );
-  };
-
-  const getSubscriptionInfo = async () => {
-    const data = await getUser();
-
-    setSubscription(data);
-    setPriceIdLoading(false);
   };
 
   const toggleIsStyleSelected = async () => {
@@ -140,9 +143,12 @@ const Tool = () => {
       return;
     } else {
       try {
+        setIsSubmitted(true);
         const result = await createDesignFromTool(selectedFile, selectedStyle);
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
+        } else {
+          console.log(result?.code + ': ' + result?.status);
         }
       } catch (err) {
         console.log(err);
@@ -151,11 +157,7 @@ const Tool = () => {
     }
   };
 
-  return priceIdLoading ? (
-    <div>
-      <Spinner />
-    </div>
-  ) : (
+  return (
     <>
       <div
         className={`fixed left-0 top-0 z-50 w-full h-full ${
@@ -163,7 +165,9 @@ const Tool = () => {
         }`}>
         <div className="absolute bg-white top-1/2 left-1/2 -ml-36 -mt-28 p-5 rounded-xl w-72 h-60">
           <div
-            className="absolute top-0 right-0 m-4 cursor-pointer"
+            className={`absolute top-0 right-0 m-4 cursor-pointer ${
+              isSubmitted ? 'hidden' : ''
+            }`}
             onClick={() => {
               toggleIsStyleSelected();
             }}>
@@ -182,7 +186,29 @@ const Tool = () => {
               />
             </svg>
           </div>
-          {isFileSelected ? (
+          {isNoCreditsLeft ? (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">
+                Sorry you don't have any credits left...
+              </div>
+              <div
+                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  redirectToPricing();
+                }}>
+                Buy more
+              </div>
+            </div>
+          ) : isSubmitted ? (
+            <div className="flex flex-col justify-center items-center h-full w-full">
+              <Spinner />
+              <div className="text-center">
+                <span className="text-xl">Generating...</span>
+                <br />
+                Please wait a few seconds
+              </div>
+            </div>
+          ) : isFileSelected ? (
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
                 Do you want to use the{' '}
@@ -212,7 +238,7 @@ const Tool = () => {
         <div
           className="w-full h-full bg-black bg-opacity-40 transition overflow-auto"
           onClick={() => {
-            toggleIsStyleSelected();
+            if (!isSubmitted) toggleIsStyleSelected();
           }}></div>
       </div>
       <div
@@ -252,9 +278,7 @@ const Tool = () => {
               name="file"
               accept="image/*"
               onChange={(e) => {
-                if (!submit) {
-                  changeHandler(e);
-                }
+                changeHandler(e);
               }}
               className="hidden"
             />
@@ -267,7 +291,6 @@ const Tool = () => {
                 onClick={() => {
                   setSelectedStyle(option.label);
                   setIsStyleSelected(true);
-                  console.log(option.value);
                 }}
                 className="flex flex-col w-full justify-center items-center mt-5">
                 <div className="relative">

@@ -32,7 +32,6 @@ const Dashboard = () => {
 
   const getRedesigns = async () => {
     const data = await getAllRedesignsByUserId();
-    console.log(data);
     if (data) setRedesigns(data.redesigns);
   };
 
