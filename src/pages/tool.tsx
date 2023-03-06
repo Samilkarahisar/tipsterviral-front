@@ -189,7 +189,7 @@ const Tool = () => {
           {isNoCreditsLeft ? (
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
-                Sorry you don't have any credits left...
+                Sorry you don&apos;t have any credits left...
               </div>
               <div
                 className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
