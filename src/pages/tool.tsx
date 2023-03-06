@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-type BillingInterval = 'year' | 'month';
-
 const styleList = [
   {
     image:
@@ -132,6 +130,10 @@ const Tool = () => {
     setPriceIdLoading(false);
   };
 
+  const toggleIsStyleSelected = async () => {
+    setIsStyleSelected(!isStyleSelected);
+  };
+
   const handleSubmission = async () => {
     if (!selectedFile) {
       console.log('No file selected');
@@ -156,13 +158,45 @@ const Tool = () => {
   ) : (
     <>
       <div
-        id="transformModal"
-        className="fixed left-0 top-0 z-50 w-full h-full bg-black bg-opacity-40 transition overflow-auto">
-        <div
-          id="transformModalContent"
-          className="absolute bg-white top-1/2 left-1/2 -ml-28 -mt-10 p-5 rounded-md w-60 h-40">
-          test
+        className={`fixed left-0 top-0 z-50 w-full h-full ${
+          !isStyleSelected ? 'hidden' : ''
+        }`}>
+        <div className="absolute bg-white top-1/2 left-1/2 -ml-36 -mt-28 p-5 rounded-xl w-72 h-60">
+          <div
+            className="absolute top-0 right-0 m-4 cursor-pointer"
+            onClick={() => {
+              toggleIsStyleSelected();
+            }}>
+            <svg
+              className="h-8 w-8 hover:text-gray-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true">
+              <path
+                strokeLinecap-="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+          <div className="flex flex-col justify-center items-center w-full h-full">
+            <div className="text-center text-xl">
+              Do you want to use the{' '}
+              <span className="font-bold">{selectedStyle}</span> style ?
+            </div>
+            <div className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer">
+              Confirm
+            </div>
+          </div>
         </div>
+        <div
+          className="w-full h-full bg-black bg-opacity-40 transition overflow-auto"
+          onClick={() => {
+            toggleIsStyleSelected();
+          }}></div>
       </div>
       <div
         id="selectDiv"
@@ -236,69 +270,6 @@ const Tool = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-      <div
-        id="transformDiv"
-        className={`${
-          !isStyleSelected ? 'hidden' : ''
-        } absolute bottom-0 w-full h-1/4 bg-white rounded-t-3xl border-2 transition-all`}>
-        <div className="flex flex-col ">
-          <div
-            className="flex self-end p-2 m-2 rounded-full bg-black"
-            onClick={() => {
-              if (!submit) {
-                setIsStyleSelected(false);
-              }
-            }}>
-            <svg
-              className="h-6 w-6 text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true">
-              <path
-                strokeLinecap-="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </div>
-          <div className="flex self-center">
-            <button
-              className="flex items-center bg-yellow-500 hover:bg-yellow-600 text-white text-2xl py-2 px-8 rounded-full"
-              onClick={() => {
-                handleSubmission();
-              }}>
-              {submit ? (
-                <svg
-                  className="animate-spin text-white h-5 w-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-              ) : (
-                <></>
-              )}
-              Transform
-            </button>
           </div>
         </div>
       </div>
