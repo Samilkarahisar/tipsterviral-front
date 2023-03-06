@@ -182,15 +182,32 @@ const Tool = () => {
               />
             </svg>
           </div>
-          <div className="flex flex-col justify-center items-center w-full h-full">
-            <div className="text-center text-xl">
-              Do you want to use the{' '}
-              <span className="font-bold">{selectedStyle}</span> style ?
+          {isFileSelected ? (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">
+                Do you want to use the{' '}
+                <span className="font-bold">{selectedStyle}</span> style ?
+              </div>
+              <div
+                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  handleSubmission();
+                }}>
+                Confirm
+              </div>
             </div>
-            <div className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer">
-              Confirm
+          ) : (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">Please select a picture</div>
+              <div
+                className="bg-yellow-500 hover:bg-yellow-600 text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  toggleIsStyleSelected();
+                }}>
+                OK
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div
           className="w-full h-full bg-black bg-opacity-40 transition overflow-auto"
