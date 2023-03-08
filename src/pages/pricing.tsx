@@ -35,6 +35,8 @@ const Pricing = () => {
       id: 'prod_NU2X29q39J3WUA',
       name: 'Pro',
       description: 'Bon plan',
+      image:
+        'https://i.ibb.co/X7TDm0k/Capture-d-e-cran-2023-03-09-a-00-24-40.png',
       features: [
         '100 crédits',
         "Puissance de l'IA",
@@ -60,6 +62,8 @@ const Pricing = () => {
       id: 'prod_NU2ZrwVwfJYLJb',
       name: 'Entreprise',
       description: 'Convient aux entreprises',
+      image:
+        'https://images.unsplash.com/photo-1495321308589-43affb814eee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
       features: [
         'Utilisation illimité',
         "Puissance de l'IA",
@@ -174,9 +178,7 @@ const Pricing = () => {
                     <div className="p-2">
                       <div className="relative bg-black w-full h-52 rounded-3xl overflow-hidden">
                         <img
-                          src={
-                            'https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1773&q=80'
-                          }
+                          src={product.image}
                           className="h-full w-full object-cover object-center"
                         />
                         <div className="absolute bottom-0 left-0 p-6">
