@@ -139,7 +139,7 @@ const Tool = () => {
 
   const handleSubmission = async () => {
     if (!selectedFile) {
-      console.log('No file selected');
+      console.log('Vous devez choisir une image');
       return;
     } else {
       try {
@@ -189,30 +189,30 @@ const Tool = () => {
           {isNoCreditsLeft ? (
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
-                Sorry you don&apos;t have any credits left...
+                Vous n&apos;avez plus de crédit.
               </div>
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
                 onClick={() => {
                   redirectToPricing();
                 }}>
-                Buy more
+                Abonnez vous.
               </div>
             </div>
           ) : isSubmitted ? (
             <div className="flex flex-col justify-center items-center h-full w-full">
               <Spinner />
               <div className="text-center">
-                <span className="text-xl">Generating...</span>
+                <span className="text-xl">Génération en cours...</span>
                 <br />
-                Please wait a few seconds
+                Cela peut prendre 30 secondes.
               </div>
             </div>
           ) : isFileSelected ? (
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
-                Do you want to use the{' '}
-                <span className="font-bold">{selectedStyle}</span> style ?
+                Voulez-vous utiliser le style{' '}
+                <span className="font-bold">{selectedStyle}</span>?
               </div>
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
@@ -224,7 +224,9 @@ const Tool = () => {
             </div>
           ) : (
             <div className="flex flex-col justify-center items-center w-full h-full">
-              <div className="text-center text-xl">Please select a picture</div>
+              <div className="text-center text-xl">
+                Veuillez choisir une photo
+              </div>
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
                 onClick={() => {
@@ -269,7 +271,7 @@ const Tool = () => {
                   />
                 </svg>
                 <p className="pt-1 m-0 text-xl text-center tracking-wider text-black">
-                  Upload a picture
+                  Télécharger une photo d&apos;appartement
                 </p>
               </div>
             )}
@@ -284,7 +286,9 @@ const Tool = () => {
             />
           </label>
           <div id="styleSelectDiv">
-            <div className="text-2xl font-bold">Choose a style</div>
+            <div className="text-2xl font-bold">
+              Choisir le style à appliquer
+            </div>
             {styleList.map((option, id) => (
               <div
                 key={id}

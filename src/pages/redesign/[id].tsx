@@ -61,10 +61,10 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
           />
           <div className="flex flex-col items-start mt-10">
             <h1 className="text-3xl font-bold mb-5">
-              Want to see your room in {redesign.style} style?
+              Voulez vous utiliser le style {redesign.style}?
             </h1>
             <button className="bg-[#ee7932] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block">
-              Try decoloco for free
+              Aller à l&apos;outil de design
             </button>
           </div>
         </div>

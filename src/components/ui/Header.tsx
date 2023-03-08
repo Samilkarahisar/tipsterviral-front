@@ -4,9 +4,9 @@ import { ImgLogo } from '@/res/images';
 import {
   footerRoutes,
   headerRoutes,
-  ROUTE_ACCOUNT,
   ROUTE_DASHBOARD,
   ROUTE_LOGIN,
+  ROUTE_TOOL,
 } from '@/res/routes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -88,16 +88,18 @@ const Header = () => {
               {user && isClient && (
                 <>
                   <li>
-                    <Link href={ROUTE_ACCOUNT}>
+                    <Link href={ROUTE_TOOL}>
                       <a>
-                        <label className="cursor-pointer">Account</label>
+                        <label className="cursor-pointer">Outil</label>
                       </a>
                     </Link>
                   </li>
                   <li>
                     <Link href={ROUTE_DASHBOARD}>
                       <a>
-                        <label className="cursor-pointer">Dashboard</label>
+                        <label className="cursor-pointer">
+                          Tableau de bord
+                        </label>
                       </a>
                     </Link>
                   </li>
@@ -110,7 +112,7 @@ const Header = () => {
                           path: '/landing',
                         });
                       }}>
-                      Sign out
+                      Déconnexion
                     </label>
                   </li>
                 </>
@@ -120,7 +122,7 @@ const Header = () => {
                   <li>
                     <Link href={ROUTE_LOGIN}>
                       <a>
-                        <label className="cursor-pointer">Sign in</label>
+                        <label className="cursor-pointer">Se connecter</label>
                       </a>
                     </Link>
                   </li>

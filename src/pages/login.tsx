@@ -119,8 +119,8 @@ const LoginPage = () => {
   return (
     <>
       <NextSeo
-        title={`Login to Website`}
-        description={'Logging in is necessary to be able to use Website.'}
+        title={`Se connecter à decoloco`}
+        description={'Pour utiliser nos services vous devez vous connecter.'}
       />
       {loading ? (
         <LoadingScreen />
@@ -129,13 +129,13 @@ const LoginPage = () => {
           <Modal
             open={showResetPasswordModal}
             onOk={() => onResetPasswordConfirm()}
-            okText="Confirm"
+            okText="Confirmer"
             onCancel={() => setShowResetPasswordModal(false)}
             destroyOnClose={true}
-            title="Reset your password">
+            title="Réinitialiser mon mot depasse">
             <Input
               type="email"
-              placeholder="Your email"
+              placeholder="Votre email"
               onChange={(e) => {
                 setEmailForPasswordReset(e.target.value);
               }}></Input>
@@ -153,7 +153,7 @@ const LoginPage = () => {
             onOk={() => setShowResetPasswordConfirmModal(false)}
             onCancel={() => setShowResetPasswordConfirmModal(false)}
             cancelButtonProps={{ style: { display: 'none' } }}
-            title="Email sent">
+            title="Email envoyé">
             <div>
               If an account with this email exists, you will receive a link to
               reset your password.
@@ -233,16 +233,16 @@ const LoginPage = () => {
                       <label
                         className="cursor-pointer mt-2 text-xs text-[#007aff]"
                         onClick={() => setShowResetPasswordModal(true)}>
-                        Forgot your password?
+                        Réinitialiser mon mot de passe
                       </label>
                       <button className="flex justify-center items-center hover:bg-gray-200 dark:hover:bg-gray-800 mt-6 py-[14px] w-[280px] rounded-lg bg-secondary dark:bg-dark-secondary">
                         <IconEmail className="fill-current text-gray2 mr-3" />
-                        Sign in with Email
+                        Se connecter avec un mail
                       </button>
                       <label
                         className="cursor-pointer mt-5 text-xs text-[#007aff]"
                         onClick={() => setIsCreatingAccount(true)}>
-                        New here? Create your account
+                        Pas de compte? Créer dès maintenant.
                       </label>
                     </FormSectionsWrapper>
                   </FormWrapper>
@@ -256,7 +256,7 @@ const LoginPage = () => {
                 }}
                 className="flex justify-center items-center hover:bg-gray-200 dark:hover:bg-gray-800 py-[14px] w-[280px] rounded-lg bg-secondary dark:bg-dark-secondary">
                 <IconGoogle className="fill-current text-gray2 mr-3" />
-                Sign {isCreatingAccount ? 'up' : 'in'} with Google
+                Connexion facile avec Google
               </button>
             </div>
           </div>

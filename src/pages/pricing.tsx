@@ -33,32 +33,38 @@ const Pricing = () => {
   const products = [
     {
       id: 'prod_NU2X29q39J3WUA',
-      name: 'Professional',
-      description: 'To start automating',
-      features: ['100 credits / month', 'AI generation', 'Image hosting'],
+      name: 'Pro',
+      description: 'Bon plan',
+      features: [
+        '100 crédits',
+        "Puissance de l'IA",
+        'Hébérgement des images',
+        'Support par email',
+      ],
       prices: [
         {
           id: 'price_1Mj4SAIkTMCG3UAUvXJy7GoZ',
           interval: 'month',
           currency: 'EUR',
-          unit_amount: 25,
+          unit_amount: 19,
         },
         {
           id: 'price_1Mj4SBIkTMCG3UAUri1OadUN',
           interval: 'year',
           currency: 'EUR',
-          unit_amount: 250,
+          unit_amount: 190,
         },
       ],
     },
     {
       id: 'prod_NU2ZrwVwfJYLJb',
-      name: 'Enterprise',
-      description: 'Automate like a pro',
+      name: 'Entreprise',
+      description: 'Convient aux entreprises',
       features: [
-        '100 credits / month',
-        'AI generation',
-        'Image hosting',
+        'Utilisation illimité',
+        "Puissance de l'IA",
+        'Hébérgement des images',
+        'Support client au téléphone',
         // 'Up to 10 team members',
       ],
       prices: [
@@ -66,13 +72,13 @@ const Pricing = () => {
           id: 'price_1Mj4U0IkTMCG3UAU7uTuNjkX',
           interval: 'month',
           currency: 'EUR',
-          unit_amount: 300,
+          unit_amount: 199,
         },
         {
           id: 'price_1Mj4U0IkTMCG3UAUDKhZpqat',
           interval: 'year',
           currency: 'EUR',
-          unit_amount: 3000,
+          unit_amount: 1999,
         },
       ],
     },
@@ -112,10 +118,10 @@ const Pricing = () => {
           <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8 ">
             <div className="sm:flex sm:flex-col sm:align-center">
               <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
-                Ready to get started ?
+                Prêt à commencer ?
               </h1>
               <p className="text-xl text-zinc-200 sm:text-center sm:text-2xl max-w-2xl m-auto">
-                Choose a plan tailored to your needs
+                Choisissez le plan qui vous correspond
               </p>
               <div className="bg-gray-200 relative self-center mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-zinc-800">
                 <button
@@ -126,7 +132,7 @@ const Pricing = () => {
                       ? 'bg-[#ee7932] relative w-1/2 border-zinc-800 shadow-sm text-white'
                       : 'text-black ml-0.5 relative w-1/2 border border-transparent'
                   } rounded-md m-1 py-2 text-sm font-medium blackspace-nowrap sm:w-auto sm:px-8`}>
-                  Monthly billing
+                  Mensuel
                 </button>
                 <button
                   onClick={() => setBillingInterval('year')}
@@ -136,7 +142,7 @@ const Pricing = () => {
                       ? 'bg-[#ee7932] relative w-1/2 border-zinc-800 shadow-sm text-white'
                       : 'text-black ml-0.5 relative w-1/2 border border-transparent'
                   } rounded-md m-1 py-2 text-sm font-medium blackspace-nowrap sm:w-auto sm:px-8`}>
-                  Yearly billing
+                  Annuel
                 </button>
               </div>
             </div>
@@ -166,12 +172,18 @@ const Pricing = () => {
                     key={product.id}
                     className={`bg-white rounded-3xl shadow divide-y divide-zinc-600  `}>
                     <div className="p-2">
-                      <div className="flex flex-col justify-end bg-black w-full h-52 rounded-3xl p-6">
-                        <div className="relative bottom-0 left-0 text-white text-xl">
-                          #{index + 1}
-                        </div>
-                        <div className="relative bottom-0 left-0 text-white text-4xl">
-                          {product.name}
+                      <div className="relative bg-black w-full h-52 rounded-3xl overflow-hidden">
+                        <img
+                          src={
+                            'https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1773&q=80'
+                          }
+                          className="h-full w-full object-cover object-center"
+                        />
+                        <div className="absolute bottom-0 left-0 p-6">
+                          <div className="text-white text-xl">#{index + 1}</div>
+                          <div className="text-white text-4xl">
+                            {product.name}
+                          </div>
                         </div>
                       </div>
                       <div className="p-6">
@@ -179,7 +191,9 @@ const Pricing = () => {
                           <span className="text-5xl font-bold text-[#ee7932]">
                             {priceString}
                           </span>
-                          <span className="text-base font-medium">/month</span>
+                          <span className="text-base font-medium">
+                            /par mois
+                          </span>
                         </div>
                         <div className="text-center p-4">
                           {product.features?.map((a, i) => {
@@ -207,9 +221,9 @@ const Pricing = () => {
                           <div className="font-bold text-lg">
                             {subscription != undefined
                               ? subscription.credits_amount > 0
-                                ? 'Manage'
-                                : 'Subscribe'
-                              : 'Try for free'}
+                                ? 'Gérer mon abonnement'
+                                : 'Payer'
+                              : 'Essai gratuit'}
                           </div>
                         </div>
                       </div>

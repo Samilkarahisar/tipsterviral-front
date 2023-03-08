@@ -1,6 +1,5 @@
-import { IconDiscord, IconTwitter } from '@/res/icons';
+import { IconEmail } from '@/res/icons';
 import { footerRoutes } from '@/res/routes';
-import { DISCORD_LINK, TWITTER_LINK } from '@/res/values';
 import Link from 'next/link';
 import React from 'react';
 import Container from './Container';
@@ -23,16 +22,9 @@ const Footer = () => {
           </ul>
           <div className="flex space-x-3 flex-wrap">
             <div className="p-[10px] bg-secondary flex dark:bg-dark-secondary rounded-xl">
-              <Link href={TWITTER_LINK}>
+              <Link href="mailto:no-reply@example.com">
                 <a target="_blank" className="flex">
-                  <IconTwitter alt="twitter" />
-                </a>
-              </Link>
-            </div>
-            <div className="p-[10px] bg-secondary flex dark:bg-dark-secondary rounded-xl">
-              <Link href={DISCORD_LINK}>
-                <a target="_blank" className="flex">
-                  <IconDiscord alt="discord" />
+                  <IconEmail alt="email" />
                 </a>
               </Link>
             </div>
