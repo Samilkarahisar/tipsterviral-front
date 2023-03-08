@@ -6,6 +6,7 @@ export const API_PATH_GET_DESIGN = '/public/getDesignBySlug';
 export const API_PATH_POST_DESIGN_TOOL = '/restricted/redesign';
 
 export const API_PATH_GET_REDESIGN = '/public/getRedesignById';
+export const API_PATH_GET_REDESIGNS_BY_USER = '/public/getAllRedesignsByUserId';
 
 export const API_PATH_ADD_SITE = '/restricted/createSite';
 export const API_PATH_UPDATE_SITE = '/restricted/updateSite';

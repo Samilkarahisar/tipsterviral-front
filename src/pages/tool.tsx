@@ -2,118 +2,125 @@ import { createDesignFromTool } from '@/api/tool';
 import { getUser } from '@/api/user';
 import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
-import {
-  IconBathroom,
-  IconBedroom,
-  IconBricks,
-  IconCloset,
-  IconGarage,
-  IconGreen,
-  IconKitchen,
-  IconLivingRoom,
-  IconLux,
-  IconMarble,
-  IconToilet,
-  IconWood,
-} from '@/res/icons';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-type BillingInterval = 'year' | 'month';
-
-const roomList = [
+const styleList = [
   {
-    image: IconBathroom.src,
-    label: 'Bathroom',
+    image:
+      'https://imageio.forbes.com/specials-images/imageserve/632d891161b9efabbc7d2c23/0x0.jpg?format=jpg&crop=2200,1232,x398,y0,safe&width=1200',
+    label: 'Japanese',
     value: '1',
   },
   {
-    image: IconBedroom.src,
-    label: 'Bedroom',
+    image:
+      'https://cdn.pixabay.com/photo/2017/01/18/13/10/galaxy-soho-1989816_1280.jpg',
+    label: 'Modern',
     value: '2',
   },
   {
-    image: IconKitchen.src,
-    label: 'Kitchen',
+    image:
+      'https://cdn.pixabay.com/photo/2020/06/07/01/50/window-5268702_1280.jpg',
+    label: 'Minimalist',
     value: '3',
   },
   {
-    image: IconLivingRoom.src,
-    label: 'Living Room',
+    image:
+      'https://cdn.pixabay.com/photo/2019/05/29/19/51/house-4238414_1280.jpg',
+    label: 'Scandinavian',
     value: '4',
   },
   {
-    image: IconToilet.src,
-    label: 'Toilet',
+    image:
+      'https://cdn.pixabay.com/photo/2018/03/12/20/07/maldives-3220702_1280.jpg',
+    label: 'Tropical',
     value: '5',
   },
   {
-    image: IconGarage.src,
-    label: 'Garage',
-    value: '6',
-  },
-  {
-    image: IconCloset.src,
-    label: 'Closet',
-    value: '7',
-  },
-];
-
-const styleList = [
-  {
-    image: IconWood.src,
-    label: 'Wood',
-    value: '1',
-  },
-  {
-    image: IconGreen.src,
-    label: 'Green',
+    image:
+      'https://cdn.pixabay.com/photo/2015/06/27/16/34/wall-823611_1280.jpg',
+    label: 'Industrial',
     value: '2',
   },
   {
-    image: IconLux.src,
-    label: 'Lux',
+    image:
+      'https://cdn.pixabay.com/photo/2021/03/02/01/07/cyberpunk-6061251_1280.jpg',
+    label: 'Cyberpunk',
     value: '3',
   },
   {
-    image: IconBricks.src,
-    label: 'Bricks',
+    image:
+      'https://cdn.pixabay.com/photo/2019/11/04/19/15/steampunk-4601917_1280.jpg',
+    label: 'Steampunk',
     value: '4',
   },
   {
-    image: IconMarble.src,
-    label: 'Marble',
+    image: 'https://cdn.pixabay.com/photo/2015/04/08/13/22/car-712684_1280.jpg',
+    label: 'Vice City',
+    value: '5',
+  },
+  {
+    image:
+      'https://cdn.pixabay.com/photo/2014/12/06/12/47/fireplace-558985_1280.jpg',
+    label: 'Christmas',
+    value: '5',
+  },
+  {
+    image:
+      'https://cdn.pixabay.com/photo/2014/10/15/01/57/catherines-palace-489085_1280.jpg',
+    label: 'Palace',
+    value: '5',
+  },
+  {
+    image:
+      'https://cdn.pixabay.com/photo/2018/07/13/09/04/architecture-3535243_1280.jpg',
+    label: 'Morocco',
     value: '5',
   },
 ];
 
 const Tool = () => {
-  const [user] = useAuthState(auth);
   const router = useRouter();
-
-  const [priceIdLoading, setPriceIdLoading] = useState(true);
-  const [subscription, setSubscription] = useState<any>();
+  const [user] = useAuthState(auth);
+  const [account, setAccount] = useState<any>({});
   const [selectedFile, setSelectedFile] = useState(undefined);
   const [isFileSelected, setIsFileSelected] = useState(false);
-  const [selectedRoom, setSelectedRoom] = useState(roomList[0].value);
   const [selectedStyle, setSelectedStyle] = useState(styleList[0].value);
+  const [isStyleSelected, setIsStyleSelected] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
 
   useEffect(() => {
     getSubscriptionInfo();
+    setIsNoCreditsLeft(account.credits_amount <= 0);
+    console.log(isNoCreditsLeft);
   }, [user]);
 
+  const getSubscriptionInfo = async () => {
+    const data = await getUser();
+    if (data) setAccount(data);
+  };
+
   const changeHandler = (event) => {
-    const file = event.target.files[0];
-    const fileNotNull = file !== undefined;
-    if (fileNotNull && file.type.toLowerCase().indexOf('image/') < 0) {
-      setSelectedFile(undefined);
-      setIsFileSelected(false);
-      alert('Please select an image file');
+    if (user) {
+      const file = event.target.files[0];
+      const fileNotNull = file !== undefined;
+      if (fileNotNull && file.type.toLowerCase().indexOf('image/') < 0) {
+        setSelectedFile(undefined);
+        setIsFileSelected(false);
+        alert('Please select an image file');
+      } else {
+        setSelectedFile(file);
+        setIsFileSelected(fileNotNull);
+      }
     } else {
-      setSelectedFile(file);
-      setIsFileSelected(fileNotNull);
+      router.push('/login');
     }
+  };
+
+  const redirectToPricing = () => {
+    router.push('/pricing');
   };
 
   const ImageThumb = ({ image }) => {
@@ -126,26 +133,22 @@ const Tool = () => {
     );
   };
 
-  const getSubscriptionInfo = async () => {
-    const data = await getUser();
-    setSubscription(data);
-    setPriceIdLoading(false);
+  const toggleIsStyleSelected = async () => {
+    setIsStyleSelected(!isStyleSelected);
   };
 
   const handleSubmission = async () => {
     if (!selectedFile) {
-      console.log('No file selected');
+      console.log('Vous devez choisir une image');
       return;
     } else {
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-      formData.append('room', selectedRoom);
-      formData.append('style', 'Japanese');
-
       try {
-        const result = await createDesignFromTool(formData);
-        if (result.code == 200) {
+        setIsSubmitted(true);
+        const result = await createDesignFromTool(selectedFile, selectedStyle);
+        if (result?.code == 200) {
           router.push('/redesign/' + result.id);
+        } else {
+          console.log(result?.code + ': ' + result?.status);
         }
       } catch (err) {
         console.log(err);
@@ -154,138 +157,164 @@ const Tool = () => {
     }
   };
 
-  return priceIdLoading ? (
-    <div>
-      <Spinner />
-    </div>
-  ) : (
+  return (
     <>
-      <div className="max-w-[1000px] mx-auto py-4 px-4">
-        <div className="flex flex-col laptop:flex-row rounded-3xl  laptop:min-w-[1000px]">
-          <div className="flex mobile:flex-col mobile:w-full laptop:w-1/2 bg-transparent m-5 laptop:m-10 laptop:mr-5">
-            <div className="flex w-full h-full laptop:h-3/4">
-              <label className="flex flex-col w-full rounded-3xl border-4 border-dashed border-yellow-500 hover:cursor-pointer group">
-                {isFileSelected ? (
-                  <div className="flex flex-col w-full h-full">
-                    <div className="flex flex-col items-center justify-center overflow-hidden p-4">
-                      {selectedFile && <ImageThumb image={selectedFile} />}
-                    </div>
-                    <div className="flex items-center justify-center pb-4">
-                      <span className="text-black font-bold">
-                        File selected :{' '}
-                        <span className=" text-yellow-500 font-thin underline">
-                          {selectedFile && selectedFile.name}
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center m-10 laptop:my-auto group-hover:scale-110 transition">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-24 h-24 text-black"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      />
-                    </svg>
-                    <p className="pt-1 m-0 text-xl text-center tracking-wider text-black">
-                      Upload a picture
-                    </p>
-                  </div>
-                )}
-                <input
-                  type="file"
-                  name="file"
-                  accept="image/*"
-                  onChange={changeHandler}
-                  className="hidden"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="flex mobile:flex-col mobile:w-full laptop:w-1/2 bg-transparent m-5 laptop:m-10 laptop:ml-5">
-            <div className="w-full h-full">
-              <div id="select-room" className="flex flex-col mb-4">
-                <span className="text-black text-xl laptop:text-2xl">
-                  Select the room of your picture
-                </span>
-                <div className="h-1 w-1/2 bg-yellow-500 rounded-xl mt-2 mb-8" />
-                <div className="grid grid-cols-3 laptop:grid-cols-4">
-                  {roomList.map((option) => (
-                    <div
-                      key={option.value}
-                      className="cursor-pointer w-20 h-20 mr-1 mb-1 laptop:w-24 laptop:h-24 laptop:mr-2 laptop:mb-2"
-                      onClick={() => {
-                        setSelectedRoom(option.value);
-                      }}>
-                      <div
-                        className={`relative bg-[#fefbf2] 
-                        ${
-                          option.value === selectedRoom
-                            ? 'border-4 border-yellow-500'
-                            : ''
-                        }`}>
-                        <div className="p-6">
-                          <img src={option.image} alt={option.label} />
-                        </div>
-                        <span className="absolute flex w-full h-full bottom-0 items-end justify-center">
-                          {option.label}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div id="select-style" className="flex flex-col mb-4">
-                <span className="text-black text-2xl">
-                  Select the style of your room
-                </span>
-                <div className="h-1 w-1/2 bg-yellow-500 rounded-xl mt-2 mb-8" />
-                <div className="grid grid-cols-3 laptop:grid-cols-4">
-                  {styleList.map((option) => (
-                    <div
-                      key={option.value}
-                      className="cursor-pointer w-20 h-20 mr-1 mb-1 laptop:w-24 laptop:h-24 laptop:mr-2 laptop:mb-2"
-                      onClick={() => {
-                        setSelectedStyle(option.value);
-                      }}>
-                      <div
-                        className={`relative
-                        ${
-                          option.value === selectedStyle
-                            ? 'border-4 border-yellow-500'
-                            : ''
-                        }`}>
-                        <div className="">
-                          <img src={option.image} alt={option.label} />
-                        </div>
-                        <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-lg">
-                          {option.label}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="button-generate" className="flex flex-col w-full">
-          <button
-            className="flex rounded-full bg-yellow-500 hover:bg-yellow-600 text-white text-xl font-bold bottom-0 py-2 px-8 mx-auto disabled:cursor-default disabled:bg-gray-500 disabled:hover:bg-gray-600"
-            disabled={!isFileSelected}
-            title={!isFileSelected ? 'Attach a file to generate' : ''}
+      <div
+        className={`fixed left-0 top-0 z-50 w-full h-full ${
+          !isStyleSelected ? 'hidden' : ''
+        }`}>
+        <div className="absolute bg-white top-1/2 left-1/2 -ml-36 -mt-28 p-5 rounded-xl w-72 h-60">
+          <div
+            className={`absolute top-0 right-0 m-4 cursor-pointer ${
+              isSubmitted ? 'hidden' : ''
+            }`}
             onClick={() => {
-              handleSubmission();
+              toggleIsStyleSelected();
             }}>
-            Generate
-          </button>
+            <svg
+              className="h-8 w-8 hover:text-gray-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true">
+              <path
+                strokeLinecap-="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+          {isNoCreditsLeft ? (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">
+                Vous n&apos;avez plus de crédit.
+              </div>
+              <div
+                className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  redirectToPricing();
+                }}>
+                Abonnez vous.
+              </div>
+            </div>
+          ) : isSubmitted ? (
+            <div className="flex flex-col justify-center items-center h-full w-full">
+              <Spinner />
+              <div className="text-center">
+                <span className="text-xl">Génération en cours...</span>
+                <br />
+                Cela peut prendre 30 secondes.
+              </div>
+            </div>
+          ) : isFileSelected ? (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">
+                Voulez-vous utiliser le style{' '}
+                <span className="font-bold">{selectedStyle}</span>?
+              </div>
+              <div
+                className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  handleSubmission();
+                }}>
+                Confirm
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <div className="text-center text-xl">
+                Veuillez choisir une photo
+              </div>
+              <div
+                className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                onClick={() => {
+                  toggleIsStyleSelected();
+                }}>
+                OK
+              </div>
+            </div>
+          )}
+        </div>
+        <div
+          className="w-full h-full bg-black bg-opacity-40 transition overflow-auto"
+          onClick={() => {
+            if (!isSubmitted) toggleIsStyleSelected();
+          }}></div>
+      </div>
+      <div
+        id="selectDiv"
+        className={`flex justify-center items-center laptop:mx-auto 
+        ${isStyleSelected ? 'blur' : ''}`}>
+        <div className="flex flex-col flex-grow p-5">
+          <label className="flex flex-col w-full min-h-[200px] mb-7 rounded-3xl border-4 border-dashed border-[#ee7932] hover:cursor-pointer group">
+            {isFileSelected ? (
+              <div className="flex flex-col w-full h-full">
+                <div className="flex flex-col items-center justify-center overflow-hidden p-4">
+                  {selectedFile && <ImageThumb image={selectedFile} />}
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center m-10 laptop:my-auto group-hover:scale-110 transition">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-24 h-24 text-black"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  />
+                </svg>
+                <p className="pt-1 m-0 text-xl text-center tracking-wider text-black">
+                  Télécharger une photo d&apos;appartement
+                </p>
+              </div>
+            )}
+            <input
+              type="file"
+              name="file"
+              accept="image/*"
+              onChange={(e) => {
+                changeHandler(e);
+              }}
+              className="hidden"
+            />
+          </label>
+          <div id="styleSelectDiv">
+            <div className="text-2xl font-bold">
+              Choisir le style à appliquer
+            </div>
+            {styleList.map((option, id) => (
+              <div
+                key={id}
+                onClick={() => {
+                  setSelectedStyle(option.label);
+                  setIsStyleSelected(true);
+                }}
+                className="flex flex-col w-full justify-center items-center mt-5">
+                <div className="relative">
+                  <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative cursor-pointer">
+                    <img
+                      src={option.image}
+                      alt="Image"
+                      className="h-24 w-80 object-cover blur-[0.7px]"
+                    />
+                    <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
+                        {option.label}
+                        <span className="text-[#ee7932]">.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

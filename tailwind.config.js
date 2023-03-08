@@ -82,6 +82,7 @@ module.exports = {
     fontFamily: {
       sans: ['Open Sans', 'ui-sans-serif', 'system-ui'],
       secondary: ['Montserrat', 'ui-serif', 'Georgia'],
+      Alexandria: ['Alexandria'],
       roboto: ['Roboto'],
     },
     typography: (theme) => ({

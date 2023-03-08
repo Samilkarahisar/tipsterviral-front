@@ -1,3 +1,4 @@
+import { Col, Row } from 'antd';
 import { NextSeo } from 'next-seo';
 import router from 'next/router';
 import React from 'react';
@@ -6,29 +7,68 @@ const HomePage = () => {
   return (
     <>
       <NextSeo
-        title={`Decoloco - AI powered image generation API`}
-        description={
-          'Decoloco handles everything for you. We use the newest technologies like Stable Diffusion to find a unique background for your needs. All you have to do is to give us a title and we provide you a content ready image, for your blog, podcast, social media usages.'
-        }
+        title={`Decoloco.co - Projetez vos acheteurs dans leur futur bien immobilier`}
+        description={'Projetez vos acheteurs dans leur futur bien immobilier.'}
       />
+      <Row className="font-Alexandria lg:text-5xl text-3xl h-[150px] max-w-[1000px] mx-auto w-full px-4 items-center ">
+        <Col span={80}>
+          <div className="font-bold text-[#ef8b34]">Projetez vos acheteurs</div>
+          <div>dans leur futur bien immobilier</div>
+        </Col>
+      </Row>
+      <Row className="font-Alexandria lg:text-xl text-xl h-[100px] max-w-[1000px] mx-auto w-full pl-20 items-center ">
+        <Col span={80}>
+          <div>1. Importez une photo</div>
+          <div>2. Choisissez un style</div>
+        </Col>
+      </Row>
+      <div className="flex laptop:items-stretch laptop:justify-center p-10 ">
+        <img
+          src={
+            'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/c89d68bb-3064-498f-af66-4cc5bba16b41-init.png/public'
+          }
+          className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[320px] laptop:h-[320px]"
+        />
+        <div className="relative">
+          <div className="small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[75px] laptop:h-[75px]"></div>
+          <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="relative">
+              <div className="rounded-full overflow-hidden h-24 w-72 flex items-center justify-center bg-transparent border-0 ">
+                <img
+                  src="https://i.ibb.co/b5kd9b3/Nouveau-projet-23.png"
+                  alt="Image"
+                  className="h-12 w-36"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <img
+          src={
+            'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/c89d68bb-3064-498f-af66-4cc5bba16b41-result.png/public'
+          }
+          alt="alt-text"
+          className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[320px] laptop:h-[320px]"
+        />
+      </div>
+
       <div
         style={{
-          background: 'black',
+          backgroundImage: 'url(https://i.ibb.co/09FwV12/landingpage3-3.png)',
           width: '100%',
         }}
-        className="xl:h-[30vh] lg:h-[25vh] md:h-[20vh] sm:h-[15vh] h-[10vh] bg-contain ">
-        <div className="text-center text-white xl:text-8xl lg:text-7xl md:text-6xl sm:text-5xl text-4xl  font-extrabold  xl:pt-[11vh] lg:pt-[9vh] md:pt-[7vh] sm:pt-[5vh] pt-[3vh] drop-shadow-xl">
-          AI Powered
-        </div>
-      </div>
-      <div className="max-w-[1200px] w-full px-4 mx-auto py-10">
-        <div className="font-bold text-3xl text-center mb-4 mt-[150px]">
-          Ready to get started?
+        className="xl:h-[9vh] lg:h-[7vh] md:h-[5vh] sm:h-[3vh] h-[150px] animate-ltr-linear-infinite md:bg-contain "></div>
+
+      <div className="max-w-[800px] w-full px-4 mx-auto py-5">
+        <div className="text-3xl text-center mb-6 mt-[20px] font-Alexandria">
+          Transformez quasi-instantanément{' '}
+          <div>votre bien immobilier grâce à</div>
+          <div className="font-extrabold">l&apos;Intelligence Artificielle</div>
         </div>
         <button
-          className="bg-[#4298f8] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold mx-auto block"
+          className="bg-[#ef8b34] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold mx-auto block"
           onClick={() => router.push('/login')}>
-          Try decoloco for free
+          Essayez gratuitement
         </button>
       </div>
     </>

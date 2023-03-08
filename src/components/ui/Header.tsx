@@ -4,9 +4,9 @@ import { ImgLogo } from '@/res/images';
 import {
   footerRoutes,
   headerRoutes,
-  ROUTE_ACCOUNT,
   ROUTE_DASHBOARD,
   ROUTE_LOGIN,
+  ROUTE_TOOL,
 } from '@/res/routes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -52,7 +52,7 @@ const Header = () => {
       <Container>
         <div className="flex justify-between">
           <div className="flex justify-between items-center gap-10">
-            <Link href={!user ? '/' : '/dashboard'}>
+            <Link href={!user ? '/' : '/tool'}>
               <a className="w-40 h-50  block">
                 <img src={ImgLogo.src} />
               </a>
@@ -70,7 +70,7 @@ const Header = () => {
           <div
             className={`laptop:static fixed ${
               !open ? 'translate-x-full' : 'translate-x-0'
-            } right-0 min-h-screen laptop:min-h-0 laptop:transform-none transition-transform duration-300 laptop:h-auto h-full bg-blue-100 laptop:w-auto w-[265px] top-0 laptop:p-0 p-4 pr-9 laptop:gap-10 laptop:flex laptop:flex-row flex-col`}>
+            } right-0 min-h-screen laptop:min-h-0 laptop:transform-none transition-transform duration-300 laptop:h-auto h-full bg-white laptop:w-auto w-[265px] top-0 laptop:p-0 p-4 pr-9 laptop:gap-10 laptop:flex laptop:flex-row flex-col`}>
             <IconClose
               onClick={() => setOpen(false)}
               className="laptop:hidden mb-5 stroke-current text-gray1 dark:text-dark-gray1 cursor-pointer"
@@ -88,16 +88,18 @@ const Header = () => {
               {user && isClient && (
                 <>
                   <li>
-                    <Link href={ROUTE_ACCOUNT}>
+                    <Link href={ROUTE_TOOL}>
                       <a>
-                        <label className="cursor-pointer">Account</label>
+                        <label className="cursor-pointer">Outil</label>
                       </a>
                     </Link>
                   </li>
                   <li>
                     <Link href={ROUTE_DASHBOARD}>
                       <a>
-                        <label className="cursor-pointer">Dashboard</label>
+                        <label className="cursor-pointer">
+                          Tableau de bord
+                        </label>
                       </a>
                     </Link>
                   </li>
@@ -110,7 +112,7 @@ const Header = () => {
                           path: '/landing',
                         });
                       }}>
-                      Sign out
+                      Déconnexion
                     </label>
                   </li>
                 </>
@@ -120,7 +122,7 @@ const Header = () => {
                   <li>
                     <Link href={ROUTE_LOGIN}>
                       <a>
-                        <label className="cursor-pointer">Sign in</label>
+                        <label className="cursor-pointer">Se connecter</label>
                       </a>
                     </Link>
                   </li>

@@ -29,7 +29,7 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         <div className="flex flex-col laptop:items-center laptop:justify-center p-10">
           <img
             src={redesign.init_url}
-            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[520px] laptop:h-[520px]"
+            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
           />
           <div className="relative">
             <img
@@ -57,14 +57,14 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
           <img
             src={redesign.result_url}
             alt="alt-text"
-            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[520px] laptop:h-[520px]"
+            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
           />
           <div className="flex flex-col items-start mt-10">
             <h1 className="text-3xl font-bold mb-5">
-              Want to see your room in {redesign.style} style?
+              Voulez vous utiliser le style {redesign.style}?
             </h1>
             <button className="bg-[#ee7932] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block">
-              Try decoloco for free
+              Aller à l&apos;outil de design
             </button>
           </div>
         </div>

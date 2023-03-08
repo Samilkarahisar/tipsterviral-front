@@ -8,12 +8,8 @@ export const ROUTE_PRIVACY = '/documentation';
 export const ROUTE_TOOL = '/tool';
 export const headerRoutes = [
   {
-    label: 'Pricing',
+    label: 'Prix',
     route: ROUTE_PRICING,
-  },
-  {
-    label: 'Tool',
-    route: ROUTE_TOOL,
   },
 ];
 export const footerRoutes = [
