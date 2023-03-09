@@ -4,6 +4,7 @@ import { styleList } from '@/res/values';
 import { RedesignDto } from '@/types/dto/RedesignDto';
 import { NextPageContext } from 'next';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import React from 'react';
 
@@ -12,6 +13,11 @@ interface Props {
 }
 
 const RedesignPage: React.FC<Props> = ({ redesign }) => {
+  const router = useRouter();
+  const redirectToTool = async () => {
+    router.push('/tool');
+  };
+
   return (
     <>
       <NextSeo
@@ -27,7 +33,7 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         }}
       />
       <Container>
-        <div className="flex flex-col laptop:items-center laptop:justify-center p-10">
+        <div className="flex flex-col laptop:items-center laptop:justify-center laptop:max-w-[800px] mx-auto p-10">
           <img
             src={redesign.init_url}
             className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
@@ -68,7 +74,11 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
             <h1 className="text-3xl font-bold mb-5">
               Voulez vous utiliser le style {redesign.style}?
             </h1>
-            <button className="bg-[#ee7932] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block">
+            <button
+              className="bg-[#ee7932] hover:bg-[#d46c2c] cursor-pointer h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block"
+              onClick={() => {
+                redirectToTool();
+              }}>
               Aller à l&apos;outil de design
             </button>
           </div>
