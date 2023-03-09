@@ -2,83 +2,10 @@ import { createDesignFromTool } from '@/api/tool';
 import { getUser } from '@/api/user';
 import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
+import { styleList } from '@/res/values';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
-const styleList = [
-  {
-    image:
-      'https://imageio.forbes.com/specials-images/imageserve/632d891161b9efabbc7d2c23/0x0.jpg?format=jpg&crop=2200,1232,x398,y0,safe&width=1200',
-    label: 'Japanese',
-    value: '1',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2017/01/18/13/10/galaxy-soho-1989816_1280.jpg',
-    label: 'Modern',
-    value: '2',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2020/06/07/01/50/window-5268702_1280.jpg',
-    label: 'Minimalist',
-    value: '3',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2019/05/29/19/51/house-4238414_1280.jpg',
-    label: 'Scandinavian',
-    value: '4',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2018/03/12/20/07/maldives-3220702_1280.jpg',
-    label: 'Tropical',
-    value: '5',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2015/06/27/16/34/wall-823611_1280.jpg',
-    label: 'Industrial',
-    value: '2',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2021/03/02/01/07/cyberpunk-6061251_1280.jpg',
-    label: 'Cyberpunk',
-    value: '3',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2019/11/04/19/15/steampunk-4601917_1280.jpg',
-    label: 'Steampunk',
-    value: '4',
-  },
-  {
-    image: 'https://cdn.pixabay.com/photo/2015/04/08/13/22/car-712684_1280.jpg',
-    label: 'Vice City',
-    value: '5',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2014/12/06/12/47/fireplace-558985_1280.jpg',
-    label: 'Christmas',
-    value: '5',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2014/10/15/01/57/catherines-palace-489085_1280.jpg',
-    label: 'Palace',
-    value: '5',
-  },
-  {
-    image:
-      'https://cdn.pixabay.com/photo/2018/07/13/09/04/architecture-3535243_1280.jpg',
-    label: 'Morocco',
-    value: '5',
-  },
-];
 
 const Tool = () => {
   const router = useRouter();

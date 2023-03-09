@@ -1,5 +1,6 @@
 import { getRedesignById } from '@/api/redesign';
 import Container from '@/components/ui/Container';
+import { styleList } from '@/res/values';
 import { RedesignDto } from '@/types/dto/RedesignDto';
 import { NextPageContext } from 'next';
 import { NextSeo } from 'next-seo';
@@ -40,12 +41,16 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
               <div className="relative">
                 <div className="rounded-full overflow-hidden h-24 w-72 flex items-center justify-center bg-gray-300 border-2 border-black relative ">
                   <img
-                    src="https://imageio.forbes.com/specials-images/imageserve/632d891161b9efabbc7d2c23/0x0.jpg?format=jpg&crop=2200,1232,x398,y0,safe&width=1200"
+                    src={
+                      styleList.find((style) => {
+                        return style.label === redesign.style;
+                      })?.image
+                    }
                     alt="Image"
                     className="h-24 w-72 object-cover"
                   />
                   <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="text-4xl font-bold pt-2 text-[white] drop-shadow-2xl shadow-black">
+                    <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
                       {redesign.style}
                       <span className="text-[#ee7932]">.</span>
                     </div>
