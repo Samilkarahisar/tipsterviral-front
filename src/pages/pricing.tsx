@@ -124,7 +124,7 @@ const Pricing = () => {
               <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
                 Prêt à commencer ?
               </h1>
-              <p className="text-xl text-zinc-200 sm:text-center sm:text-2xl max-w-2xl m-auto">
+              <p className="text-xl sm:text-center sm:text-2xl max-w-2xl m-auto">
                 Choisissez le plan qui vous correspond
               </p>
               <div className="bg-gray-200 relative self-center mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-zinc-800">
@@ -133,8 +133,8 @@ const Pricing = () => {
                   type="button"
                   className={`${
                     billingInterval === 'month'
-                      ? 'bg-[#ee7932] relative w-1/2 border-zinc-800 shadow-sm text-white'
-                      : 'text-black ml-0.5 relative w-1/2 border border-transparent'
+                      ? 'bg-[#ee7932] hover:bg-[#d46c2c] relative w-1/2 border-zinc-800 shadow-sm text-white'
+                      : 'text-black ml-0.5 relative w-1/2 border border-transparent hover:bg-gray-300'
                   } rounded-md m-1 py-2 text-sm font-medium blackspace-nowrap sm:w-auto sm:px-8`}>
                   Mensuel
                 </button>
@@ -143,8 +143,8 @@ const Pricing = () => {
                   type="button"
                   className={`${
                     billingInterval === 'year'
-                      ? 'bg-[#ee7932] relative w-1/2 border-zinc-800 shadow-sm text-white'
-                      : 'text-black ml-0.5 relative w-1/2 border border-transparent'
+                      ? 'bg-[#ee7932] hover:bg-[#d46c2c] relative w-1/2 border-zinc-800 shadow-sm text-white'
+                      : 'text-black ml-0.5 relative w-1/2 border border-transparent hover:bg-gray-300'
                   } rounded-md m-1 py-2 text-sm font-medium blackspace-nowrap sm:w-auto sm:px-8`}>
                   Annuel
                 </button>
@@ -215,7 +215,7 @@ const Pricing = () => {
                         </div>
                       </div>
                       <div
-                        className="cursor-pointer text-white bg-[#ee7932] hover:bg-[#DF830A] w-full h-20 rounded-3xl"
+                        className="cursor-pointer text-white bg-[#ee7932] hover:bg-[#d46c2c] w-full h-20 rounded-3xl"
                         onClick={() => {
                           subscription != undefined
                             ? handleCheckout(price, subscription)
