@@ -10,16 +10,17 @@ const HomePage = () => {
         title={`Decoloco.co - Projetez vos acheteurs dans leur futur bien immobilier`}
         description={'Projetez vos acheteurs dans leur futur bien immobilier.'}
       />
-      <Row className="font-Alexandria lg:text-5xl text-3xl h-[150px] max-w-[1000px] mx-auto w-full px-4 items-center ">
+      <Row className="font-Alexandria lg:text-5xl text-3xl max-w-[1000px] mx-auto w-full px-10 laptop:px-20 py-10 items-center ">
         <Col span={80}>
           <div className="font-bold text-[#ef8b34]">Projetez vos acheteurs</div>
           <div>dans leur futur bien immobilier</div>
         </Col>
       </Row>
-      <Row className="font-Alexandria lg:text-xl text-xl h-[100px] max-w-[1000px] mx-auto w-full pl-20 items-center ">
+      <Row className="font-Alexandria lg:text-xl text-xl max-w-[1000px] mx-auto w-full px-10 laptop:px-20 items-center ">
         <Col span={80}>
-          <div>1. Importez une photo</div>
-          <div>2. Choisissez un style</div>
+          <div>1. Importez une photo de la pièce d'un appartemment/maison</div>
+          <div>2. Choisissez un style à y appliquer</div>
+          <div>3. Obtenez un nouvel apreçu de votre pièce</div>
         </Col>
       </Row>
       <div className="flex flex-col laptop:flex-row laptop:items-stretch laptop:justify-center p-10 ">
@@ -59,17 +60,20 @@ const HomePage = () => {
         }}
         className="h-[150px] laptop:h-[9vh] animate-ltr-linear-infinite laptop:bg-contain bg-repeat-x"></div>
 
-      <div className="max-w-[800px] w-full px-4 mx-auto py-5">
-        <div className="text-3xl text-center mb-6 mt-[20px] font-Alexandria">
-          Transformez quasi-instantanément{' '}
-          <div>votre bien immobilier grâce à</div>
-          <div className="font-extrabold">l&apos;Intelligence Artificielle</div>
+      <div className="p-10">
+        <div className="flex flex-col laptop:flex-row gap-5 justify-center items-center max-w-[800px] w-full mx-auto px-14 py-10 bg-gray-200 rounded-3xl">
+          <div className="text-3xl font-Alexandria">
+            Transformez en un clique <div>votre bien immobilier grâce à</div>
+            <span className="font-extrabold">
+              l&apos;Intelligence Artificielle
+            </span>
+          </div>
+          <button
+            className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl  mx-auto block"
+            onClick={() => router.push('/login')}>
+            Essayez gratuitement
+          </button>
         </div>
-        <button
-          className="bg-[#ef8b34] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold mx-auto block"
-          onClick={() => router.push('/login')}>
-          Essayez gratuitement
-        </button>
       </div>
     </>
   );

@@ -26,6 +26,7 @@ const Tool = () => {
   const getSubscriptionInfo = async () => {
     const data = await getUser();
     if (data) setAccount(data);
+    else router.push('/login');
   };
 
   const changeHandler = (event) => {
