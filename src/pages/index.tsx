@@ -18,7 +18,9 @@ const HomePage = () => {
       </Row>
       <Row className="font-Alexandria lg:text-xl text-xl max-w-[1000px] mx-auto w-full px-10 laptop:px-20 items-center ">
         <Col span={80}>
-          <div>1. Importez une photo de la pièce d'un appartemment/maison</div>
+          <div>
+            1. Importez une photo de la pièce d&apos;un appartemment/maison
+          </div>
           <div>2. Choisissez un style à y appliquer</div>
           <div>3. Obtenez un nouvel apreçu de votre pièce</div>
         </Col>
