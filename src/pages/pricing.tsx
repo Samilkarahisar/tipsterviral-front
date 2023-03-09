@@ -215,18 +215,18 @@ const Pricing = () => {
                         </div>
                       </div>
                       <div
-                        className="cursor-pointer bg-gray-200 hover:bg-gray-300 w-full h-20 rounded-3xl"
+                        className="cursor-pointer text-white bg-[#ee7932] hover:bg-[#DF830A] w-full h-20 rounded-3xl"
                         onClick={() => {
                           subscription != undefined
                             ? handleCheckout(price, subscription)
                             : router.push('/login');
                         }}>
-                        <div className="flex justify-center items-center w-full h-full">
+                        <div className="flex justify-center items-center  w-full h-full">
                           <div className="font-bold text-lg">
                             {subscription != undefined
                               ? subscription.credits_amount > 3
                                 ? 'Gérer mon abonnement'
-                                : 'Payer'
+                                : 'Commencer'
                               : 'Essai gratuit'}
                           </div>
                         </div>
