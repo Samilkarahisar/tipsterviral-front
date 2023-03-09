@@ -182,8 +182,10 @@ const Pricing = () => {
                           className="h-full w-full object-cover object-center"
                         />
                         <div className="absolute bottom-0 left-0 p-6">
-                          <div className="text-white text-xl">#{index + 1}</div>
-                          <div className="text-white text-4xl">
+                          <div className="text-white text-2xl">
+                            #{index + 1}
+                          </div>
+                          <div className="text-white text-6xl">
                             {product.name}
                           </div>
                         </div>
@@ -222,7 +224,7 @@ const Pricing = () => {
                         <div className="flex justify-center items-center w-full h-full">
                           <div className="font-bold text-lg">
                             {subscription != undefined
-                              ? subscription.credits_amount > 0
+                              ? subscription.credits_amount > 3
                                 ? 'Gérer mon abonnement'
                                 : 'Payer'
                               : 'Essai gratuit'}
