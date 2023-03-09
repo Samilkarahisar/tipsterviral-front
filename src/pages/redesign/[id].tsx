@@ -33,34 +33,21 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         }}
       />
       <Container>
-        <div className="flex flex-col laptop:items-center laptop:justify-center laptop:max-w-[800px] mx-auto p-10">
+        <div className="flex flex-col laptop:flex-row laptop:items-center laptop:justify-center laptop:max-w-[1000px] mx-auto px-5 pt-10">
           <img
             src={redesign.init_url}
             className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
           />
           <div className="relative">
-            <img
-              src="https://i.ibb.co/xfLDTt6/Nouveau-projet-21.png"
-              className="small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[75px] laptop:h-[75px]"
-            />
+            <div className="small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[75px] laptop:h-[75px]"></div>
             <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="relative">
-                <div className="rounded-full overflow-hidden h-24 w-72 flex items-center justify-center bg-gray-300 border-2 border-black relative ">
+                <div className="rounded-full overflow-hidden h-24 w-72 flex items-center justify-center bg-transparent border-0 rotate-90 laptop:rotate-0">
                   <img
-                    src={
-                      styleList.find((style) => {
-                        return style.label === redesign.style;
-                      })?.image
-                    }
+                    src="https://i.ibb.co/b5kd9b3/Nouveau-projet-23.png"
                     alt="Image"
-                    className="h-24 w-72 object-cover"
+                    className="h-12 w-36"
                   />
-                  <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
-                      {redesign.style}
-                      <span className="text-[#ee7932]">.</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -70,16 +57,41 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
             alt="alt-text"
             className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
           />
-          <div className="flex flex-col items-start mt-10">
-            <h1 className="text-3xl font-bold mb-5">
-              Voulez vous utiliser le style {redesign.style}?
+        </div>
+        <div className="flex flex-col justify-center items-center mx-auto px-5 py-10">
+          <div className="flex flex-col">
+            <div className="flex flex-col laptop:flex-row">
+              <h1 className="text-4xl font-bold mb-5 mr-5 pt-3">
+                Vous avez utilisé le style
+              </h1>
+              <div className="rounded-full overflow-hidden h-16 w-48 flex items-center justify-center bg-gray-300 border-2 border-black relative ">
+                <img
+                  src={
+                    styleList.find((style) => {
+                      return style.label === redesign.style;
+                    })?.image
+                  }
+                  alt="Image"
+                  className="h-16 w-48 object-cover"
+                />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-black">
+                    {redesign.style}
+                    <span className="text-[#ee7932]">.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h1 className="text-xl font-medium mb-5 mr-5 pt-5">
+              Essayez d&apos;autres styles et d&apos;autres pièces avec
+              l&apos;outil de Decoloco !
             </h1>
             <button
-              className="bg-[#ee7932] hover:bg-[#d46c2c] cursor-pointer h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block"
+              className="bg-[#ee7932] hover:bg-[#d46c2c] cursor-pointer h-[50px] w-[150px] rounded-lg text-white text-lg font-bold  block"
               onClick={() => {
                 redirectToTool();
               }}>
-              Aller à l&apos;outil de design
+              Aller à l&apos;outil
             </button>
           </div>
         </div>
