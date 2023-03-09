@@ -1,8 +1,10 @@
 import { getRedesignById } from '@/api/redesign';
 import Container from '@/components/ui/Container';
+import { styleList } from '@/res/values';
 import { RedesignDto } from '@/types/dto/RedesignDto';
 import { NextPageContext } from 'next';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import React from 'react';
 
@@ -11,6 +13,11 @@ interface Props {
 }
 
 const RedesignPage: React.FC<Props> = ({ redesign }) => {
+  const router = useRouter();
+  const redirectToTool = async () => {
+    router.push('/tool');
+  };
+
   return (
     <>
       <NextSeo
@@ -26,7 +33,7 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         }}
       />
       <Container>
-        <div className="flex flex-col laptop:items-center laptop:justify-center p-10">
+        <div className="flex flex-col laptop:items-center laptop:justify-center laptop:max-w-[800px] mx-auto p-10">
           <img
             src={redesign.init_url}
             className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
@@ -40,12 +47,16 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
               <div className="relative">
                 <div className="rounded-full overflow-hidden h-24 w-72 flex items-center justify-center bg-gray-300 border-2 border-black relative ">
                   <img
-                    src="https://imageio.forbes.com/specials-images/imageserve/632d891161b9efabbc7d2c23/0x0.jpg?format=jpg&crop=2200,1232,x398,y0,safe&width=1200"
+                    src={
+                      styleList.find((style) => {
+                        return style.label === redesign.style;
+                      })?.image
+                    }
                     alt="Image"
                     className="h-24 w-72 object-cover"
                   />
                   <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="text-4xl font-bold pt-2 text-[white] drop-shadow-2xl shadow-black">
+                    <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
                       {redesign.style}
                       <span className="text-[#ee7932]">.</span>
                     </div>
@@ -63,7 +74,11 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
             <h1 className="text-3xl font-bold mb-5">
               Voulez vous utiliser le style {redesign.style}?
             </h1>
-            <button className="bg-[#ee7932] h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block">
+            <button
+              className="bg-[#ee7932] hover:bg-[#d46c2c] cursor-pointer h-[50px] w-[250px] rounded-lg text-white text-lg font-bold  block"
+              onClick={() => {
+                redirectToTool();
+              }}>
               Aller à l&apos;outil de design
             </button>
           </div>

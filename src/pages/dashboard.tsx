@@ -1,5 +1,6 @@
 import { getAllRedesignsByUserId } from '@/api/redesign';
 import { getUser } from '@/api/user';
+import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
 import {
   DollarCircleFilled,
@@ -14,11 +15,16 @@ const Dashboard = () => {
   const [user] = useAuthState(auth);
   const [account, setAccount] = useState<any>({});
   const [redesigns, setRedesigns] = useState<any>([]);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     getSubscriptionInfo();
     getRedesigns();
+    const timeout = setTimeout(() => {
+      setIsPageLoaded(true);
+    }, 100);
+    return () => clearTimeout(timeout);
   }, [user]);
 
   const getSubscriptionInfo = async () => {
@@ -39,7 +45,11 @@ const Dashboard = () => {
     router.push('/tool');
   };
 
-  return (
+  return !isPageLoaded ? (
+    <div>
+      <Spinner />
+    </div>
+  ) : (
     <>
       <div className="laptop:max-w-[1500px] mx-auto">
         <div className="grid grid-cols-2 laptop:grid-cols-4 gap-2 w-full h-[120px] p-6">

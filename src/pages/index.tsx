@@ -22,7 +22,7 @@ const HomePage = () => {
           <div>2. Choisissez un style</div>
         </Col>
       </Row>
-      <div className="flex laptop:items-stretch laptop:justify-center p-10 ">
+      <div className="flex flex-col laptop:flex-row laptop:items-stretch laptop:justify-center p-10 ">
         <img
           src={
             'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/c89d68bb-3064-498f-af66-4cc5bba16b41-init.png/public'
@@ -33,7 +33,7 @@ const HomePage = () => {
           <div className="small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[75px] laptop:h-[75px]"></div>
           <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="relative">
-              <div className="rounded-full overflow-hidden h-24 w-72 flex items-center justify-center bg-transparent border-0 ">
+              <div className="rounded-full overflow-hidden h-24 w-72 flex items-center justify-center bg-transparent border-0 rotate-90 laptop:rotate-0">
                 <img
                   src="https://i.ibb.co/b5kd9b3/Nouveau-projet-23.png"
                   alt="Image"
@@ -57,7 +57,7 @@ const HomePage = () => {
           backgroundImage: 'url(https://i.ibb.co/09FwV12/landingpage3-3.png)',
           width: '100%',
         }}
-        className="xl:h-[9vh] lg:h-[7vh] md:h-[5vh] sm:h-[3vh] h-[150px] animate-ltr-linear-infinite md:bg-contain "></div>
+        className="h-[150px] laptop:h-[9vh] animate-ltr-linear-infinite laptop:bg-contain bg-repeat-x"></div>
 
       <div className="max-w-[800px] w-full px-4 mx-auto py-5">
         <div className="text-3xl text-center mb-6 mt-[20px] font-Alexandria">
