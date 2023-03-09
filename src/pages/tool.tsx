@@ -21,7 +21,6 @@ const Tool = () => {
   useEffect(() => {
     getSubscriptionInfo();
     setIsNoCreditsLeft(account.credits_amount <= 0);
-    console.log(isNoCreditsLeft);
   }, [user]);
 
   const getSubscriptionInfo = async () => {
@@ -74,8 +73,15 @@ const Tool = () => {
         const result = await createDesignFromTool(selectedFile, selectedStyle);
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
+        } else if (result?.code == 666) {
+          alert(
+            "Vous n'avez plus de crédits, veuillez consulter les offres Decoloco",
+          );
+          router.push('/pricing');
         } else {
           console.log(result?.code + ': ' + result?.status);
+          alert('Une erreur est survenue...');
+          router.push('/');
         }
       } catch (err) {
         console.log(err);
@@ -175,7 +181,7 @@ const Tool = () => {
         className={`flex justify-center items-center laptop:mx-auto 
         ${isStyleSelected ? 'blur' : ''}`}>
         <div className="flex flex-col flex-grow p-5">
-          <label className="flex flex-col w-full min-h-[200px] mb-7 rounded-3xl border-4 border-dashed border-[#ee7932] hover:cursor-pointer group">
+          <label className="flex flex-col w-full min-h-[200px] laptop:max-w-[800px] mb-7 rounded-3xl border-4 border-dashed border-[#ee7932] hover:cursor-pointer group">
             {isFileSelected ? (
               <div className="flex flex-col w-full h-full">
                 <div className="flex flex-col items-center justify-center overflow-hidden p-4">
