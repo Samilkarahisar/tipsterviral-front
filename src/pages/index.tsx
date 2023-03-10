@@ -22,7 +22,7 @@ const HomePage = () => {
             1. Importez une photo de la pièce d&apos;un appartemment/maison
           </div>
           <div>2. Choisissez un style à y appliquer</div>
-          <div>3. Obtenez un nouvel apreçu de votre pièce</div>
+          <div>3. Obtenez un nouvel aperçu de votre pièce</div>
         </Col>
       </Row>
       <div className="flex flex-col laptop:flex-row laptop:items-stretch laptop:justify-center p-10 ">
