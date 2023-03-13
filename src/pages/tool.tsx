@@ -17,6 +17,7 @@ const Tool = () => {
   const [selectedRoomStyle, setSelectedRoomStyle] = useState(
     styleList[0].value,
   );
+  const [selectedRoomStyleLabel, setSelectedRoomStyleLabel] = useState('');
   const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
   const [selectedRoomType, setSelectedRoomType] = useState(
     roomTypeList[0].value,
@@ -161,7 +162,7 @@ const Tool = () => {
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
                 Voulez-vous utiliser le style{' '}
-                <span className="font-bold">{selectedRoomStyle}</span>?
+                <span className="font-bold">{selectedRoomStyleLabel}</span>?
               </div>
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
@@ -326,6 +327,7 @@ const Tool = () => {
                   key={id}
                   onClick={() => {
                     setSelectedRoomStyle(option.value);
+                    setSelectedRoomStyleLabel(option.label);
                     setIsRoomStyleSelected(true);
                   }}
                   className="flex w-full justify-center items-center mt-5">
