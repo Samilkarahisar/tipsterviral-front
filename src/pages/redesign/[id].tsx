@@ -68,7 +68,9 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
                 <img
                   src={
                     styleList.find((style) => {
-                      return style.value === redesign.style;
+                      return (
+                        style.value.toLowerCase === redesign.style.toLowerCase
+                      );
                     })?.image
                   }
                   alt="Image"
@@ -78,7 +80,9 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
                   <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-black">
                     {
                       styleList.find((style) => {
-                        return style.value === redesign.style;
+                        return (
+                          style.value.toLowerCase === redesign.style.toLowerCase
+                        );
                       })?.label
                     }
                     <span className="text-[#ee7932]">.</span>
