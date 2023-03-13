@@ -2,7 +2,7 @@ import { createDesignFromTool } from '@/api/tool';
 import { getUser } from '@/api/user';
 import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
-import { styleList } from '@/res/values';
+import { roomTypeList, styleList } from '@/res/values';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -13,13 +13,14 @@ const Tool = () => {
   const [account, setAccount] = useState<any>({});
   const [selectedFile, setSelectedFile] = useState(undefined);
   const [isFileSelected, setIsFileSelected] = useState(false);
-  const [isRoomEmpty, setIsRoomEmpty] = useState(false);
+  const [isRoomEmpty, setIsRoomEmpty] = useState(true);
   const [selectedRoomStyle, setSelectedRoomStyle] = useState(
-    styleList[0].value,
+    styleList[0].label,
   );
   const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
-  const [selectedRoomType, setSelectedRoomType] = useState(styleList[0].value);
-  const [isRoomTypeSelected, setIsRoomTypeSelected] = useState(false);
+  const [selectedRoomType, setSelectedRoomType] = useState(
+    roomTypeList[0].label,
+  );
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
 
@@ -27,6 +28,13 @@ const Tool = () => {
     getSubscriptionInfo();
     setIsNoCreditsLeft(account.credits_amount <= 0);
   }, [user]);
+
+  useEffect(() => {
+    if (roomTypeList) {
+      console.log(roomTypeList);
+      setSelectedRoomType(roomTypeList[0].value);
+    }
+  }, [roomTypeList]);
 
   const getSubscriptionInfo = async () => {
     const data = await getUser();
@@ -60,13 +68,17 @@ const Tool = () => {
       <img
         src={URL.createObjectURL(image)}
         alt={image.name}
-        className="object-scale-down h-full rounded-3xl"
+        className="object-scale-down rounded-3xl h-[300px]"
       />
     );
   };
 
   const toggleIsRoomStyleSelected = async () => {
     setIsRoomStyleSelected(!isRoomStyleSelected);
+  };
+
+  const toggleIsRoomEmpty = async (empty: boolean) => {
+    setIsRoomEmpty(empty);
   };
 
   const handleSubmission = async () => {
@@ -189,9 +201,9 @@ const Tool = () => {
       </div>
       <div
         id="selectDiv"
-        className={`flex justify-center items-center laptop:mx-auto 
+        className={`flex justify-center items-center laptop:mx-auto
         ${isRoomStyleSelected ? 'blur' : ''}`}>
-        <div className="flex flex-col flex-grow p-5">
+        <div className="flex flex-col flex-grow p-5 pb-10">
           <label className="flex flex-col w-full min-h-[200px] laptop:w-[800px] mb-7 hover:cursor-pointer group bg-white rounded-3xl shadow">
             {isFileSelected ? (
               <div className="flex flex-col w-full h-full">
@@ -230,39 +242,118 @@ const Tool = () => {
             />
           </label>
           <div id="options">
-            <div className="text-2xl font-bold">
-              Choisir le type de la pièce
+            <div className="text-2xl font-bold mb-4">Vide ou meublée</div>
+            <div className="flex flex-row justify-center items-center mb-10">
+              <div
+                className={`relative cursor-pointer transition hover:scale-100 ${
+                  isRoomEmpty ? 'scale-[0.95]' : 'scale-[0.8]'
+                }`}
+                onClick={() => {
+                  toggleIsRoomEmpty(true);
+                }}>
+                <div
+                  className={`rounded-[25px] overflow-hidden border-4 border-transparent ${
+                    isRoomEmpty ? 'border-[#ee7932]' : ''
+                  }`}>
+                  <img
+                    src={
+                      'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/c89d68bb-3064-498f-af66-4cc5bba16b41-init.png/public'
+                    }
+                    className={`object-contain small:h-auto small:w-auto min-h-[150px] min-w-[150px] laptop:w-[320px] laptop:h-[320px]`}
+                  />
+                </div>
+                <div
+                  className={`absolute flex w-full h-full -bottom-8 items-end justify-center text-2xl ${
+                    isRoomEmpty ? 'font-bold' : ''
+                  }`}>
+                  Pièce vide
+                </div>
+              </div>
+              <div
+                className={`relative cursor-pointer transition hover:scale-100 ${
+                  !isRoomEmpty ? 'scale-[0.95]' : 'scale-[0.8]'
+                }`}
+                onClick={() => {
+                  toggleIsRoomEmpty(false);
+                }}>
+                <div
+                  className={`rounded-[25px] overflow-hidden border-4 border-transparent ${
+                    !isRoomEmpty ? 'border-[#ee7932]' : ''
+                  }`}>
+                  <img
+                    src={
+                      'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/c89d68bb-3064-498f-af66-4cc5bba16b41-result.png/public'
+                    }
+                    className={`object-contain small:h-auto small:w-auto min-h-[150px] min-w-[150px] laptop:w-[320px] laptop:h-[320px]`}
+                  />
+                </div>
+                <div
+                  className={`absolute flex w-full h-full -bottom-8 items-end justify-center text-2xl ${
+                    !isRoomEmpty ? 'font-bold' : ''
+                  }`}>
+                  Pièce meublée
+                </div>
+              </div>
+            </div>
+            <div className="text-2xl font-bold mb-4">Type de pièce</div>
+            <div id="select-room" className="flex flex-col mb-4">
+              <div className="grid grid-cols-2 laptop:grid-cols-4">
+                {roomTypeList.map((option, id) => (
+                  <div className="relative" key={id}>
+                    <div
+                      className="flex justify-center items-center "
+                      onClick={() => {
+                        setSelectedRoomType(option.label);
+                      }}>
+                      <div
+                        className={`relative w-32 h-32 bg-[#fefbf2] cursor-pointer
+                        ${
+                          option.label === selectedRoomType
+                            ? 'rounded-[10px] border-4 border-[#ee7932]'
+                            : ''
+                        }`}>
+                        <div className="p-6">
+                          <img src={option.image} alt={option.label} />
+                        </div>
+                        <span className="absolute flex w-full h-full bottom-0 items-end justify-center text-[20px]">
+                          {option.label}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div id="styleSelectDiv">
-            <div className="text-2xl font-bold">
-              Choisir le style à appliquer
-            </div>
-            {styleList.map((option, id) => (
-              <div
-                key={id}
-                onClick={() => {
-                  setSelectedRoomStyle(option.label);
-                  setIsRoomStyleSelected(true);
-                }}
-                className="flex flex-col w-full justify-center items-center mt-5">
-                <div className="relative">
-                  <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative cursor-pointer">
-                    <img
-                      src={option.image}
-                      alt="Image"
-                      className="h-24 w-80 object-cover blur-[0.7px]"
-                    />
-                    <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                      <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
-                        {option.label}
-                        <span className="text-[#ee7932]">.</span>
+            <div className="text-2xl font-bold">Style</div>
+            <div className="grid grid-cols-1 laptop:grid-cols-2">
+              {styleList.map((option, id) => (
+                <div
+                  key={id}
+                  onClick={() => {
+                    setSelectedRoomStyle(option.label);
+                    setIsRoomStyleSelected(true);
+                  }}
+                  className="flex w-full justify-center items-center mt-5">
+                  <div className="relative">
+                    <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative cursor-pointer">
+                      <img
+                        src={option.image}
+                        alt="Image"
+                        className="h-24 w-80 object-cover blur-[0.7px]"
+                      />
+                      <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
+                          {option.label}
+                          <span className="text-[#ee7932]">.</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
