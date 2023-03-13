@@ -1,3 +1,13 @@
+import {
+  IconBathroom,
+  IconBedroom,
+  IconCloset,
+  IconGarage,
+  IconKitchen,
+  IconLivingRoom,
+  IconToilet,
+} from '@/res/icons';
+
 export const DISCORD_LINK = '';
 export const TWITTER_LINK = 'https://twitter.com/Decolococo';
 
@@ -48,7 +58,7 @@ export const styleList = [
   },
   {
     image:
-      'https://cdn.pixabay.com/photo/2017/01/18/13/10/galaxy-soho-1989816_1280.jpg',
+      'https://cdn.pixabay.com/photo/2015/10/24/12/30/musee-des-confluances-1004423_960_720.jpg',
     label: 'Modern',
     value: '2',
   },
@@ -63,5 +73,43 @@ export const styleList = [
       'https://cdn.pixabay.com/photo/2014/12/06/12/47/fireplace-558985_1280.jpg',
     label: 'Christmas',
     value: '4',
+  },
+];
+
+export const roomTypeList = [
+  {
+    image: IconBathroom.src,
+    label: 'Bathroom',
+    value: '1',
+  },
+  {
+    image: IconBedroom.src,
+    label: 'Bedroom',
+    value: '2',
+  },
+  {
+    image: IconKitchen.src,
+    label: 'Kitchen',
+    value: '3',
+  },
+  {
+    image: IconLivingRoom.src,
+    label: 'Living Room',
+    value: '4',
+  },
+  {
+    image: IconToilet.src,
+    label: 'Toilet',
+    value: '5',
+  },
+  {
+    image: IconGarage.src,
+    label: 'Garage',
+    value: '6',
+  },
+  {
+    image: IconCloset.src,
+    label: 'Closet',
+    value: '7',
   },
 ];

@@ -174,7 +174,7 @@ const Pricing = () => {
                 return (
                   <div
                     key={product.id}
-                    className={`bg-white rounded-3xl shadow divide-y divide-zinc-600  `}>
+                    className={`bg-white rounded-3xl shadow`}>
                     <div className="p-2">
                       <div className="relative bg-black w-full h-52 rounded-3xl overflow-hidden">
                         <img
