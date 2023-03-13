@@ -16,13 +16,18 @@ const HomePage = () => {
           <div>dans leur futur bien immobilier</div>
         </Col>
       </Row>
-      <Row className="font-Alexandria lg:text-xl text-xl max-w-[1000px] mx-auto w-full px-10 laptop:px-20 items-center ">
-        <Col span={80}>
-          <div>
-            1. Importez une photo de la pièce d&apos;un appartemment/maison
-          </div>
-          <div>2. Choisissez un style à y appliquer</div>
-          <div>3. Obtenez un nouvel aperçu de votre pièce</div>
+      <Row className="font-Alexandria lg:text-xl text-xl max-w-[1200px] mx-auto w-full px-10 laptop:px-20 items-center">
+        <Col span={12}>
+          <div>1. Importez une photo vide de votre pièce</div>
+          <div>2. Choisissez un style</div>
+          <div>3. Obtenez une version meublée</div>
+        </Col>
+        <Col span={10}>
+          <button
+            className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl  mx-auto block"
+            onClick={() => router.push('/login')}>
+            Essayez gratuitement
+          </button>
         </Col>
       </Row>
       <div className="flex flex-col laptop:flex-row laptop:items-stretch laptop:justify-center p-10 ">
