@@ -69,7 +69,8 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
                   src={
                     styleList.find((style) => {
                       return (
-                        style.value.toLowerCase === redesign.style.toLowerCase
+                        style.value.toLowerCase() ===
+                        redesign.style.toLowerCase()
                       );
                     })?.image
                   }
@@ -81,7 +82,8 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
                     {
                       styleList.find((style) => {
                         return (
-                          style.value.toLowerCase === redesign.style.toLowerCase
+                          style.value.toLowerCase() ===
+                          redesign.style.toLowerCase()
                         );
                       })?.label
                     }
