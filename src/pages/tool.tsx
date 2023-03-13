@@ -13,8 +13,13 @@ const Tool = () => {
   const [account, setAccount] = useState<any>({});
   const [selectedFile, setSelectedFile] = useState(undefined);
   const [isFileSelected, setIsFileSelected] = useState(false);
-  const [selectedStyle, setSelectedStyle] = useState(styleList[0].value);
-  const [isStyleSelected, setIsStyleSelected] = useState(false);
+  const [isRoomEmpty, setIsRoomEmpty] = useState(false);
+  const [selectedRoomStyle, setSelectedRoomStyle] = useState(
+    styleList[0].value,
+  );
+  const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
+  const [selectedRoomType, setSelectedRoomType] = useState(styleList[0].value);
+  const [isRoomTypeSelected, setIsRoomTypeSelected] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
 
@@ -55,13 +60,13 @@ const Tool = () => {
       <img
         src={URL.createObjectURL(image)}
         alt={image.name}
-        className="object-scale-down h-full"
+        className="object-scale-down h-full rounded-3xl"
       />
     );
   };
 
-  const toggleIsStyleSelected = async () => {
-    setIsStyleSelected(!isStyleSelected);
+  const toggleIsRoomStyleSelected = async () => {
+    setIsRoomStyleSelected(!isRoomStyleSelected);
   };
 
   const handleSubmission = async () => {
@@ -71,7 +76,12 @@ const Tool = () => {
     } else {
       try {
         setIsSubmitted(true);
-        const result = await createDesignFromTool(selectedFile, selectedStyle);
+        const result = await createDesignFromTool(
+          selectedFile,
+          selectedRoomStyle,
+          selectedRoomType,
+          isRoomEmpty,
+        );
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
         } else if (result?.code == 666) {
@@ -95,7 +105,7 @@ const Tool = () => {
     <>
       <div
         className={`fixed left-0 top-0 z-50 w-full h-full ${
-          !isStyleSelected ? 'hidden' : ''
+          !isRoomStyleSelected ? 'hidden' : ''
         }`}>
         <div className="absolute bg-white top-1/2 left-1/2 -ml-36 -mt-28 p-5 rounded-xl w-72 h-60">
           <div
@@ -103,7 +113,7 @@ const Tool = () => {
               isSubmitted ? 'hidden' : ''
             }`}
             onClick={() => {
-              toggleIsStyleSelected();
+              toggleIsRoomStyleSelected();
             }}>
             <svg
               className="h-8 w-8 hover:text-gray-600"
@@ -146,7 +156,7 @@ const Tool = () => {
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
                 Voulez-vous utiliser le style{' '}
-                <span className="font-bold">{selectedStyle}</span>?
+                <span className="font-bold">{selectedRoomStyle}</span>?
               </div>
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
@@ -164,7 +174,7 @@ const Tool = () => {
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
                 onClick={() => {
-                  toggleIsStyleSelected();
+                  toggleIsRoomStyleSelected();
                 }}>
                 OK
               </div>
@@ -174,15 +184,15 @@ const Tool = () => {
         <div
           className="w-full h-full bg-black bg-opacity-40 transition overflow-auto"
           onClick={() => {
-            if (!isSubmitted) toggleIsStyleSelected();
+            if (!isSubmitted) toggleIsRoomStyleSelected();
           }}></div>
       </div>
       <div
         id="selectDiv"
         className={`flex justify-center items-center laptop:mx-auto 
-        ${isStyleSelected ? 'blur' : ''}`}>
+        ${isRoomStyleSelected ? 'blur' : ''}`}>
         <div className="flex flex-col flex-grow p-5">
-          <label className="flex flex-col w-full min-h-[200px] laptop:max-w-[800px] mb-7 rounded-3xl border-4 border-dashed border-[#ee7932] hover:cursor-pointer group">
+          <label className="flex flex-col w-full min-h-[200px] laptop:w-[800px] mb-7 hover:cursor-pointer group bg-white rounded-3xl shadow">
             {isFileSelected ? (
               <div className="flex flex-col w-full h-full">
                 <div className="flex flex-col items-center justify-center overflow-hidden p-4">
@@ -190,10 +200,10 @@ const Tool = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center m-10 laptop:my-auto group-hover:scale-110 transition">
+              <div className="flex flex-col items-center justify-center m-10 laptop:my-auto group-hover:scale-105 transition">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-24 h-24 text-black"
+                  className="w-24 h-24 text-[#ee7932]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor">
@@ -219,6 +229,11 @@ const Tool = () => {
               className="hidden"
             />
           </label>
+          <div id="options">
+            <div className="text-2xl font-bold">
+              Choisir le type de la pièce
+            </div>
+          </div>
           <div id="styleSelectDiv">
             <div className="text-2xl font-bold">
               Choisir le style à appliquer
@@ -227,8 +242,8 @@ const Tool = () => {
               <div
                 key={id}
                 onClick={() => {
-                  setSelectedStyle(option.label);
-                  setIsStyleSelected(true);
+                  setSelectedRoomStyle(option.label);
+                  setIsRoomStyleSelected(true);
                 }}
                 className="flex flex-col w-full justify-center items-center mt-5">
                 <div className="relative">

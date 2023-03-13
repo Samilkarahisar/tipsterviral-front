@@ -48,7 +48,7 @@ const Header = () => {
   }, [open, router.events]);
 
   return (
-    <div className="border-b border-secondary border-black dark:border-dark-secondary laptop:py-[16px] py-4 sticky top-0 bg-white dark:bg-dark z-20">
+    <div className="border-b border-secondary dark:border-dark-secondary laptop:py-[16px] py-4 sticky top-0 bg-white dark:bg-dark z-20">
       <Container>
         <div className="flex justify-between">
           <div className="flex justify-between items-center gap-10">

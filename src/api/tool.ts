@@ -2,7 +2,12 @@ import api from '@/lib/axios';
 import { auth } from '@/lib/firebase';
 import { API_PATH_POST_DESIGN_TOOL } from '@/res/values';
 
-export const createDesignFromTool = async (file: any, style: string) => {
+export const createDesignFromTool = async (
+  file: any,
+  style: string,
+  type: string,
+  empty: any,
+) => {
   try {
     const token = await auth.currentUser?.getIdToken();
     const ownerId = auth.currentUser?.uid;
@@ -13,6 +18,8 @@ export const createDesignFromTool = async (file: any, style: string) => {
       const formData = new FormData();
       formData.append('image', fileToUpload);
       formData.append('style', style);
+      formData.append('roomType', type);
+      formData.append('isRoomEmpty', empty);
 
       const { data } = await api.post(API_PATH_POST_DESIGN_TOOL, formData, {
         params: {
