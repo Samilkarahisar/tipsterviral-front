@@ -15,11 +15,11 @@ const Tool = () => {
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [isRoomEmpty, setIsRoomEmpty] = useState(true);
   const [selectedRoomStyle, setSelectedRoomStyle] = useState(
-    styleList[0].label,
+    styleList[0].value,
   );
   const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
   const [selectedRoomType, setSelectedRoomType] = useState(
-    roomTypeList[0].label,
+    roomTypeList[0].value,
   );
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
@@ -28,13 +28,6 @@ const Tool = () => {
     getSubscriptionInfo();
     setIsNoCreditsLeft(account.credits_amount <= 0);
   }, [user]);
-
-  useEffect(() => {
-    if (roomTypeList) {
-      console.log(roomTypeList);
-      setSelectedRoomType(roomTypeList[0].value);
-    }
-  }, [roomTypeList]);
 
   const getSubscriptionInfo = async () => {
     const data = await getUser();
@@ -303,12 +296,12 @@ const Tool = () => {
                     <div
                       className="flex justify-center items-center "
                       onClick={() => {
-                        setSelectedRoomType(option.label);
+                        setSelectedRoomType(option.value);
                       }}>
                       <div
                         className={`relative w-32 h-32 bg-[#fefbf2] cursor-pointer
                         ${
-                          option.label === selectedRoomType
+                          option.value === selectedRoomType
                             ? 'rounded-[10px] border-4 border-[#ee7932]'
                             : ''
                         }`}>
@@ -332,7 +325,7 @@ const Tool = () => {
                 <div
                   key={id}
                   onClick={() => {
-                    setSelectedRoomStyle(option.label);
+                    setSelectedRoomStyle(option.value);
                     setIsRoomStyleSelected(true);
                   }}
                   className="flex w-full justify-center items-center mt-5">

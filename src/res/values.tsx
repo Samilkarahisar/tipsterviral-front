@@ -52,64 +52,65 @@ export const weight = ['lighter', 'normal', 'bold'];
 export const styleList = [
   {
     image:
-      'https://imageio.forbes.com/specials-images/imageserve/632d891161b9efabbc7d2c23/0x0.jpg?format=jpg&crop=2200,1232,x398,y0,safe&width=1200',
-    label: 'Japanese',
-    value: '1',
-  },
-  {
-    image:
       'https://cdn.pixabay.com/photo/2015/10/24/12/30/musee-des-confluances-1004423_960_720.jpg',
-    label: 'Modern',
-    value: '2',
+    label: 'Moderne',
+    value: 'modern',
   },
   {
     image:
       'https://cdn.pixabay.com/photo/2015/06/27/16/34/wall-823611_1280.jpg',
-    label: 'Industrial',
-    value: '3',
+    label: 'Industriel',
+    value: 'industrial',
+  },
+  {
+    image:
+      'https://imageio.forbes.com/specials-images/imageserve/632d891161b9efabbc7d2c23/0x0.jpg?format=jpg&crop=2200,1232,x398,y0,safe&width=1200',
+    label: 'Japonais',
+    value: 'japanese',
   },
   {
     image:
       'https://cdn.pixabay.com/photo/2014/12/06/12/47/fireplace-558985_1280.jpg',
-    label: 'Christmas',
-    value: '4',
+    label: 'Noël',
+    value: 'christmas',
   },
 ];
 
 export const roomTypeList = [
   {
-    image: IconBathroom.src,
-    label: 'Bathroom',
-    value: '1',
+    image: IconLivingRoom.src,
+    label: 'Salon',
+    value: 'living room',
   },
+
   {
     image: IconBedroom.src,
-    label: 'Bedroom',
-    value: '2',
+    label: 'Chambre',
+    value: 'bedroom',
   },
   {
     image: IconKitchen.src,
-    label: 'Kitchen',
-    value: '3',
+    label: 'Cuisine',
+    value: 'kitchen',
   },
   {
-    image: IconLivingRoom.src,
-    label: 'Living Room',
-    value: '4',
+    image: IconBathroom.src,
+    label: 'Salle de bain',
+    value: 'bathroom',
   },
   {
     image: IconToilet.src,
-    label: 'Toilet',
-    value: '5',
+    label: 'Toilettes',
+    value: 'toilet',
   },
   {
     image: IconGarage.src,
     label: 'Garage',
-    value: '6',
+    value: 'garage',
   },
   {
     image: IconCloset.src,
-    label: 'Closet',
-    value: '7',
+    label: 'Dressing',
+    value: 'closet',
   },
 ];
