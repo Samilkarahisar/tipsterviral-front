@@ -139,7 +139,7 @@ const Tool = () => {
               <div className="text-center">
                 <span className="text-xl">Génération en cours...</span>
                 <br />
-                Cela peut prendre 30 secondes.
+                Cela peut prendre plus de 1 min.
               </div>
             </div>
           ) : isFileSelected ? (
