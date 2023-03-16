@@ -322,34 +322,46 @@ const Tool = () => {
             </div>
           </div>
           <div id="styleSelectDiv">
-            <div className="text-2xl font-bold">Style</div>
+            <div className="text-2xl font-bold">
+              {!isRoomEmpty ? 'Style' : ''}
+            </div>
             <div className="grid grid-cols-1 laptop:grid-cols-2">
-              {styleList.map((option, id) => (
-                <div
-                  key={id}
-                  onClick={() => {
-                    setSelectedRoomStyle(option.value);
-                    setSelectedRoomStyleLabel(option.label);
-                    setIsRoomStyleSelected(true);
-                  }}
-                  className="flex w-full justify-center items-center mt-5">
-                  <div className="relative">
-                    <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative cursor-pointer">
-                      <img
-                        src={option.image}
-                        alt="Image"
-                        className="h-24 w-80 object-cover blur-[0.7px]"
-                      />
-                      <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
-                          {option.label}
-                          <span className="text-[#ee7932]">.</span>
+              {isRoomEmpty ? (
+                <div className="flex w-full">
+                  <button
+                    className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl pl-50"
+                    onClick={() => setIsRoomStyleSelected(true)}>
+                    Meubler cette pièce
+                  </button>
+                </div>
+              ) : (
+                styleList.map((option, id) => (
+                  <div
+                    key={id}
+                    onClick={() => {
+                      setSelectedRoomStyle(option.value);
+                      setSelectedRoomStyleLabel(option.label);
+                      setIsRoomStyleSelected(true);
+                    }}
+                    className="flex w-full justify-center items-center mt-5">
+                    <div className="relative">
+                      <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative cursor-pointer">
+                        <img
+                          src={option.image}
+                          alt="Image"
+                          className="h-24 w-80 object-cover blur-[0.7px]"
+                        />
+                        <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                          <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
+                            {option.label}
+                            <span className="text-[#ee7932]">.</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>
