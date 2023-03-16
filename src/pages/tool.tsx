@@ -19,9 +19,12 @@ const Tool = () => {
   );
   const [selectedRoomStyleLabel, setSelectedRoomStyleLabel] = useState('');
   const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
-  const [selectedRoomType, setSelectedRoomType] = useState('');
+  const [selectedRoomType, setSelectedRoomType] = useState(
+    roomTypeList[0].value,
+  );
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     getSubscriptionInfo();
@@ -34,7 +37,7 @@ const Tool = () => {
     else router.push('/login');
   };
 
-  const changeHandler = (event) => {
+  const changeHandler = (event: any) => {
     if (user) {
       const file = event.target.files[0];
       const fileNotNull = file !== undefined;
@@ -68,10 +71,6 @@ const Tool = () => {
   const toggleIsRoomStyleSelected = async () => {
     setSelectedRoomType('');
     setIsRoomStyleSelected(!isRoomStyleSelected);
-  };
-
-  const toggleIsRoomEmpty = async (empty: boolean) => {
-    setIsRoomEmpty(empty);
   };
 
   const handleSubmission = async () => {
@@ -110,7 +109,7 @@ const Tool = () => {
     <>
       <div
         className={`fixed left-0 top-0 z-50 w-full h-full ${
-          !isRoomStyleSelected ? 'hidden' : ''
+          !showPopup ? 'hidden' : ''
         }`}>
         <div className="absolute bg-white top-1/2 left-1/2 -ml-36 -mt-28 p-5 rounded-xl w-72 h-60">
           <div
@@ -118,7 +117,7 @@ const Tool = () => {
               isSubmitted ? 'hidden' : ''
             }`}
             onClick={() => {
-              toggleIsRoomStyleSelected();
+              setShowPopup(false);
             }}>
             <svg
               className="h-8 w-8 hover:text-gray-600"
@@ -145,7 +144,7 @@ const Tool = () => {
                 onClick={() => {
                   redirectToPricing();
                 }}>
-                Abonnez vous.
+                Abonnez-vous
               </div>
             </div>
           ) : isSubmitted ? (
@@ -154,7 +153,7 @@ const Tool = () => {
               <div className="text-center">
                 <span className="text-xl">Génération en cours...</span>
                 <br />
-                Cela peut prendre plus de 1 min.
+                Cela peut prendre jusqu&apos;à 1 min
               </div>
             </div>
           ) : isFileSelected ? (
@@ -182,8 +181,16 @@ const Tool = () => {
             ) : (
               <div className="flex flex-col justify-center items-center w-full h-full">
                 <div className="text-center text-xl">
-                  Voulez-vous utiliser le style{' '}
-                  <span className="font-bold">{selectedRoomStyleLabel}</span>?
+                  Redécorer le/la{' '}
+                  <span className="font-bold">
+                    {
+                      roomTypeList.find(
+                        (type) => type.value === selectedRoomType,
+                      )?.label
+                    }
+                  </span>{' '}
+                  avec le style{' '}
+                  <span className="font-bold">{selectedRoomStyleLabel}</span> ?
                 </div>
                 <div
                   className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
@@ -202,7 +209,7 @@ const Tool = () => {
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
                 onClick={() => {
-                  toggleIsRoomStyleSelected();
+                  setShowPopup(false);
                 }}>
                 OK
               </div>
@@ -212,13 +219,13 @@ const Tool = () => {
         <div
           className="w-full h-full bg-black bg-opacity-40 transition overflow-auto"
           onClick={() => {
-            if (!isSubmitted) toggleIsRoomStyleSelected();
+            if (!isSubmitted) setShowPopup(false);
           }}></div>
       </div>
       <div
         id="selectDiv"
         className={`flex justify-center items-center laptop:mx-auto
-        ${isRoomStyleSelected ? 'blur' : ''}`}>
+        ${showPopup ? 'blur' : ''}`}>
         <div className="flex flex-col flex-grow p-5 pb-10">
           <label className="flex flex-col w-full min-h-[200px] laptop:w-[800px] mb-7 hover:cursor-pointer group bg-white rounded-3xl shadow">
             {isFileSelected ? (
@@ -267,7 +274,7 @@ const Tool = () => {
                   isRoomEmpty ? 'scale-[0.95]' : 'scale-[0.8]'
                 }`}
                 onClick={() => {
-                  toggleIsRoomEmpty(true);
+                  setIsRoomEmpty(true);
                 }}>
                 <div
                   className={`rounded-[25px] overflow-hidden border-4 border-transparent ${
@@ -292,7 +299,7 @@ const Tool = () => {
                   !isRoomEmpty ? 'scale-[0.95]' : 'scale-[0.8]'
                 }`}
                 onClick={() => {
-                  toggleIsRoomEmpty(false);
+                  setIsRoomEmpty(false);
                 }}>
                 <div
                   className={`rounded-[25px] overflow-hidden border-4 border-transparent ${
@@ -314,24 +321,25 @@ const Tool = () => {
               </div>
             </div>
             <div className="text-2xl font-bold mb-4">Type de pièce</div>
-            <div id="select-room" className="flex flex-col mb-4">
-              <div className="grid grid-cols-2 laptop:grid-cols-4">
+            <div id="select-room-type" className="flex flex-col mb-4">
+              <div className="grid grid-cols-2 laptop:grid-cols-3">
                 {roomTypeList.map((option, id) => (
                   <div className="relative" key={id}>
                     <div
-                      className="flex justify-center items-center "
+                      className={`flex justify-center items-center transition hover:scale-100 ${
+                        option.value === selectedRoomType
+                          ? 'scale-[0.95]'
+                          : 'scale-[0.9]'
+                      }`}
                       onClick={() => {
-                        isRoomEmpty
-                          ? (setSelectedRoomType(option.value),
-                            setIsRoomStyleSelected(true))
-                          : setSelectedRoomType(option.value);
+                        setSelectedRoomType(option.value);
                       }}>
                       <div
-                        className={`relative w-32 h-32 bg-[#fefbf2] cursor-pointer
+                        className={`relative w-32 h-32 bg-[#fefbf2] cursor-pointer rounded-[10px] border-4
                         ${
                           option.value === selectedRoomType
-                            ? 'rounded-[10px] border-4 border-[#ee7932]'
-                            : ''
+                            ? 'border-[#ee7932]'
+                            : 'border-transparent'
                         }`}>
                         <div className="p-6">
                           <img src={option.image} alt={option.label} />
@@ -345,42 +353,56 @@ const Tool = () => {
                 ))}
               </div>
             </div>
-          </div>
-          {!isRoomEmpty ? (
-            <div id="styleSelectDiv">
-              <div className="text-2xl font-bold">Style</div>
-              <div className="grid grid-cols-1 laptop:grid-cols-2">
-                {styleList.map((option, id) => (
-                  <div
-                    key={id}
-                    onClick={() => {
-                      setSelectedRoomStyle(option.value);
-                      setSelectedRoomStyleLabel(option.label);
-                      setIsRoomStyleSelected(true);
-                    }}
-                    className="flex w-full justify-center items-center mt-5">
-                    <div className="relative">
-                      <div className="rounded-full overflow-hidden h-24 w-80  flex items-center justify-center bg-gray-300 border-2 border-black relative cursor-pointer">
-                        <img
-                          src={option.image}
-                          alt="Image"
-                          className="h-24 w-80 object-cover blur-[0.7px]"
-                        />
-                        <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                          <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
-                            {option.label}
-                            <span className="text-[#ee7932]">.</span>
+            {!isRoomEmpty ? (
+              <div id="select-style">
+                <div className="text-2xl font-bold">Style</div>
+                <div className="grid grid-cols-1 laptop:grid-cols-2">
+                  {styleList.map((option, id) => (
+                    <div
+                      key={id}
+                      onClick={() => {
+                        setSelectedRoomStyle(option.value);
+                        setSelectedRoomStyleLabel(option.label);
+                        setIsRoomStyleSelected(true);
+                      }}
+                      className="flex w-full justify-center items-center mt-5">
+                      <div className="relative">
+                        <div
+                          className={`rounded-full overflow-hidden h-24 w-80  flex items-center justify-center relative cursor-pointer border-4  transition hover:scale-100 
+                        ${
+                          option.value === selectedRoomStyle
+                            ? ' border-[#ee7932] scale-[0.95]'
+                            : 'border-transparent scale-[0.9]'
+                        }`}>
+                          <img
+                            src={option.image}
+                            alt="Image"
+                            className="h-24 w-80 object-cover blur-[0.7px]"
+                          />
+                          <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <div className="text-4xl font-bold text-[white] drop-shadow-2xl shadow-black">
+                              {option.label}
+                              <span className="text-[#ee7932]">.</span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            ''
-          )}
+            ) : (
+              ''
+            )}
+          </div>
+
+          <div className="mt-10">
+            <button
+              className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl  mx-auto block"
+              onClick={() => setShowPopup(true)}>
+              {isRoomEmpty ? 'Meubler' : 'Redécorer'}
+            </button>
+          </div>
         </div>
       </div>
     </>
