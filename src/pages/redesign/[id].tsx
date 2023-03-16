@@ -60,38 +60,42 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         </div>
         <div className="flex flex-col justify-center items-center mx-auto px-5 py-10">
           <div className="flex flex-col">
-            <div className="flex flex-col laptop:flex-row">
-              <h1 className="text-4xl font-bold mb-5 mr-5 pt-3">
-                Vous avez utilisé le style
-              </h1>
-              <div className="rounded-full overflow-hidden h-16 w-48 flex items-center justify-center bg-gray-300 border-2 border-black relative ">
-                <img
-                  src={
-                    styleList.find((style) => {
-                      return (
-                        style.value.toLowerCase() ===
-                        redesign.style.toLowerCase()
-                      );
-                    })?.image
-                  }
-                  alt="Image"
-                  className="h-16 w-48 object-cover"
-                />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-black">
-                    {
+            {redesign.style ? (
+              <div className="flex flex-col laptop:flex-row">
+                <h1 className="text-4xl font-bold mb-5 mr-5 pt-3">
+                  Vous avez utilisé le style
+                </h1>
+                <div className="rounded-full overflow-hidden h-16 w-48 flex items-center justify-center bg-gray-300 border-2 border-black relative ">
+                  <img
+                    src={
                       styleList.find((style) => {
                         return (
                           style.value.toLowerCase() ===
                           redesign.style.toLowerCase()
                         );
-                      })?.label
+                      })?.image
                     }
-                    <span className="text-[#ee7932]">.</span>
+                    alt="Image"
+                    className="h-16 w-48 object-cover"
+                  />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-black">
+                      {
+                        styleList.find((style) => {
+                          return (
+                            style.value.toLowerCase() ===
+                            redesign.style.toLowerCase()
+                          );
+                        })?.label
+                      }
+                      <span className="text-[#ee7932]">.</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              ''
+            )}
             <h1 className="text-xl font-medium mb-5 mr-5 pt-5">
               Essayez d&apos;autres styles et d&apos;autres pièces avec
               l&apos;outil de Decoloco !

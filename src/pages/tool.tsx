@@ -19,9 +19,7 @@ const Tool = () => {
   );
   const [selectedRoomStyleLabel, setSelectedRoomStyleLabel] = useState('');
   const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
-  const [selectedRoomType, setSelectedRoomType] = useState(
-    roomTypeList[0].value,
-  );
+  const [selectedRoomType, setSelectedRoomType] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
 
