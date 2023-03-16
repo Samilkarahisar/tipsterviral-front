@@ -236,7 +236,9 @@ const Tool = () => {
             />
           </label>
           <div id="options">
-            <div className="text-2xl font-bold mb-4">Vide ou meublée</div>
+            <div className="text-2xl font-bold mb-4">
+              La pièce sur la photo est
+            </div>
             <div className="flex flex-row justify-center items-center mb-10">
               <div
                 className={`relative cursor-pointer transition hover:scale-100 ${
@@ -260,7 +262,7 @@ const Tool = () => {
                   className={`absolute flex w-full h-full -bottom-8 items-end justify-center text-2xl ${
                     isRoomEmpty ? 'font-bold' : ''
                   }`}>
-                  Pièce vide
+                  Vide
                 </div>
               </div>
               <div
@@ -285,7 +287,7 @@ const Tool = () => {
                   className={`absolute flex w-full h-full -bottom-8 items-end justify-center text-2xl ${
                     !isRoomEmpty ? 'font-bold' : ''
                   }`}>
-                  Pièce meublée
+                  Meublée
                 </div>
               </div>
             </div>

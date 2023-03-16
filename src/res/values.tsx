@@ -1,12 +1,4 @@
-import {
-  IconBathroom,
-  IconBedroom,
-  IconCloset,
-  IconGarage,
-  IconKitchen,
-  IconLivingRoom,
-  IconToilet,
-} from '@/res/icons';
+import { IconBedroom, IconKitchen, IconLivingRoom } from '@/res/icons';
 
 export const DISCORD_LINK = '';
 export const TWITTER_LINK = 'https://twitter.com/Decolococo';
@@ -92,25 +84,5 @@ export const roomTypeList = [
     image: IconKitchen.src,
     label: 'Cuisine',
     value: 'kitchen',
-  },
-  {
-    image: IconBathroom.src,
-    label: 'Salle de bain',
-    value: 'bathroom',
-  },
-  {
-    image: IconToilet.src,
-    label: 'Toilettes',
-    value: 'toilet',
-  },
-  {
-    image: IconGarage.src,
-    label: 'Garage',
-    value: 'garage',
-  },
-  {
-    image: IconCloset.src,
-    label: 'Dressing',
-    value: 'closet',
   },
 ];
