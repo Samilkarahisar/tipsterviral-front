@@ -66,6 +66,7 @@ const Tool = () => {
   };
 
   const toggleIsRoomStyleSelected = async () => {
+    setSelectedRoomType('');
     setIsRoomStyleSelected(!isRoomStyleSelected);
   };
 
