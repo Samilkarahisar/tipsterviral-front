@@ -3,6 +3,7 @@ import { Col, Row } from 'antd';
 import { NextSeo } from 'next-seo';
 import router from 'next/router';
 import React from 'react';
+
 const HomePage = () => {
   return (
     <>
@@ -31,13 +32,14 @@ const HomePage = () => {
         </Col>
       </Row>
       <div className="flex flex-col laptop:flex-row laptop:items-stretch laptop:justify-center p-10 ">
-        <img
-          src={
-            'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/c89d68bb-3064-498f-af66-4cc5bba16b41-init.png/public'
-          }
-          className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[320px] laptop:h-[320px]"
-        />
-
+        <div className="rounded-3xl h-auto w-auto laptop:w-[350px] laptop:h-[350px] overflow-hidden">
+          <img
+            src={
+              'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/6c41685e-e162-40e3-8db1-30fcf4fafb00/public'
+            }
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
         <div className="flex flex-col items-center">
           <FieldTimeOutlined className="!text-[#ef8b34] text-4xl pt-10 laptop:mt-16" />
           <div className="flex items-center text-l text-bold text-[#ef8b34] ">
@@ -58,13 +60,15 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <img
-          src={
-            'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/c89d68bb-3064-498f-af66-4cc5bba16b41-result.png/public'
-          }
-          alt="alt-text"
-          className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px] laptop:w-[320px] laptop:h-[320px]"
-        />
+        <div className="rounded-3xl h-auto w-auto laptop:w-[350px] laptop:h-[350px] overflow-hidden">
+          <img
+            src={
+              'https://imagedelivery.net/UabTOQ3wdufnHp8GajOkxg/291b8240-de21-4e6f-0fa9-7da34fd5d000/public'
+            }
+            alt="alt-text"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
       </div>
 
       <div
