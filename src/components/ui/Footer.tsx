@@ -22,7 +22,7 @@ const Footer = () => {
           </ul>
           <div className="flex space-x-3 flex-wrap">
             <div className="p-[10px] bg-secondary flex dark:bg-dark-secondary rounded-xl">
-              <Link href="mailto:no-reply@example.com">
+              <Link href="mailto:contact@decoloco.co">
                 <a target="_blank" className="flex">
                   <IconEmail alt="email" />
                 </a>

@@ -151,9 +151,7 @@ class TermsConditions extends Component {
           <strong>
             Each package gives a determined amount of credits. Everytime you
             click on a button containing the word Generate, your account
-            consumes 1 credit. The usage of our magic API endpoints (see:
-            https://decoloco.co/documentation) also consume 1 credit every
-            usage.
+            consumes 1 credit.
           </strong>
           <strong>
             The remaining credits your account has is visible on the
