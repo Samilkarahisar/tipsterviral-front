@@ -159,19 +159,42 @@ const Tool = () => {
               </div>
             </div>
           ) : isFileSelected ? (
-            <div className="flex flex-col justify-center items-center w-full h-full">
-              <div className="text-center text-xl">
-                Voulez-vous utiliser le style{' '}
-                <span className="font-bold">{selectedRoomStyleLabel}</span>?
+            isRoomEmpty ? (
+              <div className="flex flex-col justify-center items-center w-full h-full">
+                <div className="text-center text-xl">
+                  Meubler cette pièce en{' '}
+                  <span className="font-bold">
+                    {
+                      roomTypeList.find(
+                        (type) => type.value === selectedRoomType,
+                      )?.label
+                    }
+                  </span>{' '}
+                  ?
+                </div>
+                <div
+                  className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                  onClick={() => {
+                    handleSubmission();
+                  }}>
+                  Confirmer
+                </div>
               </div>
-              <div
-                className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
-                onClick={() => {
-                  handleSubmission();
-                }}>
-                Confirm
+            ) : (
+              <div className="flex flex-col justify-center items-center w-full h-full">
+                <div className="text-center text-xl">
+                  Voulez-vous utiliser le style{' '}
+                  <span className="font-bold">{selectedRoomStyleLabel}</span>?
+                </div>
+                <div
+                  className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
+                  onClick={() => {
+                    handleSubmission();
+                  }}>
+                  Confirmer
+                </div>
               </div>
-            </div>
+            )
           ) : (
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
@@ -299,7 +322,10 @@ const Tool = () => {
                     <div
                       className="flex justify-center items-center "
                       onClick={() => {
-                        setSelectedRoomType(option.value);
+                        isRoomEmpty
+                          ? (setSelectedRoomType(option.value),
+                            setIsRoomStyleSelected(true))
+                          : setSelectedRoomType(option.value);
                       }}>
                       <div
                         className={`relative w-32 h-32 bg-[#fefbf2] cursor-pointer
@@ -321,21 +347,11 @@ const Tool = () => {
               </div>
             </div>
           </div>
-          <div id="styleSelectDiv">
-            <div className="text-2xl font-bold">
-              {!isRoomEmpty ? 'Style' : ''}
-            </div>
-            <div className="grid grid-cols-1 laptop:grid-cols-2">
-              {isRoomEmpty ? (
-                <div className="flex w-full">
-                  <button
-                    className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl pl-50"
-                    onClick={() => setIsRoomStyleSelected(true)}>
-                    Meubler cette pièce
-                  </button>
-                </div>
-              ) : (
-                styleList.map((option, id) => (
+          {!isRoomEmpty ? (
+            <div id="styleSelectDiv">
+              <div className="text-2xl font-bold">Style</div>
+              <div className="grid grid-cols-1 laptop:grid-cols-2">
+                {styleList.map((option, id) => (
                   <div
                     key={id}
                     onClick={() => {
@@ -360,10 +376,12 @@ const Tool = () => {
                       </div>
                     </div>
                   </div>
-                ))
-              )}
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </>
