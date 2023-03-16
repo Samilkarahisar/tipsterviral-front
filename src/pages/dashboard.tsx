@@ -2,7 +2,6 @@ import { getAllRedesignsByUserId } from '@/api/redesign';
 import { getUser } from '@/api/user';
 import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
-import { styleList } from '@/res/values';
 import {
   DollarCircleFilled,
   PictureFilled,
@@ -89,19 +88,6 @@ const Dashboard = () => {
                     alt={redesign.style}
                     className="h-full w-full object-cover object-center"
                   />
-                  <div className="absolute text-5xl text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="text-4xl font-bold pt-2 text-[white] drop-shadow-2xl shadow-black">
-                      {
-                        styleList.find((style) => {
-                          return (
-                            style.value.toLowerCase() ===
-                            redesign.style.toLowerCase()
-                          );
-                        })?.label
-                      }
-                      <span className="text-[#ee7932]">.</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             ))}
