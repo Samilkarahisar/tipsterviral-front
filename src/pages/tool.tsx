@@ -17,7 +17,9 @@ const Tool = () => {
   const [selectedRoomStyle, setSelectedRoomStyle] = useState(
     styleList[0].value,
   );
-  const [selectedRoomStyleLabel, setSelectedRoomStyleLabel] = useState('');
+  const [selectedRoomStyleLabel, setSelectedRoomStyleLabel] = useState(
+    styleList[0].label,
+  );
   const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
   const [selectedRoomType, setSelectedRoomType] = useState(
     roomTypeList[0].value,
@@ -25,6 +27,7 @@ const Tool = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [freeToken, setFreeToken] = useState<string>('');
 
   useEffect(() => {
     getSubscriptionInfo();
@@ -34,11 +37,13 @@ const Tool = () => {
   const getSubscriptionInfo = async () => {
     const data = await getUser();
     if (data) setAccount(data);
-    else router.push('/login');
+    else if (router.query.freeToken) {
+      setFreeToken(router.query.freeToken.toString());
+    } //else router.push('/login');
   };
 
   const changeHandler = (event: any) => {
-    if (user) {
+    if (user || freeToken) {
       const file = event.target.files[0];
       const fileNotNull = file !== undefined;
       if (fileNotNull && file.type.toLowerCase().indexOf('image/') < 0) {
@@ -68,11 +73,6 @@ const Tool = () => {
     );
   };
 
-  const toggleIsRoomStyleSelected = async () => {
-    setSelectedRoomType('');
-    setIsRoomStyleSelected(!isRoomStyleSelected);
-  };
-
   const handleSubmission = async () => {
     if (!selectedFile) {
       console.log('Vous devez choisir une image');
@@ -85,6 +85,7 @@ const Tool = () => {
           selectedRoomStyle,
           selectedRoomType,
           isRoomEmpty,
+          freeToken,
         );
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
@@ -222,11 +223,19 @@ const Tool = () => {
             if (!isSubmitted) setShowPopup(false);
           }}></div>
       </div>
+
       <div
         id="selectDiv"
         className={`flex justify-center items-center laptop:mx-auto
         ${showPopup ? 'blur' : ''}`}>
         <div className="flex flex-col flex-grow p-5 pb-10">
+          {freeToken ? (
+            <div className="text-3xl text-[#ee7932] font-bold mb-4">
+              Essai gratuit
+            </div>
+          ) : (
+            ''
+          )}
           <label className="flex flex-col w-full min-h-[200px] laptop:w-[800px] mb-7 hover:cursor-pointer group bg-white rounded-3xl shadow">
             {isFileSelected ? (
               <div className="flex flex-col w-full h-full">
