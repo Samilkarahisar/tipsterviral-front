@@ -1,22 +1,48 @@
 import { getRedesignById } from '@/api/redesign';
 import Container from '@/components/ui/Container';
-import { styleList } from '@/res/values';
 import { RedesignDto } from '@/types/dto/RedesignDto';
+import { DownloadOutlined, ZoomInOutlined } from '@ant-design/icons';
+import { saveAs } from 'file-saver';
 import { NextPageContext } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import ImageViewer from 'react-simple-image-viewer';
 
 interface Props {
   redesign: RedesignDto;
 }
 
 const RedesignPage: React.FC<Props> = ({ redesign }) => {
+  const [images, setImages] = useState<any>([]);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  useEffect(() => {
+    setImages(redesign.result_url.split(';'));
+  }, []);
+  const openImageViewer = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
+
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
+
   const router = useRouter();
   const redirectToTool = async () => {
     router.push('/tool');
   };
+
+  function downloadImage(url: any, id: any) {
+    console.log(url);
+    saveAs(
+      url,
+      'Decoloco_' + redesign.id.split('-').pop() + '_image_' + id + '.jpg',
+    );
+  }
 
   return (
     <>
@@ -33,6 +59,18 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         }}
       />
       <Container>
+        <div className="z-12">
+          {isViewerOpen && (
+            <ImageViewer
+              src={images}
+              currentIndex={currentImage}
+              disableScroll={true}
+              closeOnClickOutside={true}
+              backgroundStyle={{ background: 'transparent' }}
+              onClose={closeImageViewer}
+            />
+          )}
+        </div>
         <div className="flex flex-col laptop:flex-row laptop:items-center laptop:justify-center laptop:max-w-[1000px] mx-auto px-5 pt-10">
           <img
             src={redesign.init_url}
@@ -52,53 +90,48 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
               </div>
             </div>
           </div>
-          <img
-            src={redesign.result_url}
-            alt="alt-text"
-            className="object-contain rounded-[25px] small:h-auto small:w-auto min-h-[200px] min-w-[200px]"
-          />
-        </div>
-        <div className="flex flex-col justify-center items-center mx-auto px-5 py-10">
-          <div className="flex flex-col">
-            {redesign.style ? (
-              <div className="flex flex-col laptop:flex-row">
-                <h1 className="text-4xl font-bold mb-5 mr-5 pt-3">
-                  Vous avez utilisé le style
-                </h1>
-                <div className="rounded-full overflow-hidden h-16 w-48 flex items-center justify-center bg-gray-300 border-2 border-black relative ">
-                  <img
-                    src={
-                      styleList.find((style) => {
-                        return (
-                          style.value.toLowerCase() ===
-                          redesign.style.toLowerCase()
-                        );
-                      })?.image
-                    }
-                    alt="Image"
-                    className="h-16 w-48 object-cover"
-                  />
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="text-3xl font-bold text-white drop-shadow-2xl shadow-black">
-                      {
-                        styleList.find((style) => {
-                          return (
-                            style.value.toLowerCase() ===
-                            redesign.style.toLowerCase()
-                          );
-                        })?.label
-                      }
-                      <span className="text-[#ee7932]">.</span>
-                    </div>
+
+          <div className="grid grid-cols-1 laptop:grid-cols-2 gap-4">
+            {images.map((redesign: any, id: number) => (
+              <div key={id} className="relative">
+                <img
+                  src={redesign}
+                  className="h-full w-full object-cover object-center"
+                />
+                <div
+                  className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100"
+                  style={{ pointerEvents: isViewerOpen ? 'none' : 'auto' }}>
+                  <div className="flex flex-col items-center justify-center z-10">
+                    <button
+                      onClick={() => downloadImage(redesign, id)}
+                      className="w-[50px] h-[50px] border-2 border-white rounded-full">
+                      <DownloadOutlined className="text-xl !text-white" />
+                    </button>
+                    <span className="text-xs text-white mt-1">Télécharger</span>
                   </div>
+                  <div className="flex flex-col items-center justify-center ml-2 z-10">
+                    <button
+                      onClick={() => openImageViewer(id)}
+                      className="w-[50px] h-[50px] border-2 border-white rounded-full">
+                      <ZoomInOutlined className="text-xl !text-white" />
+                    </button>
+                    <span className="text-xs text-white mt-1">Voir</span>
+                  </div>
+
+                  <div className="absolute inset-0 bg-black opacity-50"></div>
                 </div>
               </div>
-            ) : (
-              ''
-            )}
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-center items-center mx-auto px-5 py-10">
+          <div className="flex flex-col">
+            <h1 className="text-4xl font-bold mb-5 mr-5 pt-3">
+              Pour télécharger une image, cliquez dessus.
+            </h1>
             <h1 className="text-xl font-medium mb-5 mr-5 pt-5">
-              Essayez d&apos;autres styles et d&apos;autres pièces avec
-              l&apos;outil de Decoloco !
+              Meublez d&apos;autres pièces avec l&apos;outil de Decoloco !
             </h1>
             <button
               className="bg-[#ee7932] hover:bg-[#d46c2c] cursor-pointer h-[50px] w-[150px] rounded-lg text-white text-lg font-bold  block"

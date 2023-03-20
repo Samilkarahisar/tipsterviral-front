@@ -84,7 +84,7 @@ const Dashboard = () => {
                     redirectToRedesign(redesign.id);
                   }}>
                   <img
-                    src={redesign.result_url}
+                    src={redesign.init_url}
                     alt={redesign.style}
                     className="h-full w-full object-cover object-center"
                   />
