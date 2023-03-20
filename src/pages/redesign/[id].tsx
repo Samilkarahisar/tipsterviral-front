@@ -59,16 +59,18 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         }}
       />
       <Container>
-        {isViewerOpen && (
-          <ImageViewer
-            src={images}
-            currentIndex={currentImage}
-            disableScroll={true}
-            closeOnClickOutside={true}
-            backgroundStyle={{ background: 'transparent' }}
-            onClose={closeImageViewer}
-          />
-        )}
+        <div className="z-12">
+          {isViewerOpen && (
+            <ImageViewer
+              src={images}
+              currentIndex={currentImage}
+              disableScroll={true}
+              closeOnClickOutside={true}
+              backgroundStyle={{ background: 'transparent' }}
+              onClose={closeImageViewer}
+            />
+          )}
+        </div>
         <div className="flex flex-col laptop:flex-row laptop:items-center laptop:justify-center laptop:max-w-[1000px] mx-auto px-5 pt-10">
           <img
             src={redesign.init_url}
@@ -91,40 +93,32 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
 
           <div className="grid grid-cols-1 laptop:grid-cols-2 gap-4">
             {images.map((redesign: any, id: number) => (
-              <div
-                key={id}
-                className="relative"
-                style={{
-                  filter: 'brightness(1)',
-                  transition: 'filter 0.2s ease-in-out',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.filter = 'brightness(0.7)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.filter = 'brightness(1)';
-                }}>
+              <div key={id} className="relative">
                 <img
                   src={redesign}
                   className="h-full w-full object-cover object-center"
                 />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100">
-                  <div className="flex flex-col items-center justify-center">
+                <div
+                  className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100"
+                  style={{ pointerEvents: isViewerOpen ? 'none' : 'auto' }}>
+                  <div className="flex flex-col items-center justify-center z-10">
                     <button
                       onClick={() => downloadImage(redesign, id)}
-                      className="w-[32px] h-[32px] border border-white rounded-full">
-                      <DownloadOutlined className="!text-white" />
+                      className="w-[50px] h-[50px] border-2 border-white rounded-full">
+                      <DownloadOutlined className="text-xl !text-white" />
                     </button>
                     <span className="text-xs text-white mt-1">Télécharger</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center ml-2">
+                  <div className="flex flex-col items-center justify-center ml-2 z-10">
                     <button
                       onClick={() => openImageViewer(id)}
-                      className="w-[32px] h-[32px] border border-white rounded-full">
-                      <ZoomInOutlined className="!text-white" />
+                      className="w-[50px] h-[50px] border-2 border-white rounded-full">
+                      <ZoomInOutlined className="text-xl !text-white" />
                     </button>
                     <span className="text-xs text-white mt-1">Voir</span>
                   </div>
+
+                  <div className="absolute inset-0 bg-black opacity-50"></div>
                 </div>
               </div>
             ))}
