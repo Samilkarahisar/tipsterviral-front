@@ -1,18 +1,22 @@
 import api from '@/lib/axios';
 import { auth } from '@/lib/firebase';
-import { API_PATH_POST_DESIGN_TOOL } from '@/res/values';
+import {
+  API_PATH_POST_DESIGN_TOOL,
+  API_PATH_POST_FREE_DESIGN_TOOL,
+} from '@/res/values';
 
 export const createDesignFromTool = async (
   file: any,
   style: string,
   type: string,
   empty: any,
+  freeToken: string,
 ) => {
   try {
     const token = await auth.currentUser?.getIdToken();
     const ownerId = auth.currentUser?.uid;
 
-    if (token && ownerId) {
+    if ((token && ownerId) || freeToken) {
       const resizedFile = await resizeImage(file, 800, 800);
       const fileToUpload = new File([resizedFile], 'resizedFile');
       const formData = new FormData();
@@ -21,12 +25,20 @@ export const createDesignFromTool = async (
       formData.append('roomType', type);
       formData.append('isRoomEmpty', empty);
 
-      const { data } = await api.post(API_PATH_POST_DESIGN_TOOL, formData, {
-        params: {
-          token,
-        },
-      });
-      return data;
+      if (freeToken) {
+        const { data } = await api.post(
+          API_PATH_POST_FREE_DESIGN_TOOL + freeToken,
+          formData,
+        );
+        return data;
+      } else {
+        const { data } = await api.post(API_PATH_POST_DESIGN_TOOL, formData, {
+          params: {
+            token,
+          },
+        });
+        return data;
+      }
     }
   } catch (e) {
     console.log(e);

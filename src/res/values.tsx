@@ -6,6 +6,7 @@ export const TWITTER_LINK = 'https://twitter.com/Decolococo';
 export const API_PATH_GET_DESIGN = '/public/getDesignBySlug';
 
 export const API_PATH_POST_DESIGN_TOOL = '/restricted/redesign';
+export const API_PATH_POST_FREE_DESIGN_TOOL = '/public/freeRedesign/';
 
 export const API_PATH_GET_REDESIGN = '/public/getRedesignById';
 export const API_PATH_GET_REDESIGNS_BY_USER = '/public/getAllRedesignsByUserId';

@@ -9,36 +9,39 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Tool = () => {
   const router = useRouter();
-  const [user] = useAuthState(auth);
-  const [account, setAccount] = useState<any>({});
+  const [user, loading] = useAuthState(auth);
   const [selectedFile, setSelectedFile] = useState(undefined);
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [isRoomEmpty, setIsRoomEmpty] = useState(true);
   const [selectedRoomStyle, setSelectedRoomStyle] = useState(
     styleList[0].value,
   );
-  const [selectedRoomStyleLabel, setSelectedRoomStyleLabel] = useState('');
-  const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
+  const [selectedRoomStyleLabel, setSelectedRoomStyleLabel] = useState(
+    styleList[0].label,
+  );
   const [selectedRoomType, setSelectedRoomType] = useState(
     roomTypeList[0].value,
   );
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const freeToken = router.query.freeToken;
 
   useEffect(() => {
-    getSubscriptionInfo();
-    setIsNoCreditsLeft(account.credits_amount <= 0);
-  }, [user]);
+    const getSubscriptionInfo = async () => {
+      const data = await getUser();
+      if (data) {
+        setIsNoCreditsLeft(data.credits_amount <= 0);
+      } else if (!freeToken) {
+        router.push('/login');
+      }
+    };
 
-  const getSubscriptionInfo = async () => {
-    const data = await getUser();
-    if (data) setAccount(data);
-    else router.push('/login');
-  };
+    if (!loading) getSubscriptionInfo();
+  }, [loading, freeToken, router]);
 
   const changeHandler = (event: any) => {
-    if (user) {
+    if (user || freeToken) {
       const file = event.target.files[0];
       const fileNotNull = file !== undefined;
       if (fileNotNull && file.type.toLowerCase().indexOf('image/') < 0) {
@@ -68,11 +71,6 @@ const Tool = () => {
     );
   };
 
-  const toggleIsRoomStyleSelected = async () => {
-    setSelectedRoomType('');
-    setIsRoomStyleSelected(!isRoomStyleSelected);
-  };
-
   const handleSubmission = async () => {
     if (!selectedFile) {
       console.log('Vous devez choisir une image');
@@ -85,6 +83,7 @@ const Tool = () => {
           selectedRoomStyle,
           selectedRoomType,
           isRoomEmpty,
+          freeToken,
         );
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
@@ -127,7 +126,7 @@ const Tool = () => {
               stroke="currentColor"
               aria-hidden="true">
               <path
-                strokeLinecap-="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M6 18L18 6M6 6l12 12"
@@ -222,11 +221,19 @@ const Tool = () => {
             if (!isSubmitted) setShowPopup(false);
           }}></div>
       </div>
+
       <div
         id="selectDiv"
         className={`flex justify-center items-center laptop:mx-auto
         ${showPopup ? 'blur' : ''}`}>
         <div className="flex flex-col flex-grow p-5 pb-10">
+          {freeToken ? (
+            <div className="text-3xl text-[#ee7932] font-bold mb-4">
+              Essai gratuit
+            </div>
+          ) : (
+            ''
+          )}
           <label className="flex flex-col w-full min-h-[200px] laptop:w-[800px] mb-7 hover:cursor-pointer group bg-white rounded-3xl shadow">
             {isFileSelected ? (
               <div className="flex flex-col w-full h-full">
@@ -363,7 +370,6 @@ const Tool = () => {
                       onClick={() => {
                         setSelectedRoomStyle(option.value);
                         setSelectedRoomStyleLabel(option.label);
-                        setIsRoomStyleSelected(true);
                       }}
                       className="flex w-full justify-center items-center mt-5">
                       <div className="relative">
