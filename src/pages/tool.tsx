@@ -9,8 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Tool = () => {
   const router = useRouter();
-  const [user] = useAuthState(auth);
-  const [account, setAccount] = useState<any>({});
+  const [user, loading] = useAuthState(auth);
   const [selectedFile, setSelectedFile] = useState(undefined);
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [isRoomEmpty, setIsRoomEmpty] = useState(true);
@@ -20,27 +19,26 @@ const Tool = () => {
   const [selectedRoomStyleLabel, setSelectedRoomStyleLabel] = useState(
     styleList[0].label,
   );
-  const [isRoomStyleSelected, setIsRoomStyleSelected] = useState(false);
   const [selectedRoomType, setSelectedRoomType] = useState(
     roomTypeList[0].value,
   );
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isNoCreditsLeft, setIsNoCreditsLeft] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [freeToken, setFreeToken] = useState<string>('');
+  const freeToken = router.query.freeToken;
 
   useEffect(() => {
-    getSubscriptionInfo();
-    setIsNoCreditsLeft(account.credits_amount <= 0);
-  }, [user]);
+    const getSubscriptionInfo = async () => {
+      const data = await getUser();
+      if (data) {
+        setIsNoCreditsLeft(data.credits_amount <= 0);
+      } else if (!freeToken) {
+        router.push('/login');
+      }
+    };
 
-  const getSubscriptionInfo = async () => {
-    const data = await getUser();
-    if (data) setAccount(data);
-    else if (router.query.freeToken) {
-      setFreeToken(router.query.freeToken.toString());
-    } //else router.push('/login');
-  };
+    if (!loading) getSubscriptionInfo();
+  }, [loading, freeToken, router]);
 
   const changeHandler = (event: any) => {
     if (user || freeToken) {
@@ -128,7 +126,7 @@ const Tool = () => {
               stroke="currentColor"
               aria-hidden="true">
               <path
-                strokeLinecap-="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M6 18L18 6M6 6l12 12"
@@ -372,7 +370,6 @@ const Tool = () => {
                       onClick={() => {
                         setSelectedRoomStyle(option.value);
                         setSelectedRoomStyleLabel(option.label);
-                        setIsRoomStyleSelected(true);
                       }}
                       className="flex w-full justify-center items-center mt-5">
                       <div className="relative">
