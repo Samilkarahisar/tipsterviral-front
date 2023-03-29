@@ -3,6 +3,7 @@ import Container from '@/components/ui/Container';
 import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
 import { getStripe } from 'get-stripe';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -111,6 +112,7 @@ const Pricing = () => {
     }
   };
 
+  const { t } = useTranslation('home');
   return priceIdLoading ? (
     <div>
       <Spinner />
@@ -122,10 +124,10 @@ const Pricing = () => {
           <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8 ">
             <div className="sm:flex sm:flex-col sm:align-center">
               <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
-                Prêt à commencer ?
+                {t('pricing.ready')}
               </h1>
               <p className="text-xl sm:text-center sm:text-2xl max-w-2xl m-auto">
-                Choisissez le plan qui vous correspond
+                {t('pricing.chooseYourPlan')}
               </p>
               <div className="bg-gray-200 relative self-center mt-6 rounded-lg p-0.5 flex sm:mt-8 border border-zinc-800">
                 <button
@@ -136,7 +138,7 @@ const Pricing = () => {
                       ? 'bg-[#ee7932] hover:bg-[#d46c2c] relative w-1/2 border-zinc-800 shadow-sm text-white'
                       : 'text-black ml-0.5 relative w-1/2 border border-transparent hover:bg-gray-300'
                   } rounded-md m-1 py-2 text-sm font-medium blackspace-nowrap sm:w-auto sm:px-8`}>
-                  Mensuel
+                  {t('pricing.monthly')}
                 </button>
                 <button
                   onClick={() => setBillingInterval('year')}
@@ -146,7 +148,7 @@ const Pricing = () => {
                       ? 'bg-[#ee7932] hover:bg-[#d46c2c] relative w-1/2 border-zinc-800 shadow-sm text-white'
                       : 'text-black ml-0.5 relative w-1/2 border border-transparent hover:bg-gray-300'
                   } rounded-md m-1 py-2 text-sm font-medium blackspace-nowrap sm:w-auto sm:px-8`}>
-                  Annuel
+                  {t('pricing.yearly')}
                 </button>
               </div>
             </div>
@@ -196,7 +198,7 @@ const Pricing = () => {
                             {priceString}
                           </span>
                           <span className="text-base font-medium">
-                            /par mois
+                            {t('pricing.perMonth')}
                           </span>
                         </div>
                         <div className="text-center p-4">
@@ -225,9 +227,9 @@ const Pricing = () => {
                           <div className="font-bold text-lg">
                             {subscription != undefined
                               ? subscription.credits_amount > 3
-                                ? 'Gérer mon abonnement'
-                                : 'Commencer'
-                              : 'Essai gratuit'}
+                                ? t('pricing.manageMySubscription')
+                                : t('pricing.begin')
+                              : t('pricing.freeTrial')}
                           </div>
                         </div>
                       </div>

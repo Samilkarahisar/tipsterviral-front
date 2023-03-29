@@ -1,0 +1,65 @@
+{
+    "common": {
+          "tryFree": "Kostenlos testen"
+    },
+    "navbar": {
+      "price": "Preis",
+      "dashboard": "Dashboard",
+      "tool": "Werkzeug",
+      "logout": "Abmelden",
+      "login": "Anmelden"
+    },
+    "landing": {
+          "seconds": "sekunden",
+          "bigTitle1": "Projizieren Sie Ihre Käufer",
+          "bigTitle2": "in ihre zukünftige Immobilie",
+          "firstStep": "Importieren Sie ein Foto eines Zimmers in einer Wohnung/einem Haus",
+          "secondStep": "Wählen Sie einen Stil aus, den Sie anwenden möchten",
+          "thirdStep": "Erhalten Sie eine neue Vorschau Ihres Raumes",
+          "transformText": "Verwandeln Sie Ihre Immobilie mit einem Klick in einen neuen Raum",
+          "transformIA": "Künstliche Intelligenz"
+    },
+    "redesign":{
+        "download": "Herunterladen",
+        "see": "Ansehen",
+        "downloadDescription": "Um ein Bild herunterzuladen, klicken Sie darauf",
+        "finalProposal": "Möblieren Sie andere Räume mit dem Tool von Decoloco!",
+        "returnMessage": "Zum Tool gehen"
+    },
+    "tool":{
+        "noCreditLeft": "Sie haben keinen Kredit mehr",
+        "designing": "Aktuelle Generation...",
+        "timeWarning": "Das kann bis zu 1 Minute dauern",
+        "furnishInto": "Diesen Raum möblieren in",
+        "confirm": "Bestätigen",
+        "redecorate": "Den/die Raum/e neu dekorieren",
+        "withStyle": "mit dem Stil",
+        "choosePicture": "Bitte wählen Sie ein Foto aus",
+        "freeTrial": "Kostenlose Probefahrt",
+        "uploadPicture": "Ein Foto von einer Wohnung hochladen",
+        "pictureIs": "Der Raum auf dem Foto ist",
+        "empty": "Leer",
+        "furnished": "Möbliert",
+        "roomType": "Art des Zimmers",
+        "alertCredit": "Sie haben kein Guthaben mehr, bitte schauen Sie sich die Decoloco-Angebote an",
+        "error": "Es ist ein Fehler aufgetreten...",
+        "errorNoPicture": "Sie müssen ein Bild auswählen",
+        "furnish":"Möblierung",
+        "restyle":"Umdekorieren"
+    },
+    "dashboard":{
+        "credits": "Credits",
+        "designs": "Designs"
+    },
+    "Preisgestaltung":{
+        "chooseYourPlan": "Wählen Sie den Plan, der zu Ihnen passt",
+        "ready": "Bereit zu beginnen?",
+        "monthly": "Monatlich",
+        "yearly": "Jährlich",
+        "perMonth": "/pro Monat",
+        "manageMySubscription": "'Mein Abonnement verwalten'",
+        "begin": "Beginnen",
+        "freeTrial": "Kostenlose Probefahrt"
+    
+    }
+}

@@ -3,6 +3,7 @@ import { getUser } from '@/api/user';
 import Spinner from '@/components/ui/Spinner';
 import { auth } from '@/lib/firebase';
 import { roomTypeList, styleList } from '@/res/values';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -47,7 +48,7 @@ const Tool = () => {
       if (fileNotNull && file.type.toLowerCase().indexOf('image/') < 0) {
         setSelectedFile(undefined);
         setIsFileSelected(false);
-        alert('Please select an image file');
+        alert(t('tool.errorNoPicture'));
       } else {
         setSelectedFile(file);
         setIsFileSelected(fileNotNull);
@@ -73,7 +74,7 @@ const Tool = () => {
 
   const handleSubmission = async () => {
     if (!selectedFile) {
-      console.log('Vous devez choisir une image');
+      console.log(t('tool.errorNoPicture'));
       return;
     } else {
       try {
@@ -88,13 +89,11 @@ const Tool = () => {
         if (result?.code == 200) {
           router.push('/redesign/' + result.id);
         } else if (result?.code == 666) {
-          alert(
-            "Vous n'avez plus de crédits, veuillez consulter les offres Decoloco",
-          );
+          alert(t('tool.alertCredit'));
           router.push('/pricing');
         } else {
           console.log(result?.code + ': ' + result?.status);
-          alert('Une erreur est survenue...');
+          alert(t('tool.error'));
           router.push('/');
         }
       } catch (err) {
@@ -103,6 +102,8 @@ const Tool = () => {
       }
     }
   };
+
+  const { t } = useTranslation('home');
 
   return (
     <>
@@ -136,7 +137,7 @@ const Tool = () => {
           {isNoCreditsLeft ? (
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
-                Vous n&apos;avez plus de crédit.
+                {t('tool.noCreditLeft')}
               </div>
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
@@ -150,16 +151,16 @@ const Tool = () => {
             <div className="flex flex-col justify-center items-center h-full w-full">
               <Spinner />
               <div className="text-center">
-                <span className="text-xl">Génération en cours...</span>
+                <span className="text-xl">{t('tool.designing')}</span>
                 <br />
-                Cela peut prendre jusqu&apos;à 1 min
+                {t('tool.timeWarning')}
               </div>
             </div>
           ) : isFileSelected ? (
             isRoomEmpty ? (
               <div className="flex flex-col justify-center items-center w-full h-full">
                 <div className="text-center text-xl">
-                  Meubler cette pièce en{' '}
+                  {t('tool.furnishInto')}{' '}
                   <span className="font-bold">
                     {
                       roomTypeList.find(
@@ -174,13 +175,13 @@ const Tool = () => {
                   onClick={() => {
                     handleSubmission();
                   }}>
-                  Confirmer
+                  {t('tool.confirm')}
                 </div>
               </div>
             ) : (
               <div className="flex flex-col justify-center items-center w-full h-full">
                 <div className="text-center text-xl">
-                  Redécorer le/la{' '}
+                  {t('tool.redecorate')}{' '}
                   <span className="font-bold">
                     {
                       roomTypeList.find(
@@ -188,7 +189,7 @@ const Tool = () => {
                       )?.label
                     }
                   </span>{' '}
-                  avec le style{' '}
+                  {t('tool.withStyle')}{' '}
                   <span className="font-bold">{selectedRoomStyleLabel}</span> ?
                 </div>
                 <div
@@ -196,14 +197,14 @@ const Tool = () => {
                   onClick={() => {
                     handleSubmission();
                   }}>
-                  Confirmer
+                  {t('tool.confirm')}
                 </div>
               </div>
             )
           ) : (
             <div className="flex flex-col justify-center items-center w-full h-full">
               <div className="text-center text-xl">
-                Veuillez choisir une photo
+                {t('tool.choosePicture')}
               </div>
               <div
                 className="bg-[#ee7932] hover:bg-[#d46c2c] text-white text-xl rounded-lg py-2 px-4 mt-6 cursor-pointer"
@@ -229,7 +230,7 @@ const Tool = () => {
         <div className="flex flex-col flex-grow p-5 pb-10">
           {freeToken ? (
             <div className="text-3xl text-[#ee7932] font-bold mb-4">
-              Essai gratuit
+              {t('tool.freeTrial')}
             </div>
           ) : (
             ''
@@ -257,7 +258,7 @@ const Tool = () => {
                   />
                 </svg>
                 <p className="pt-1 m-0 text-xl text-center tracking-wider text-black">
-                  Télécharger une photo d&apos;appartement
+                  {t('tool.uploadPicture')}
                 </p>
               </div>
             )}
@@ -272,9 +273,7 @@ const Tool = () => {
             />
           </label>
           <div id="options">
-            <div className="text-2xl font-bold mb-4">
-              La pièce sur la photo est
-            </div>
+            <div className="text-2xl font-bold mb-4">{t('tool.pictureIs')}</div>
             <div className="flex flex-row justify-center items-center mb-10">
               <div
                 className={`relative cursor-pointer transition hover:scale-100 ${
@@ -298,7 +297,7 @@ const Tool = () => {
                   className={`absolute flex w-full h-full -bottom-8 items-end justify-center text-2xl ${
                     isRoomEmpty ? 'font-bold' : ''
                   }`}>
-                  Vide
+                  {t('tool.empty')}
                 </div>
               </div>
               <div
@@ -323,11 +322,11 @@ const Tool = () => {
                   className={`absolute flex w-full h-full -bottom-8 items-end justify-center text-2xl ${
                     !isRoomEmpty ? 'font-bold' : ''
                   }`}>
-                  Meublée
+                  {t('tool.furnished')}
                 </div>
               </div>
             </div>
-            <div className="text-2xl font-bold mb-4">Type de pièce</div>
+            <div className="text-2xl font-bold mb-4">{t('tool.roomType')}</div>
             <div id="select-room-type" className="flex flex-col mb-4">
               <div className="grid grid-cols-2 laptop:grid-cols-3">
                 {roomTypeList.map((option, id) => (
@@ -406,7 +405,7 @@ const Tool = () => {
             <button
               className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl  mx-auto block"
               onClick={() => setShowPopup(true)}>
-              {isRoomEmpty ? 'Meubler' : 'Redécorer'}
+              {isRoomEmpty ? t('tool.furnish') : t('tool.restyle')}
             </button>
           </div>
         </div>
