@@ -1,0 +1,23 @@
+{
+    "common": {
+        "tryFree": "Try for free"
+      },
+      "navbar": {
+        "price": "Pricing",
+        "dashboard": "Dashboard",
+        "tool": "Tool",
+        "logout": "Logout",
+        "login": "Login"
+      },
+      "landing": {
+        "seconds": "seconds",
+        "bigTitle1": "Project your buyers",
+        "bigTitle2": "in their futur real estate property",
+        "firstStep": "Import a room picture of your real estate",
+        "secondStep": "Choose a style to apply",
+        "thirdStep": "Get a new look of your room",
+        "transformText": "Transform in one click your real estate property thanks to",
+        "transformIA": "Artificial Intelligence",
+        "tryFree": "Try for free"
+    }   
+}
