@@ -1,0 +1,65 @@
+{
+    "common": {
+          "tryFree": "Experimente gratuitamente"
+    },
+    "navbar": {
+      "price": "Preço",
+      "dashboard": "Dashboard",
+      "tool": "Tool",
+      "logout": "Terminar sessão",
+      "login": "Acesso"
+    },
+    "landing": {
+          "seconds": "sekunden",
+          "bigTitle1": "Faça com que os seus clientes se sintam em casa",
+          "bigTitle2": "para a sua propriedade",
+          "firstStep": "Importar uma foto do quarto de um apartamento/casa",
+          "secondStep": "Escolha um estilo a aplicar",
+          "thirdStep": "Obtenha uma nova visualização do seu quarto",
+          "transformText": "Transforme o seu imóvel num só clique com",
+          "transformIA": "Inteligência Artificial"
+    },
+    "redesign":{
+        "download": "Descarregar",
+        "see": "Ver",
+        "downloadDescription": "Para descarregar uma imagem, clique sobre ela",
+        "finalProposal": "Mobilar outras salas com a ferramenta Decoloco",
+        "returnMessage":  "Ir para a ferramenta"
+    },
+    "tool":{
+        "noCreditLeft": "Já não tem crédito",
+        "designing": "Geração em progresso...",
+        "timeWarning": "Isto pode demorar até 1 min.",
+        "furnishInto": "Mobilar esta sala em",
+        "confirm": "Confirmar",
+        "redecorate": "redecorar o",
+        "withStyle": "com estilo",
+        "choosePicture": "Por favor escolha uma fotografia",
+        "freeTrial": "teste gratuito",
+        "uploadPicture": "Carregar uma foto de apartamento",
+        "pictures": "A sala na fotografia é",
+        "empty": "Vazio",
+        "furnished": "Mobilado",
+        "roomType": "Tipo de quarto",
+        "alertCredit": "Já não tem créditos, por favor verifique as ofertas Decoloco",
+        "error": "Ocorreu um erro...",
+        "errorNoPicture": "Precisa de escolher uma imagem",
+        "furnish": "Mobiliar",
+        "restyle": "Redecorar"
+    },
+    "dashboard":{
+        "credits": "Créditos",
+        "designs": "Desenhos"
+    },
+    "pricing":{
+        "chooseYourPlan": "Escolha o plano que mais lhe convém",
+        "ready": "Pronto para começar?",
+        "monthly": "Mensal",
+        "yearly": "Annuel",
+        "perMonth": "/por mês",
+        "manageMySubscription": "Gerir a minha subscrição",
+        "begin": "começar",
+        "freeTrial": "Teste gratuito"
+    
+    }
+  }
