@@ -18,5 +18,48 @@
           "thirdStep": "Obtenez un nouvel aperçu de votre pièce",
           "transformText": "Transformez en un clique votre bien immobilier grâce à",
           "transformIA": "l'Intelligence Artificielle"
+    },
+    "redesign":{
+        "download": "Télécharger",
+        "see": "Voir",
+        "downloadDescription": "Pour télécharger une image, cliquez dessus.",
+        "finalProposal":"Meublez d'autres pièces avec l'outil de Decoloco !",
+        "returnMessage":"Aller à l'outil"
+    },
+    "tool":{
+        "noCreditLeft":"Vous n'avez plus de crédit.",
+        "designing":"Génération en cours...",
+        "timeWarning": "Cela peut prendre jusqu'à 1 min",
+        "furnishInto": "Meubler cette pièce en",
+        "confirm": "Confirmer",
+        "redecorate": "Redécorer le/la",
+        "withStyle": "avec le style",
+        "choosePicture": "Veuillez choisir une photo",
+        "freeTrial": "Essai gratuit",
+        "uploadPicture": "Télécharger une photo d'appartement",
+        "pictureIs": "La pièce sur la photo est",
+        "empty":"Vide",
+        "furnished": "Meublée",
+        "roomType": "Type de pièce",
+        "alertCredit":"Vous n'avez plus de crédits, veuillez consulter les offres Decoloco",
+        "error": "Une erreur est survenue...",
+        "errorNoPicture":"Vous devez choisir une image",
+        "furnish":"Meubler",
+        "restyle":"Redécorer"
+    },
+    "dashboard":{
+        "credits": "Crédits",
+        "designs": "Designs"
+    },
+    "pricing":{
+        "chooseYourPlan": "Choisissez le plan qui vous correspond",
+        "ready":"Prêt à commencer ?",
+        "monthly": "Mensuel",
+        "yearly":"Annuel",
+        "perMonth": "/par mois",
+        "manageMySubscription": "Gérer mon abonnement",
+        "begin": "Commencer",
+        "freeTrial": "Essai gratuit"
+    
     }
 }

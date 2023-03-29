@@ -8,6 +8,7 @@ import {
   ROUTE_LOGIN,
   ROUTE_TOOL,
 } from '@/res/routes';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
@@ -47,6 +48,8 @@ const Header = () => {
     };
   }, [open, router.events]);
 
+  const { t } = useTranslation('home');
+
   return (
     <div className="border-b border-secondary dark:border-dark-secondary laptop:py-[16px] py-4 sticky top-0 bg-white dark:bg-dark z-20">
       <Container>
@@ -80,7 +83,9 @@ const Header = () => {
                 <li key={route}>
                   <Link href={route}>
                     <a>
-                      <label className="cursor-pointer">{label}</label>
+                      <label className="cursor-pointer">
+                        {t('navbar.price')}
+                      </label>
                     </a>
                   </Link>
                 </li>
@@ -90,7 +95,9 @@ const Header = () => {
                   <li>
                     <Link href={ROUTE_TOOL}>
                       <a>
-                        <label className="cursor-pointer">Outil</label>
+                        <label className="cursor-pointer">
+                          {t('navbar.tool')}
+                        </label>
                       </a>
                     </Link>
                   </li>
@@ -98,7 +105,7 @@ const Header = () => {
                     <Link href={ROUTE_DASHBOARD}>
                       <a>
                         <label className="cursor-pointer">
-                          Tableau de bord
+                          {t('navbar.dashboard')}
                         </label>
                       </a>
                     </Link>
@@ -112,7 +119,7 @@ const Header = () => {
                           path: '/landing',
                         });
                       }}>
-                      Déconnexion
+                      {t('navbar.logout')}
                     </label>
                   </li>
                 </>
@@ -122,7 +129,9 @@ const Header = () => {
                   <li>
                     <Link href={ROUTE_LOGIN}>
                       <a>
-                        <label className="cursor-pointer">Se connecter</label>
+                        <label className="cursor-pointer">
+                          {t('navbar.login')}
+                        </label>
                       </a>
                     </Link>
                   </li>

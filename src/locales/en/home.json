@@ -1,23 +1,65 @@
 {
-    "common": {
+  "common": {
         "tryFree": "Try for free"
-      },
-      "navbar": {
-        "price": "Pricing",
-        "dashboard": "Dashboard",
-        "tool": "Tool",
-        "logout": "Logout",
-        "login": "Login"
-      },
-      "landing": {
-        "seconds": "seconds",
+  },
+  "navbar": {
+    "price": "Price",
+    "dashboard": "Dashboard",
+    "tool": "Tool",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "landing": {
+        "seconds": "sekunden",
         "bigTitle1": "Project your buyers",
-        "bigTitle2": "in their futur real estate property",
-        "firstStep": "Import a room picture of your real estate",
+        "bigTitle2": "into their future real estate",
+        "firstStep": "Import a photo of the room of an apartment/house",
         "secondStep": "Choose a style to apply",
-        "thirdStep": "Get a new look of your room",
-        "transformText": "Transform in one click your real estate property thanks to",
-        "transformIA": "Artificial Intelligence",
-        "tryFree": "Try for free"
-    }   
+        "thirdStep": "Get a new preview of your room",
+        "transformText": "Transform your real estate in one click with",
+        "transformIA": "Artificial Intelligence"
+  },
+  "redesign":{
+      "download": "Download",
+      "see": "See",
+      "downloadDescription": "To download an image, click on it.",
+      "finalProposal": "Furnish other rooms with the Decoloco tool!",
+      "returnMessage": "Go to the tool"
+  },
+  "tool":{
+      "noCreditLeft": "You have no credit left.",
+      "designing": "Generation in progress...",
+      "timeWarning": "This may take up to 1 min",
+      "furnishInto": "Furnish this room in",
+      "confirm": "Confirm",
+      "redecorate": "Redecorate the",
+      "withStyle": "with style",
+      "choosePicture": "Please choose a picture",
+      "freeTrial": "free trial",
+      "uploadPicture": "Upload a picture of apartment",
+      "pictureIs": "The room in the picture is",
+      "empty": "Empty",
+      "furnished": "Furnished",
+      "roomType": "Type of room",
+      "alertCredit": "You have no credits left, please check Decoloco offers",
+      "error": "An error has occurred...",
+      "errorNoPicture": "You need to choose an image",
+      "furnish":"Furnish",
+      "restyle":"Redecorate"
+  },
+  "dashboard":{
+      "credits": "Credits",
+      "designs": "Designs"
+  },
+  "pricing":{
+      "chooseYourPlan": "Choose the plan that fits you",
+      "ready": "Ready to start?",
+      "monthly": "Monthly",
+      "yearly": "Annuel",
+      "perMonth": "/per month",
+      "manageMySubscription": "Manage my subscription",
+      "begin": "Start",
+      "freeTrial": "Free trial"
+  
+  }
 }

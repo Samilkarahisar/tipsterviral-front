@@ -5,6 +5,7 @@ import { DownloadOutlined, ZoomInOutlined } from '@ant-design/icons';
 import { saveAs } from 'file-saver';
 import { NextPageContext } from 'next';
 import { NextSeo } from 'next-seo';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -43,6 +44,8 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
       'Decoloco_' + redesign.id.split('-').pop() + '_image_' + id + '.jpg',
     );
   }
+
+  const { t } = useTranslation('home');
 
   return (
     <>
@@ -107,7 +110,9 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
                       className="w-[50px] h-[50px] border-2 border-white rounded-full">
                       <DownloadOutlined className="text-xl !text-white" />
                     </button>
-                    <span className="text-xs text-white mt-1">Télécharger</span>
+                    <span className="text-xs text-white mt-1">
+                      {t('redesign.download')}
+                    </span>
                   </div>
                   <div className="flex flex-col items-center justify-center ml-2 z-10">
                     <button
@@ -115,7 +120,9 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
                       className="w-[50px] h-[50px] border-2 border-white rounded-full">
                       <ZoomInOutlined className="text-xl !text-white" />
                     </button>
-                    <span className="text-xs text-white mt-1">Voir</span>
+                    <span className="text-xs text-white mt-1">
+                      {t('redesign.see')}
+                    </span>
                   </div>
 
                   <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -128,17 +135,17 @@ const RedesignPage: React.FC<Props> = ({ redesign }) => {
         <div className="flex flex-col justify-center items-center mx-auto px-5 py-10">
           <div className="flex flex-col">
             <h1 className="text-4xl font-bold mb-5 mr-5 pt-3">
-              Pour télécharger une image, cliquez dessus.
+              {t('redesign.downloadDescription')}
             </h1>
             <h1 className="text-xl font-medium mb-5 mr-5 pt-5">
-              Meublez d&apos;autres pièces avec l&apos;outil de Decoloco !
+              {t('redesign.finalProposal')}
             </h1>
             <button
               className="bg-[#ee7932] hover:bg-[#d46c2c] cursor-pointer h-[50px] w-[150px] rounded-lg text-white text-lg font-bold  block"
               onClick={() => {
                 redirectToTool();
               }}>
-              Aller à l&apos;outil
+              {t('redesign.returnMessage')}
             </button>
           </div>
         </div>

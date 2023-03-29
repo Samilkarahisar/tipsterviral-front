@@ -7,6 +7,7 @@ import {
   PictureFilled,
   PlusCircleFilled,
 } from '@ant-design/icons';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -45,6 +46,7 @@ const Dashboard = () => {
     router.push('/tool');
   };
 
+  const { t } = useTranslation('home');
   return !isPageLoaded ? (
     <div>
       <Spinner />
@@ -58,7 +60,9 @@ const Dashboard = () => {
               <DollarCircleFilled className="text-xl" />
             </div>
             <div className="flex flex-col pl-2">
-              <div className="text-gray-400 text-lg font-bold">Crédits</div>
+              <div className="text-gray-400 text-lg font-bold">
+                {t('dashboard.credits')}
+              </div>
               <div className="text-[#ee7932] text-3xl">
                 {account.credits_amount}
               </div>
@@ -69,7 +73,10 @@ const Dashboard = () => {
               <PictureFilled className="text-xl" />
             </div>
             <div className="flex flex-col pl-2">
-              <div className="text-gray-400 text-lg font-bold">Designs</div>
+              <div className="text-gray-400 text-lg font-bold">
+                {' '}
+                {t('dashboard.designs')}
+              </div>
               <div className="text-[#ee7932] text-3xl">{redesigns?.length}</div>
             </div>
           </div>
