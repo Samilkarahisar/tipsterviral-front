@@ -1,0 +1,22 @@
+{
+    "common": {
+          "tryFree": "Essayez gratuitement"
+    },
+    "navbar": {
+      "price": "Prix",
+      "dashboard": "Tableau de bord",
+      "tool": "Outil",
+      "logout": "Déconnexion",
+      "login": "Se connecter"
+    },
+    "landing": {
+          "seconds": "sekunden",
+          "bigTitle1": "Projetez vos acheteurs",
+          "bigTitle2": "dans leur futur bien immobilier",
+          "firstStep": "Importez une photo de la pièce d'un appartemment/maison",
+          "secondStep": "Choisissez un style à y appliquer",
+          "thirdStep": "Obtenez un nouvel aperçu de votre pièce",
+          "transformText": "Transformez en un clique votre bien immobilier grâce à",
+          "transformIA": "l'Intelligence Artificielle"
+    }
+}

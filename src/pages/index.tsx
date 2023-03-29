@@ -1,10 +1,12 @@
 import { FieldTimeOutlined } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import { NextSeo } from 'next-seo';
+import useTranslation from 'next-translate/useTranslation';
 import router from 'next/router';
 import React from 'react';
 
 const HomePage = () => {
+  const { t } = useTranslation('home');
   return (
     <>
       <NextSeo
@@ -13,21 +15,24 @@ const HomePage = () => {
       />
       <Row className="font-Alexandria lg:text-5xl text-3xl max-w-[1000px] mx-auto w-full px-10 laptop:px-20 py-10 items-center ">
         <Col span={80}>
-          <div className="font-bold text-[#ef8b34]">Projetez vos acheteurs</div>
-          <div>dans leur futur bien immobilier</div>
+          <div className="font-bold text-[#ef8b34]">
+            {t('landing.bigTitle1')}
+          </div>
+          <div> {t('landing.bigTitle2')}</div>
+          <div></div>
         </Col>
       </Row>
-      <Row className="font-Alexandria lg:text-xl text-xl max-w-[1200px] mx-auto px-10 laptop:px-20 items-center">
-        <Col className="pr-14">
-          <div>1. Importez une photo vide de votre pièce</div>
-          <div>2. Choisissez un style</div>
-          <div>3. Obtenez une version meublée</div>
+      <Row className="font-Alexandria lg:text-xl text-xl max-w-[1000px] mx-auto w-full px-10 laptop:px-20 items-center ">
+        <Col span={80}>
+          <div>1. {t('landing.firstStep')}</div>
+          <div>2. {t('landing.secondStep')}</div>
+          <div>3. {t('landing.thirdStep')}</div>
         </Col>
         <Col className="mt-4 laptop:pl-6 ">
           <button
             className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl  mx-auto block"
             onClick={() => router.push('/login')}>
-            Essayez gratuitement
+            {t('common.tryFree')}
           </button>
         </Col>
       </Row>
@@ -43,7 +48,7 @@ const HomePage = () => {
         <div className="flex flex-col items-center">
           <FieldTimeOutlined className="!text-[#ef8b34] text-4xl pt-10 laptop:mt-16" />
           <div className="flex items-center text-l text-bold text-[#ef8b34] ">
-            60 secondes
+            60 {t('landing.seconds')}
           </div>
           <div className="relative">
             <div className="small:h-auto small:w-auto min-h-[200px] laptop:min-h-[0px] min-w-[200px] laptop:w-[75px] laptop:h-[75px]"></div>
@@ -81,15 +86,13 @@ const HomePage = () => {
       <div className="p-10">
         <div className="flex flex-col laptop:flex-row gap-5 justify-center items-center max-w-[800px] w-full mx-auto px-14 py-10 bg-gray-200 rounded-3xl">
           <div className="text-3xl font-Alexandria">
-            Transformez en un clique <div>votre bien immobilier grâce à</div>
-            <span className="font-extrabold">
-              l&apos;Intelligence Artificielle
-            </span>
+            {t('landing.transformText')}
+            <div className="font-extrabold">{t('landing.transformIA')}</div>
           </div>
           <button
-            className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl  mx-auto block"
+            className="bg-[#ef8b34] hover:bg-[#d46c2c] cursor-pointer py-4 px-6 rounded-3xl text-white text-2xl  mx-auto block w-[200px]"
             onClick={() => router.push('/login')}>
-            Essayez gratuitement
+            {t('common.tryFree')}
           </button>
         </div>
       </div>
