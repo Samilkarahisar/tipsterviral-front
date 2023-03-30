@@ -5,7 +5,7 @@ module.exports = {
     '/': ['home'],
     '/pricing': ['home'],
     '/tool': ['home'],
-    '/redesign': ['home'],
+    '/redesign/[id]': ['home'],
     '/dashboard': ['home'],
   },
   loadLocaleFrom: (locale, namespace) =>
