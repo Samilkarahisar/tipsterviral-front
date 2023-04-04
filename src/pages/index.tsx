@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <>
       <NextSeo
-        title={`Decoloco.co - Projetez vos acheteurs dans leur futur bien immobilier`}
+        title={`Decoloco - Projetez vos acheteurs dans leur futur bien immobilier`}
         description={'Projetez vos acheteurs dans leur futur bien immobilier.'}
       />
       <Row className="font-Alexandria lg:text-5xl text-3xl max-w-[1000px] mx-auto w-full px-10 laptop:px-20 py-10 items-center ">

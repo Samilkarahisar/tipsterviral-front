@@ -1,4 +1,4 @@
-import { IconEmail } from '@/res/icons';
+import { IconEmail, IconInstagram, IconTwitter } from '@/res/icons';
 import { footerRoutes } from '@/res/routes';
 import Link from 'next/link';
 import React from 'react';
@@ -25,6 +25,21 @@ const Footer = () => {
               <Link href="mailto:contact@decoloco.co">
                 <a target="_blank" className="flex">
                   <IconEmail alt="email" />
+                </a>
+              </Link>
+            </div>
+
+            <div className="p-[10px] bg-secondary flex dark:bg-dark-secondary rounded-xl ">
+              <Link href="https://www.twitter.com/decoloco_co/">
+                <a target="_blank" className="flex">
+                  <IconTwitter alt="email" />
+                </a>
+              </Link>
+            </div>
+            <div className="p-[10px] bg-secondary flex dark:bg-dark-secondary rounded-xl ">
+              <Link href="https://www.instagram.com/decoloco.co/">
+                <a target="_blank" className="flex">
+                  <IconInstagram alt="email" />
                 </a>
               </Link>
             </div>

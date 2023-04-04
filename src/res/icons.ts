@@ -10,6 +10,7 @@ import IconEmail from '@/assets/icons/email.svg';
 import IconFallbackImage from '@/assets/icons/fallback-image.svg';
 import IconGarage from '@/assets/icons/garage.png';
 import IconGoogle from '@/assets/icons/google.svg';
+import IconInstagram from '@/assets/icons/instagram.svg';
 import IconKitchen from '@/assets/icons/kitchen.png';
 import IconLivingRoom from '@/assets/icons/living-room.png';
 import IconMenu from '@/assets/icons/menu.svg';
@@ -48,4 +49,5 @@ export {
   IconLux,
   IconBricks,
   IconMarble,
+  IconInstagram,
 };
